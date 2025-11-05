@@ -1,0 +1,233 @@
+/* @tailwind base;
+@tailwind components;
+@tailwind utilities;
+ */
+@import "tailwindcss";
+
+@config "../tailwind.config.js";
+
+html, body {
+  touch-action: pan-y pan-x !important;
+  -ms-touch-action: pan-y pan-x !important;
+  
+  -webkit-touch-callout: none !important;
+  -webkit-text-size-adjust: 100% !important;
+  text-size-adjust: 100% !important;
+  
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+#__next, #root, .app {
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+
+* {
+  -webkit-touch-callout: none;
+  -webkit-text-size-adjust: none;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+input,
+textarea,
+[contenteditable="true"] {
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+  user-select: text;
+}
+
+input,
+select,
+textarea {
+  font-size: 16px;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+:root {
+  /* BACKGROUND */
+  /* beige */
+  --background-beige-primary: #b6875a;
+  --background-beige-secondary: #b6875a0d;
+  --background-beige-tertiary: #b6875a33;
+  --background-beige-quaternary: #b6875a0d;
+  /* color-1 (mustard) */
+  --background-color-1-primary: #c6a637;
+  --background-color-1-secondary: #c6a63780;
+  --background-color-1-tertiary: #c6a63733;
+  /* color-2 (cold green / green #5C6B44) */
+  --background-color-2-primary: #5c6b44;
+  --background-color-2-secondary: #5c6b444d;
+  --background-color-2-tertiary: #5c6b441a;
+  /* color-3 (vinous) */
+  --background-color-3-primary: #522f29;
+  --background-color-3-secondary: #522f294d;
+  --background-color-3-tertiary: #522f291a;
+  /* color-4 (light green) */
+  --background-color-4-primary: #d0cf8c;
+  --background-color-4-secondary: #d0cf8c4d;
+  --background-color-4-tertiary: #d0cf8c1a;
+  /* color-5 (flesh) */
+  --background-color-5-primary: #cab58f;
+  --background-color-5-secondary: #cab58f4d;
+  --background-color-5-tertiary: #cab58f1a;
+  /* color-6 (black) */
+  --background-color-6-primary: #1a2016;
+  --background-color-6-secondary: #1a201633;
+  --background-color-6-tertiary: #1a20160d;
+  /* color-7 (brown) */
+  --background-color-7-default: #604524;
+  --background-color-7-secondary: #60452433;
+  --background-color-7-tertiary: #6045240d;
+  /* danger */
+  --background-danger-primary: #a61313;
+  --background-danger-secondary: #a6131366;
+  --background-danger-tertiary: #a6131333;
+  /* grey */
+  --background-grey-primary: #f7f7f7;
+  --background-grey-secondary: #e9e9e9;
+  --background-grey-tertiary: #fdfdfd;
+  /* overlay */
+  --background-overlay: #1a2016cc;
+  /* success (green #095028) */
+  --background-success-primary: #095028;
+  --background-success-secondary: #0950284d;
+  --background-success-tertiary: #09502833;
+  /* warning */
+  --background-warning-primary: #e0b624;
+  --background-warning-secondary: #e0b62480;
+  --background-warning-tertiary: #e0b62433;
+  /* white */
+  --background-white-primary: #fefadf;
+  --background-white-secondary: #f4e9cb;
+  --background-white-tertiary: #fefadfb3;
+  --background-white-quaternary: #fefadf1a;
+
+  /* STROKE */
+  /* beige */
+  --stroke-beige-primary: #b6875a;
+  --stroke-beige-secondary: #b6875a4d;
+  --stroke-beige-tertiary: #b6875a1a;
+  /* color-1 (mustard) */
+  --stroke-color-1-primary: #c6a637;
+  --stroke-color-1-secondary: #c6a6374d;
+  --stroke-color-1-tertiary: #c6a6371a;
+  /* color-2 (cold green #5C6B44) */
+  --stroke-color-2-primary: #5c6b44;
+  --stroke-color-2-secondary: #5c6b444d;
+  --stroke-color-2-tertiary: #5c6b441a;
+  /* color-3 (vinous) */
+  --stroke-color-3-primary: #522f29;
+  --stroke-color-3-secondary: #522f294d;
+  --stroke-color-3-tertiary: #522f291a;
+  /* color-4 (light green) */
+  --stroke-color-4-primary: #d0cf8c;
+  --stroke-color-4-secondary: #d0cf8c4d;
+  --stroke-color-4-tertiary: #d0cf8c1a;
+  /* color-5 (flesh) */
+  --stroke-color-5-primary: #cab58f;
+  --stroke-color-5-secondary: #cab58f4d;
+  --stroke-color-5-tertiary: #cab58f1a;
+  /* color-6 (black) */
+  --stroke-color-6-primary: #1a2016;
+  --stroke-color-6-secondary: #1a201633;
+  --stroke-color-6-tertiary: #1a20161a;
+  /* color-7 (brown) */
+  --stroke-color-7-primary: #604524;
+  --stroke-color-7-secondary: #6045244d;
+  --stroke-color-7-tertiary: #6045241a;
+  /* danger */
+  --stroke-danger-primary: #a61313;
+  --stroke-danger-secondary: #a613134d;
+  --stroke-danger-tertiary: #a613131a;
+  /* success */
+  --stroke-success-primary: #095028;
+  --stroke-success-secondary: #0950284d;
+  --stroke-success-tertiary: #0950281a;
+  /* warning */
+  --stroke-warning-primary: #e0b624;
+  --stroke-warning-secondary: #e0b6244d;
+  --stroke-warning-tertiary: #e0b6241a;
+  /* white */
+  --stroke-white-primary: #fefadf;
+  --stroke-white-secondary: #fefadf4d;
+  --stroke-white-tertiary: #fefadf1a;
+
+  /*PLOTS*/
+  /* plots 0 */
+  --plots-background-0: #fefadf;
+  --plots-progress-0: #b6875a;
+  /* plots 1 */
+  --plots-background-1: #c6a6374d;
+  --plots-progress-1: #c6a637;
+  /* plots 2 */
+  --plots-background-2: #5c6b444d;
+  --plots-progress-2: #5c6b44;
+  /* plots 3 */
+  --plots-background-3: #522f294d;
+  --plots-progress-3: #522f29;
+  /* plots 4 */
+  --plots-background-4: #d0cf8c4d;
+  --plots-progress-4: #d0cf8c;
+  /* plots 5 */
+  --plots-background-5: #cab58f4d;
+  --plots-progress-5: #cab58f;
+  /* plots 6 */
+  --plots-background-6: #1a20164d;
+  --plots-progress-6: #1a2016;
+
+  /* TEXT */
+  /* beige */
+  --text-beige-primary: #b6875a;
+  --text-beige-secondary: #b6875a80;
+  /* black */
+  --text-black-primary: #1a2016;
+  --text-black-secondary: #1a201680;
+  /* brown */
+  --text-brown-primary: #604524;
+  --text-brown-secondary: #60452480;
+  /* cold green */
+  --text-cold-green-primary: #5c6b44;
+  --text-cold-green-secondary: #5c6b4480;
+  /* flesh */
+  --text-flesh-primary: #cab58f;
+  --text-flesh-secondary: #cab58f80;
+  /* green */
+  --text-green-primary: #095028;
+  --text-green-secondary: #09502880;
+  /* light green */
+  --text-light-green-primary: #d0cf8c;
+  --text-light-green-secondary: #d0cf8c80;
+  /* mustard */
+  --text-mustard-primary: #c6a637;
+  --text-mustard-secondary: #c6a63780;
+  /* red */
+  --text-red-primary: #a61313;
+  --text-red-secondary: #a6131380;
+  /* vinous */
+  --text-vinos-primary: #522f29;
+  --text-vinos-secondary: #522f2980;
+  /* white */
+  --text-white-primary: #fefadf;
+  --text-white-secondary: #fefadf;
+  /* yellow */
+  --text-yellow-primary: #e0b624;
+  --text-yellow-secondary: #e0b62480;
+}
