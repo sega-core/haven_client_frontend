@@ -6,19 +6,19 @@ const TabBarItem = ({
   title,
   isActive,
 }: {
-  name: string;
+  name: "House" | "Goal" | "MessageCircle" | "LibreryBig";
   title: string;
   isActive?: boolean;
 }) => {
   return (
-    <div className="flex flex-col px-2 gap-2 rounded-full">
+    <div className="flex flex-col items-center justify-center flex-1  px-2 gap-2 rounded-full border border-solid shadow-lg">
       <Icon
         name={name}
         width={20}
         height={20}
         fill="var(--color-brown-primary)"
       />
-      <Typography type="body" size="lg" weight="medium">
+      <Typography type="body-xs" weight="medium">
         {title}
       </Typography>
     </div>

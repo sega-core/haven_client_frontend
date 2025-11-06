@@ -1,0 +1,1 @@
+export type TTypography = 'heading-xs' | 'heading-s' | 'heading-md' | 'heading-lg' | 'body-xxs' | 'body-xs' | 'body-s' | 'body-md' | 'body-lg';
