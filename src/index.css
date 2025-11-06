@@ -1,24 +1,10 @@
-/* @tailwind base; */
+@tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  /* Основные цветовые токены */
-  --color-primary: #ef4444; /* Красный */
-  --color-secondary: #1e40af; /* Синий */
-  --color-accent-light: #fbbf24; /* Светло-жёлтый */
-  --color-accent-dark: #f59e0b; /* Тёмно-жёлтый */
-  
-  /* Группа оттенков для одного цвета */
-  --color-my-yellow-50: #fef2f2;
-  --color-my-yellow-100: #ef4444;
-  --color-my-yellow-200: #7f1d1d;
-  --color-my-yellow-300: #7f1d1d;
-  --color-my-yellow-400: #7f1d1d;
-  --color-my-yellow-500: #7f1d1d;
-  --color-my-yellow-600: #7f1d1d;
-  --color-my-yellow-700: #7f1d1d;
-  --color-my-yellow-800: #7f1d1d;
-  --color-my-yellow-900: #7f1d1d;
-  --color-my-yellow-1000: #7f1d1d;
+  --color-white-primary: #fefadf;
+  --color-white-secondary: #fefadf4d;
+  --color-white-tertiary: #fefadfb3;
+  --color-brown-primary: #604524;
 }
