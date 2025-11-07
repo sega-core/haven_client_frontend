@@ -2,6 +2,10 @@ import { useState } from "react";
 import { ProgressLine } from "./components/ProgressLine/ProgressLine";
 import { Layout } from "./components/Layout";
 import { TabBar } from "./components/TabBar";
+import { Header } from "./components/Header";
+import { Block } from "./components/Block";
+import { Blagodarnost, VoprosDnya } from "./components/NavigationBlock";
+import { Nastroenie } from "./components/NavigationBlock/Nastroenie";
 
 function App() {
   const [goal, setGoal] = useState<"0" | "1" | "2" | "3" | "4">("0");
@@ -66,6 +70,10 @@ function App() {
           </div>
         </fieldset>
       </div> */}
+      <Header />
+      <Nastroenie />
+      <Blagodarnost />
+      <VoprosDnya />
       <TabBar />
     </Layout>
   );

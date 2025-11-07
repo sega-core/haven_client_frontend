@@ -18,14 +18,14 @@ const TabBarItem = ({
       onClick={onClick}
       className={`flex flex-col items-center justify-center transition duration-700 ease-in-out
       flex-1 py-[6px] gap-[6px] rounded-full cursor-pointer ${
-        isActive && "bg-[var(--color-beige-tertiary)]"
+        isActive && "bg-[var(--background-beige-tertiary)]"
       }`}
     >
       <Icon
         name={name}
         width={20}
         height={20}
-        fill="var(--color-brown-primary)"
+        fill="var(--plots-text-brown-primary)"
       />
       <Typography type="body-xs" weight="medium">
         {title}
@@ -38,7 +38,7 @@ export const TabBar = () => {
   const [isActive, setIsActive] = useState(0);
   return (
     <div className="flex fixed left-[14px] right-[14px] bottom-4 ">
-      <div className="border-solid border-violet-700 p-2 bg-[var(--color-white-tertiary)] z-50 w-full border rounded-full flex">
+      <div className="p-2 bg-[var(--background-white-tertiary)] backdrop-blur-md z-50 w-full border rounded-full flex ">
         <TabBarItem
           name={"House"}
           title="Главная"
