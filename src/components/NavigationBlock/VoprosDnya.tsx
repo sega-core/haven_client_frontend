@@ -6,10 +6,20 @@ export const VoprosDnya = () => {
   return (
     <Block onClick={() => alert("VoprosDnya")}>
       <div className="flex justify-between items-center">
-        <Typography type="heading-xs">Вопрос дня</Typography>
+        <Typography
+          className="text-[var(--plots-text-brown-primary)]"
+          type="heading-xs"
+        >
+          Вопрос дня
+        </Typography>
         <Icon name="ChevronRight" width={24} height={24} />
       </div>
-      <Typography type="body-s">Ваша ежедневная порция рефлексии.</Typography>
+      <Typography
+        className="text-[var(--plots-text-brown-primary)]"
+        type="body-s"
+      >
+        Ваша ежедневная порция рефлексии.
+      </Typography>
     </Block>
   );
 };

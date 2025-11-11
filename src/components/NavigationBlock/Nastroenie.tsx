@@ -7,7 +7,12 @@ export const Nastroenie = () => {
   return (
     <Block>
       <div className="flex justify-between items-center">
-        <Typography type="heading-xs">Как ваше настроение сегодня?</Typography>
+        <Typography
+          type="heading-xs"
+          className="text-[var(--plots-text-brown-primary)]"
+        >
+          Как ваше настроение сегодня?
+        </Typography>
       </div>
       <div className="flex justify-center gap-2 flex-wrap">
         <Chip

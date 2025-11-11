@@ -1,6 +1,7 @@
-import { useState } from "react";
 import { Icon } from "../Icon";
 import { Typography } from "../Typography";
+import { useNavigate, useLocation } from "react-router-dom";
+import { ROUTES } from "../../containers/Routes";
 
 const TabBarItem = ({
   name,
@@ -10,7 +11,7 @@ const TabBarItem = ({
 }: {
   name: "House" | "Goal" | "MessageCircle" | "LibreryBig";
   title: string;
-  isActive?: boolean;
+  isActive: boolean;
   onClick: () => void;
 }) => {
   return (
@@ -35,33 +36,35 @@ const TabBarItem = ({
 };
 
 export const TabBar = () => {
-  const [isActive, setIsActive] = useState(0);
+  const navigate = useNavigate();
+  const { pathname } = useLocation();
+
   return (
     <div className="flex fixed left-[14px] right-[14px] bottom-4 ">
       <div className="p-2 bg-[var(--background-white-tertiary)] backdrop-blur-md z-50 w-full border rounded-full flex ">
         <TabBarItem
           name={"House"}
           title="Главная"
-          isActive={isActive === 0}
-          onClick={() => setIsActive(0)}
+          isActive={pathname === ROUTES.MAIN}
+          onClick={() => navigate(ROUTES.MAIN)}
         />
         <TabBarItem
           name={"Goal"}
           title="Цели"
-          isActive={isActive === 1}
-          onClick={() => setIsActive(1)}
+          isActive={pathname === ROUTES.TARGETS}
+          onClick={() => navigate(ROUTES.TARGETS)}
         />
         <TabBarItem
           name={"MessageCircle"}
           title="Комьюнити"
-          isActive={isActive === 2}
-          onClick={() => setIsActive(2)}
+          isActive={pathname === ROUTES.COMUNITY}
+          onClick={() => navigate(ROUTES.COMUNITY)}
         />
         <TabBarItem
           name={"LibreryBig"}
           title="Практики"
-          isActive={isActive === 3}
-          onClick={() => setIsActive(3)}
+          isActive={pathname === ROUTES.PRACTICS}
+          onClick={() => navigate(ROUTES.PRACTICS)}
         />
       </div>
     </div>

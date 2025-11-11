@@ -9,7 +9,7 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
       }}
       className={`flex flex-col items-center min-h-screen 
       py-4 px-[14px] gap-4  
-      border-solid border-green-900 m-2 overflow-auto`}
+      border-solid border-green-900 overflow-auto`}
     >
       {children}
     </main>

@@ -6,9 +6,14 @@ import { Header } from "./components/Header";
 import { Block } from "./components/Block";
 import { Blagodarnost, VoprosDnya } from "./components/NavigationBlock";
 import { Nastroenie } from "./components/NavigationBlock/Nastroenie";
+import { Sheet } from "react-modal-sheet";
+import { AppRoutes } from "./containers/Routes/Routes";
+import { BrowserRouter } from "react-router-dom";
 
 function App() {
   const [goal, setGoal] = useState<"0" | "1" | "2" | "3" | "4">("0");
+  const [isOpen, setOpen] = useState(false);
+
   return (
     <Layout>
       {/* <div>
@@ -70,11 +75,26 @@ function App() {
           </div>
         </fieldset>
       </div> */}
-      <Header />
+      {/* <Header />
       <Nastroenie />
       <Blagodarnost />
       <VoprosDnya />
       <TabBar />
+      <>
+        <button onClick={() => setOpen(true)}>Open sheet</button>
+
+        <Sheet isOpen={isOpen} onClose={() => setOpen(false)}>
+          <Sheet.Container>
+            <Sheet.Header />
+            <Sheet.Content></Sheet.Content>
+          </Sheet.Container>
+          <Sheet.Backdrop />
+        </Sheet>
+      </> */}
+      <BrowserRouter>
+        <AppRoutes />
+        <TabBar />
+      </BrowserRouter>
     </Layout>
   );
 }

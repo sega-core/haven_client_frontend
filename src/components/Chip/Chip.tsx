@@ -8,7 +8,7 @@ type TChip = {
   icon?: React.ReactNode;
 };
 
-export const Chip = ({ name, size, color, icon }: TChip) => {
+export const Chip = ({ name, color, icon }: TChip) => {
   return (
     <div
       className={`text-[var(--plots-text-beige-primary)] bg-[var(${color})] backdrop-blur-md flex py-2 px-4 justify-center items-center
