@@ -10,6 +10,7 @@ export const TextArea = ({
   value?: string;
   onChange?: React.ChangeEventHandler<HTMLTextAreaElement>;
 }) => {
+  //TODO: цвет bg при фокусе и ховере
   return (
     <HeroUITextarea
       label={placeholder}
@@ -18,8 +19,7 @@ export const TextArea = ({
       onChange={onChange}
       classNames={{
         base: "w-full rounded-2xl bg-var(--background-beige-tertiary) transition-colors duration-300 ease-in-out",
-        inputWrapper:
-          "bg-(--background-beige-tertiary) !hover:bg-(--background-beige-secondary)",
+        inputWrapper: "bg-(--background-beige-tertiary)",
         innerWrapper: "bg-var(--background-beige-tertiary)",
         input:
           "bg-transparent placeholder-transparent resize-none text-gray-900 leading-6 focus:bg-transparent",

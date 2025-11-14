@@ -12,11 +12,14 @@ type Props = {
 
 export const Sheet = ({ isOpen, onClose, title, children }: Props) => {
   return (
-    <SheetReact isOpen={isOpen} onClose={onClose} detent="content">
+    <SheetReact isOpen={isOpen} onClose={onClose} detent="content" unstyled>
       <SheetReact.Container>
-        <SheetReact.Header className="bg-(--background-white-primary)">
+        <SheetReact.Header className="bg-(--background-white-primary) rounded-t-4xl">
           <div className="relative flex items-center justify-center w-full p-4">
-            <Typography type="heading-xs" className="text-center w-full">
+            <Typography
+              type="heading-xs"
+              className="text-center w-full text-(--plots-text-brown-primary)"
+            >
               {title}
             </Typography>
             <Button isIconOnly onPress={onClose} variant="light" size="sm">
@@ -26,7 +29,12 @@ export const Sheet = ({ isOpen, onClose, title, children }: Props) => {
         </SheetReact.Header>
         <SheetReact.Content>{children}</SheetReact.Content>
       </SheetReact.Container>
-      <SheetReact.Backdrop onTap={onClose} />
+      <SheetReact.Backdrop
+        onTap={onClose}
+        style={{
+          backgroundColor: "rgba(0,0,0,0.6)", // for Safari
+        }}
+      />
     </SheetReact>
   );
 };

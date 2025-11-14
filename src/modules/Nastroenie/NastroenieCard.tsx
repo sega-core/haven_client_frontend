@@ -1,13 +1,23 @@
-import { Block } from "../../../components/Block";
-import { Chip } from "../../../components/Chip";
-import { Icon } from "../../../components/Icon";
-import { Typography } from "../../../components/Typography";
-import { NASTROENIE_CHIPS } from "../Nasctroenie.constants";
-import { NastroenieSheet } from "../NastroenieSheet/NastroenieSheet";
+import { useState } from "react";
+import { Block } from "../../components/Block";
+import { Chip } from "../../components/Chip";
+import { Icon } from "../../components/Icon";
+import { Typography } from "../../components/Typography";
+import { NASTROENIE_CHIPS } from "./Nasctroenie.constants";
+import { NastroenieSheet } from "./NastroenieSheet/NastroenieSheet";
 
 export const NastroenieCard = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const onOpen = () => {
+    setIsOpen(true);
+  };
+
+  const onClose = () => {
+    setIsOpen(false);
+  };
   return (
-    <Block>
+    <Block onClick={onOpen}>
       <div className="flex justify-between items-center">
         <Typography
           type="heading-xs"
@@ -27,7 +37,7 @@ export const NastroenieCard = () => {
           />
         ))}
       </div>
-      <NastroenieSheet />
+      <NastroenieSheet isOpen={isOpen} onClose={onClose} />
     </Block>
   );
 };
