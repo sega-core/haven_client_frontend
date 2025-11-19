@@ -26,7 +26,7 @@ const TabBarItem = ({
         name={name}
         width={20}
         height={20}
-        fill="var(--plots-text-brown-primary)"
+        fill="var(--text-brown-primary)"
       />
       <Typography type="body-xs" weight="medium">
         {title}

@@ -14,11 +14,11 @@ export const Sheet = ({ isOpen, onClose, title, children }: Props) => {
   return (
     <SheetReact isOpen={isOpen} onClose={onClose} detent="content" unstyled>
       <SheetReact.Container>
-        <SheetReact.Header className="bg-(--background-white-primary) rounded-t-4xl">
+        <SheetReact.Header className="bg-white-primary rounded-t-4xl">
           <div className="relative flex items-center justify-center w-full p-4">
             <Typography
               type="heading-xs"
-              className="text-center w-full text-(--plots-text-brown-primary)"
+              className="text-center w-full text-brown-primary"
             >
               {title}
             </Typography>

@@ -1,4 +1,5 @@
 import { heroui } from "@heroui/theme";
+import { semanticColorsPlugin } from "./src/config/semanticColorsPlugin";
 
 /** @type {import('tailwindcss').Config} */
 export default {
@@ -40,5 +41,5 @@ export default {
     "font-extrabold",
   ],
   darkMode: "class",
-  plugins: [heroui()],
+  plugins: [heroui(), semanticColorsPlugin],
 };

@@ -18,15 +18,12 @@ export const VoprosDnyaCard = () => {
   return (
     <Block onClick={onOpen}>
       <div className="flex justify-between items-center">
-        <Typography
-          className="text-(--plots-text-brown-primary)"
-          type="heading-xs"
-        >
+        <Typography className="text-brown-primary" type="heading-xs">
           Вопрос дня
         </Typography>
         <Icon name="ChevronRight" width={24} height={24} />
       </div>
-      <Typography className="text-(--plots-text-brown-primary)" type="body-s">
+      <Typography className="text-brown-primary" type="body-s">
         Ваша ежедневная порция рефлексии.
       </Typography>
       <VoprosDnyaSheet isOpen={isOpen} onClose={onClose} />

@@ -19,10 +19,7 @@ export const NastroenieCard = () => {
   return (
     <Block onClick={onOpen}>
       <div className="flex justify-between items-center">
-        <Typography
-          type="heading-xs"
-          className="text-(--plots-text-brown-primary)"
-        >
+        <Typography type="heading-xs" className="text-brown-primary">
           Как ваше настроение сегодня?
         </Typography>
       </div>
@@ -30,7 +27,7 @@ export const NastroenieCard = () => {
         {NASTROENIE_CHIPS.map((item) => (
           <Chip
             key={item.id}
-            color="--background-beige-tertiary"
+            color="bg-beige-tertiary"
             icon={<Icon name={item.iconId} width={18} height={18} />}
             label={item.label}
             onClick={() => console.log(item.id)}

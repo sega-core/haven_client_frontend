@@ -4,7 +4,7 @@ import { Icon } from "../../components/Icon";
 import { Typography } from "../../components/Typography";
 import { BlagodarnostSheet } from "./BlagodarnostSheet";
 
-export const Blagodarnost = () => {
+export const BlagodarnostCard = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const onOpen = () => {
@@ -18,15 +18,12 @@ export const Blagodarnost = () => {
   return (
     <Block onClick={onOpen}>
       <div className="flex justify-between items-center">
-        <Typography
-          className="text-(--plots-text-brown-primary)"
-          type="heading-xs"
-        >
+        <Typography className="text-brown-primary" type="heading-xs">
           Благодарность
         </Typography>
         <Icon name="ChevronRight" width={24} height={24} />
       </div>
-      <Typography className="text-(--plots-text-brown-primary)" type="body-s">
+      <Typography className="text-brown-primary" type="body-s">
         Фокус на приятных мелочах помогает бороться с тревогой и беспокойством.
       </Typography>
       <BlagodarnostSheet isOpen={isOpen} onClose={onClose} />

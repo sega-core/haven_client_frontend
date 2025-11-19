@@ -5,9 +5,9 @@ import App from "./App";
 import { HeroUIProvider } from "@heroui/system";
 
 createRoot(document.getElementById("root")!).render(
-  <div>
+  <StrictMode>
     <HeroUIProvider>
       <App />
     </HeroUIProvider>
-  </div>
+  </StrictMode>
 );
