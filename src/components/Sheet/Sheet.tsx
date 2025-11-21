@@ -3,6 +3,8 @@ import { Icon } from "../Icon";
 import { Typography } from "../Typography";
 import { Button } from "@heroui/button";
 
+//TODO: подумать об "vaul", намного меньше весит
+
 type Props = {
   isOpen: boolean;
   onClose: () => void;
@@ -19,6 +21,7 @@ export const Sheet = ({ isOpen, onClose, title, children }: Props) => {
             <Typography
               type="heading-xs"
               className="text-center w-full text-brown-primary"
+              weight="semibold"
             >
               {title}
             </Typography>

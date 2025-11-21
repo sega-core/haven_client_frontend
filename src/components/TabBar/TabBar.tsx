@@ -54,7 +54,7 @@ export const TabBar = () => {
             width: `${underlineWidthPercent}%`,
           }}
         >
-          <span className="h-full w-full border rounded-full bg-beige-tertiary" />
+          <span className="h-full w-full rounded-full bg-beige-tertiary" />
         </span>
         {tabs.map((tab, index) => {
           const isActive = activeTabIndex === index;

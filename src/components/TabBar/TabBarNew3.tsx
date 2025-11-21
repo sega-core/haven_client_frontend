@@ -42,42 +42,44 @@ export const TabBarNew3 = () => {
   const underlineLeftPercent = activeTabIndex * underlineWidthPercent; // 0%, 25%, 50%, 75%
 
   return (
-    <div className="relative mx-auto flex h-16 w-full max-w-md rounded-full bg-gray-800 px-2 shadow-lg">
-      {/* Анимированная подчеркивающая линия */}
-      <span
-        className="absolute bottom-0 left-0 top-0 z-20 flex overflow-hidden rounded-full transition-all duration-300 ease-in-out"
-        style={{
-          left: `${underlineLeftPercent}%`,
-          width: `${underlineWidthPercent}%`,
-        }}
-      >
-        <span className="h-full w-full rounded-full bg-(--background-beige-tertiary)" />
-      </span>
+    <div className="fixed left-3.5 right-3.5 bottom-4 z-10">
+      <div className="relative mx-auto flex h-16 w-full max-w-md rounded-full bg-gray-800 px-2 shadow-lg">
+        {/* Анимированная подчеркивающая линия */}
+        <span
+          className="absolute bottom-0 left-0 top-0 z-20 flex overflow-hidden rounded-full transition-all duration-300 ease-in-out"
+          style={{
+            left: `${underlineLeftPercent}%`,
+            width: `${underlineWidthPercent}%`,
+          }}
+        >
+          <span className="h-full w-full rounded-full bg-(--background-beige-tertiary)" />
+        </span>
 
-      {/* Табы */}
-      {tabs.map((tab, index) => {
-        const isActive = activeTabIndex === index;
-        return (
-          <button
-            key={tab.id}
-            onClick={() => handleTabClick(tab.route)}
-            className={`relative flex flex-1 flex-col items-center justify-center py-3 text-sm font-medium transition-all duration-300 ease-in-out ${
-              isActive ? "text-white" : "text-gray-300 hover:text-white"
-            }`}
-          >
-            <span className="text-xl">
-              {tab.id === "House"
-                ? "🏠"
-                : tab.id === "Goal"
-                ? "🎯"
-                : tab.id === "MessageCircle"
-                ? "💬"
-                : "📚"}
-            </span>
-            <span className="mt-1">{tab.name}</span>
-          </button>
-        );
-      })}
+        {/* Табы */}
+        {tabs.map((tab, index) => {
+          const isActive = activeTabIndex === index;
+          return (
+            <button
+              key={tab.id}
+              onClick={() => handleTabClick(tab.route)}
+              className={`relative flex flex-1 flex-col items-center justify-center py-3 text-sm font-medium transition-all duration-300 ease-in-out ${
+                isActive ? "text-white" : "text-gray-300 hover:text-white"
+              }`}
+            >
+              <span className="text-xl">
+                {tab.id === "House"
+                  ? "🏠"
+                  : tab.id === "Goal"
+                  ? "🎯"
+                  : tab.id === "MessageCircle"
+                  ? "💬"
+                  : "📚"}
+              </span>
+              <span className="mt-1">{tab.name}</span>
+            </button>
+          );
+        })}
+      </div>
     </div>
   );
 };

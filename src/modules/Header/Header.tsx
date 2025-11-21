@@ -6,8 +6,12 @@ export const Header = () => {
   const { title } = useRouteTitle();
 
   return (
-    <div className="flex justify-between w-full">
-      <Typography type="heading-md" className="text-brown-primary">
+    <div className="flex justify-between w-full items-center">
+      <Typography
+        type="heading-md"
+        className="text-brown-primary"
+        weight="semibold"
+      >
         {title}
       </Typography>
       <div>
