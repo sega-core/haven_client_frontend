@@ -1,8 +1,8 @@
 import { Button } from "@heroui/button";
-import { Block } from "../../../components/Block";
-import { Typography } from "../../../components/Typography";
-import { Icon } from "../../../components/Icon";
-import { ProgressLine } from "../../../components/ProgressLine";
+import { Block } from "../../../../components/Block";
+import { Typography } from "../../../../components/Typography";
+import { Icon } from "../../../../components/Icon";
+import { ProgressLine } from "../../../../components/ProgressLine";
 
 export const TargetItem = () => {
   return (

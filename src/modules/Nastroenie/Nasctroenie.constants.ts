@@ -1,5 +1,5 @@
 import { TIcon } from "../../components/Icon/Icon.types";
-import { TEmotionId } from "./ Nastroenie.types";
+import { TEmotionId } from "./Nastroenie.types";
 
 export const NASTROENIE_CHIPS: { label: string; id: TEmotionId; iconId: TIcon }[] =
   [

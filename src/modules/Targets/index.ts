@@ -1,2 +1,1 @@
-export * from "./TargetsBlock";
-export * from "./TargetItem";
+export * from './components'

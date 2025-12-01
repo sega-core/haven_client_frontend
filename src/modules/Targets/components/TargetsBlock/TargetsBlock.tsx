@@ -1,4 +1,4 @@
-import { Circle } from "../../../components/CircleBlock";
+import { Circle } from "../../../../components/CircleBlock";
 
 export const TargetsBlock = () => {
   return (
