@@ -1,5 +1,6 @@
 import { Field } from "react-final-form";
 import { DayCheckbox } from "../../../components/DayCheckbox";
+import { ETargetField } from "../form";
 
 type Props = {
   label: string;
@@ -9,7 +10,7 @@ type Props = {
 export const CheckboxDay = ({ label, value }: Props) => {
   return (
     <Field
-      name={`NOTIFICATION_DAYS.${value}`}
+      name={`${ETargetField.NOTIFICATION_DAYS}.${value}`}
       label={label}
       component={({ input }) => (
         <DayCheckbox

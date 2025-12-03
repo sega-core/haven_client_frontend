@@ -1,6 +1,6 @@
 import { DAYS } from "./DayPanel.constant";
 
-import { CheckboxDay } from "../../fields/CheckboxDay";
+import { CheckboxDay } from "../../fields";
 
 export const DayPanel = () => {
   return (

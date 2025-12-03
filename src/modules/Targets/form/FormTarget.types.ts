@@ -7,14 +7,12 @@ export enum ETargetField {
   COLOR = "COLOR",
 }
 
-//TODO: сравнить с плагином семантики
-
 export enum ETargetColor {
-  COLOR1 = "bg-beige-primary",
-  COLOR2 = "bg-cold-green-primary",
-  COLOR3 = "bg-vinous-primary",
-  COLOR4 = "bg-light-green-primary",
-  COLOR5 = "bg-flesh-primary",
+  COLOR1 = "bg-mustard-primary",
+  COLOR2 = "bg-vinous-primary",
+  COLOR3 = "bg-cold-green-primary",
+  COLOR4 = "bg-flesh-primary",
+  COLOR5 = "bg-light-green-primary",
 
 }
 

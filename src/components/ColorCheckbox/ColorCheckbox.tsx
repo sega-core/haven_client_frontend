@@ -1,6 +1,5 @@
 type ColorCheckboxProps = {
   checked: boolean;
-  label: string;
   name?: string;
   value?: string;
   onChange: (checked: boolean) => void;
@@ -11,7 +10,6 @@ export const ColorCheckbox = ({
   value,
   onChange,
 }: ColorCheckboxProps) => {
-  console.log(value);
   return (
     <label className="cursor-pointer">
       <input
@@ -29,7 +27,7 @@ export const ColorCheckbox = ({
           transition-all flex-1
           ${
             checked
-              ? "border border-(--stroke-beige-primary)"
+              ? "border-2 border-(--stroke-beige-primary)"
               : "border border-transparent"
           }
           ${value}
