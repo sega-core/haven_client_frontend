@@ -12,7 +12,7 @@ export const InputName = () => {
   return (
     <Input
       placeholder="Название цели"
-      size="lg"
+      size="md"
       {...input}
       {...(meta.touched && meta.error && { isRequired: true })}
     />

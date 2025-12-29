@@ -14,12 +14,13 @@ export const InputDate = () => {
   return (
     <I18nProvider locale="ru-RU">
       <DateRangePicker
-        label="Выберите период"
-        aria-label="Выберите период"
-        {...(meta.touched && meta.error && { isRequired: true })}
+        label="Период"
+        aria-label="Период"
+        size="sm"
         onChange={(e) => input.onChange(e)}
         minValue={today(getLocalTimeZone())}
         {...(input.value && { value: input.value })}
+        {...(meta.touched && meta.error && { isRequired: true })}
       />
     </I18nProvider>
   );

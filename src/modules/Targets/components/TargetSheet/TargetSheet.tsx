@@ -3,7 +3,7 @@ import { Sheet } from "../../../../components/Sheet";
 import { Typography } from "../../../../components/Typography";
 import { Switch } from "@heroui/switch";
 import { FormTarget } from "../../form/FormTarget";
-import { InputDate, InputName } from "../../fields";
+import { InputDate, InputName, InputTime } from "../../fields";
 import { INITIAL_FORM } from "../../form/FormTarget.constant";
 import { useState } from "react";
 import { DayPanel } from "../DayPanel";
@@ -41,6 +41,7 @@ export const TargetSheet = ({
             </Typography>
           </div>
           {isToggle && <DayPanel />}
+          {isToggle && <InputTime />}
           <Button
             radius="full"
             className="bg-beige-primary text-white"

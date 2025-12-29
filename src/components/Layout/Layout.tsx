@@ -1,4 +1,4 @@
-import Background from "../../assets/images/main.png";
+import Background from "../../assets/images/backgroundImage.png";
 
 export const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
