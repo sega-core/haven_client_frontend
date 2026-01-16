@@ -2,9 +2,9 @@ import { useState } from "react";
 import { Block } from "../../components/Block";
 import { Icon } from "../../components/Icon";
 import { Typography } from "../../components/Typography";
-import { VoprosDnyaSheet } from "./VoprosDnyaSheet";
+import { GratitudeSheet } from "./GratitudeSheet";
 
-export const VoprosDnyaCard = () => {
+export const GratitudeCard = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const onOpen = () => {
@@ -19,14 +19,14 @@ export const VoprosDnyaCard = () => {
     <Block onClick={onOpen}>
       <div className="flex justify-between items-center">
         <Typography className="text-brown-primary" type="heading-xs">
-          Вопрос дня
+          Благодарность
         </Typography>
         <Icon name="ChevronRight" width={24} height={24} />
       </div>
       <Typography className="text-brown-primary" type="body-s">
-        Ваша ежедневная порция рефлексии.
+        Фокус на приятных мелочах помогает бороться с тревогой и беспокойством.
       </Typography>
-      <VoprosDnyaSheet isOpen={isOpen} onClose={onClose} />
+      <GratitudeSheet isOpen={isOpen} onClose={onClose} />
     </Block>
   );
 };

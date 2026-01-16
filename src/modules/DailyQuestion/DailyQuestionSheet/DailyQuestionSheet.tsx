@@ -1,9 +1,9 @@
-import { Textarea } from "@heroui/input";
 import { Button } from "@heroui/button";
 import { Sheet } from "../../../components/Sheet";
 import { Typography } from "../../../components/Typography";
+import { Textarea } from "@heroui/input";
 
-export const BlagodarnostSheet = ({
+export const DailyQuestionSheet = ({
   isOpen,
   onClose,
 }: {
@@ -11,10 +11,10 @@ export const BlagodarnostSheet = ({
   onClose: () => void;
 }) => {
   return (
-    <Sheet isOpen={isOpen} onClose={onClose} title="Трекер благодарности">
+    <Sheet isOpen={isOpen} onClose={onClose} title="Вопрос дня">
       <div className="grid gap-4 bg-white-primary p-4">
         <Typography type="body-s" className="text-brown-primary text-center">
-          За что вы благодарны сегоднящнему дню?
+          Что вы можете отпустить сейчас, чтобы почувствовать лёгкость?
         </Typography>
         <Textarea
           label="Добавить комментарий..."

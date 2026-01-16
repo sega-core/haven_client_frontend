@@ -3,10 +3,10 @@ import { Block } from "../../components/Block";
 import { Chip } from "../../components/Chip";
 import { Icon } from "../../components/Icon";
 import { Typography } from "../../components/Typography";
-import { NASTROENIE_CHIPS } from "./Nasctroenie.constants";
-import { NastroenieSheet } from "./NastroenieSheet/NastroenieSheet";
+import { MOOD_CHIPS } from "./Mood.constants";
+import { MoodSheet } from "./MoodSheet";
 
-export const NastroenieCard = () => {
+export const MoodCard = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const onOpen = () => {
@@ -24,7 +24,7 @@ export const NastroenieCard = () => {
         </Typography>
       </div>
       <div className="flex justify-center gap-2 flex-wrap">
-        {NASTROENIE_CHIPS.map((item) => (
+        {MOOD_CHIPS.map((item) => (
           <Chip
             key={item.id}
             color="bg-beige-tertiary"
@@ -34,7 +34,7 @@ export const NastroenieCard = () => {
           />
         ))}
       </div>
-      <NastroenieSheet isOpen={isOpen} onClose={onClose} />
+      <MoodSheet isOpen={isOpen} onClose={onClose} />
     </Block>
   );
 };

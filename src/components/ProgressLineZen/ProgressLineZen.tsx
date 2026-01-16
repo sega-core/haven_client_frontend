@@ -2,7 +2,7 @@ import { Button } from "@heroui/button";
 import { Icon } from "../Icon";
 
 export const ProgressLineZen = ({ goal }: { goal: number }) => {
-  const segments = [0, 1, 2, 3];
+  const segments = [0, 1, 2];
 
   return (
     <div className="flex justify-between items-center">
