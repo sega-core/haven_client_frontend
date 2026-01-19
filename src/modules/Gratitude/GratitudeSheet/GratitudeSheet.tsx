@@ -6,8 +6,8 @@ import { INITIAL_FORM } from "../form/FormGratitude.constant";
 import { InputText } from "../field/InputText";
 import { useCreateGratitude } from "../../../hooks";
 import { EGratitudeField, TGratitudeForm } from "../form/FormGratitude.types";
-import { CreatedGratitude } from "../components/CreatedGratitude";
 import { TGratitude } from "../../../api";
+import { BlockAnswer } from "../../../components/BlockAnswer";
 
 export const GratitudeSheet = ({
   isOpen,
@@ -41,8 +41,8 @@ export const GratitudeSheet = ({
           </Typography>
           {!isCompleted && <InputText />}
           {!!gratitudes.length &&
-            gratitudes.map((item, index) => (
-              <CreatedGratitude key={index} {...item} />
+            gratitudes.map(({ text, createdAt }, index) => (
+              <BlockAnswer key={index} text={text} date={createdAt} />
             ))}
           {!isCompleted && (
             <Button

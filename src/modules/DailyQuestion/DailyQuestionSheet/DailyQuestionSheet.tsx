@@ -1,34 +1,63 @@
 import { Button } from "@heroui/button";
 import { Sheet } from "../../../components/Sheet";
 import { Typography } from "../../../components/Typography";
-import { Textarea } from "@heroui/input";
+import { useCreateAnswer } from "../../../hooks";
+import {
+  TDailyQuestionForm,
+  EDailyQuestionField,
+} from "../form/FormDailyQuestion.types";
+import { InputText } from "../field/InputText";
+import { FormDailyQuestion } from "../form/FormDailyQuestion";
+import { INITIAL_FORM } from "../form/FormDailyQuestion.constant";
+import { BlockAnswer } from "../../../components/BlockAnswer";
+import { TQuestion } from "../../../api";
 
 export const DailyQuestionSheet = ({
   isOpen,
   onClose,
+  question,
 }: {
   isOpen: boolean;
   onClose: () => void;
+  question?: TQuestion;
 }) => {
+  const { mutateAsync, isPending } = useCreateAnswer();
+
+  const onSubmit = async (values: TDailyQuestionForm) => {
+    try {
+      await mutateAsync(values[EDailyQuestionField.ANSWER]);
+    } catch (error) {
+      alert(error);
+    } finally {
+      onClose();
+    }
+  };
+
+  const isCompleted = question?.userAnswer;
+
   return (
     <Sheet isOpen={isOpen} onClose={onClose} title="Вопрос дня">
-      <div className="grid gap-4 bg-white-primary p-4">
-        <Typography type="body-s" className="text-brown-primary text-center">
-          Что вы можете отпустить сейчас, чтобы почувствовать лёгкость?
-        </Typography>
-        <Textarea
-          label="Добавить комментарий..."
-          classNames={{
-            inputWrapper: "bg-beige-tertiary transition-colors duration-200",
-            input:
-              "bg-transparent text-white placeholder:text-gray-400 text-white",
-            description: "bg-beige-tertiary",
-          }}
-        />
-        <Button radius="full" className="bg-beige-primary text-white">
-          Сохранить
-        </Button>
-      </div>
+      <FormDailyQuestion onSubmit={onSubmit} initialValue={INITIAL_FORM}>
+        <div className="grid gap-4 bg-white-primary p-4">
+          <Typography type="body-s" className="text-brown-primary text-center">
+            {question?.question}
+          </Typography>
+          {!isCompleted && <InputText />}
+          {isCompleted && (
+            <BlockAnswer text={question.userAnswer} date={question.createdAt} />
+          )}
+          {!isCompleted && (
+            <Button
+              radius="full"
+              className="bg-beige-primary text-white"
+              isLoading={isPending}
+              type="submit"
+            >
+              Сохранить
+            </Button>
+          )}
+        </div>
+      </FormDailyQuestion>
     </Sheet>
   );
 };

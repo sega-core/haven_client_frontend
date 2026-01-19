@@ -3,6 +3,7 @@ import { Block } from "../../components/Block";
 import { Icon } from "../../components/Icon";
 import { Typography } from "../../components/Typography";
 import { DailyQuestionSheet } from "./DailyQuestionSheet";
+import { useGetQuestion } from "../../hooks";
 
 export const DailyQuestionCard = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -15,6 +16,8 @@ export const DailyQuestionCard = () => {
     setIsOpen(false);
   };
 
+  const { data } = useGetQuestion();
+
   return (
     <Block onClick={onOpen}>
       <div className="flex justify-between items-center">
@@ -26,7 +29,7 @@ export const DailyQuestionCard = () => {
       <Typography className="text-brown-primary" type="body-s">
         Ваша ежедневная порция рефлексии.
       </Typography>
-      <DailyQuestionSheet isOpen={isOpen} onClose={onClose} />
+      <DailyQuestionSheet isOpen={isOpen} onClose={onClose} question={data} />
     </Block>
   );
 };
