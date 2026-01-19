@@ -1,6 +1,7 @@
 import { TimeInput } from "@heroui/date-input";
 import { useField } from "react-final-form";
 import { ETargetField } from "../form";
+import { DEFAULT_ERROR_MSG } from "../../../constats";
 
 export const InputTime = () => {
   const { input, meta } = useField(ETargetField.NOTIFICATION_TIME, {
@@ -15,6 +16,7 @@ export const InputTime = () => {
       size="sm"
       {...input}
       {...(meta.touched && meta.error && { isRequired: true })}
+      errorMessage={DEFAULT_ERROR_MSG}
     />
   );
 };

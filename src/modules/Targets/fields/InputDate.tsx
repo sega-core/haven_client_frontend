@@ -3,6 +3,7 @@ import { ETargetField } from "../form/FormTarget.types";
 import { DateRangePicker } from "@heroui/date-picker";
 import { getLocalTimeZone, today } from "@internationalized/date";
 import { I18nProvider } from "@react-aria/i18n";
+import { DEFAULT_ERROR_MSG } from "../../../constats";
 
 export const InputDate = () => {
   const { input, meta } = useField(ETargetField.START_DATE, {
@@ -21,6 +22,7 @@ export const InputDate = () => {
         minValue={today(getLocalTimeZone())}
         {...(input.value && { value: input.value })}
         {...(meta.touched && meta.error && { isRequired: true })}
+        errorMessage={DEFAULT_ERROR_MSG}
       />
     </I18nProvider>
   );

@@ -1,18 +1,20 @@
 import { Layout } from "./components/Layout";
 import { TabBar } from "./components/TabBar";
-import { AppRoutes } from "./containers/Routes/Routes";
 import { BrowserRouter } from "react-router-dom";
 import { Header } from "./modules/Header";
+import { QueryClientProvider, AppRoutes } from "./containers";
 
 function App() {
   return (
-    <Layout>
-      <BrowserRouter>
-        <Header />
-        <AppRoutes />
-        <TabBar />
-      </BrowserRouter>
-    </Layout>
+    <QueryClientProvider>
+      <Layout>
+        <BrowserRouter>
+          <Header />
+          <AppRoutes />
+          <TabBar />
+        </BrowserRouter>
+      </Layout>
+    </QueryClientProvider>
   );
 }
 
