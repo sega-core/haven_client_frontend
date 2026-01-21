@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { TargetItem } from "../../modules/Targets";
 import { TargetSheet } from "../../modules/Targets";
 import { Button } from "@heroui/button";
@@ -7,13 +7,8 @@ import { Typography } from "../../components/Typography";
 export const Targets = () => {
   const [isOpen, setIsOpen] = useState(false);
 
-  const onOpen = () => {
-    setIsOpen(true);
-  };
-
-  const onClose = () => {
-    setIsOpen(false);
-  };
+  const onOpen = useCallback(() => setIsOpen(true), []);
+  const onClose = useCallback(() => setIsOpen(false), []);
 
   return (
     <div className="grid gap-4 w-full">

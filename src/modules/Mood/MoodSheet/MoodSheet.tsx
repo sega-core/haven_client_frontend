@@ -1,9 +1,6 @@
 import { Typography } from "../../../components/Typography";
 import { Chip } from "../../../components/Chip";
-import {
-  NASTROENIE_TAGS_MAP,
-  MOOD_CHIPS,
-} from "../Mood.constants";
+import { NASTROENIE_TAGS_MAP, MOOD_CHIPS } from "../Mood.constants";
 import { Icon } from "../../../components/Icon";
 import { Textarea } from "@heroui/input";
 import { Button } from "@heroui/button";
@@ -12,17 +9,18 @@ import { Sheet } from "../../../components/Sheet";
 export const MoodSheet = ({
   isOpen,
   onClose,
+  initialLevel,
 }: {
   isOpen: boolean;
   onClose: () => void;
+  initialLevel?: number;
 }) => {
-
-  const level4Tags =
-  Object.entries(NASTROENIE_TAGS_MAP)
-    .filter(([, tag]) => tag.level === 4)
+  
+  const TAGS_FOR_LEVEL = Object.entries(NASTROENIE_TAGS_MAP)
+    .filter(([, tag]) => tag.level === initialLevel)
     .map(([id, tag]) => ({
       id,
-      label: tag.label
+      label: tag.label,
     }));
 
   return (
@@ -42,7 +40,7 @@ export const MoodSheet = ({
         </div>
         <Typography type="body-s">Мои эмоции и чувства</Typography>
         <div className="flex justify-center gap-2 flex-wrap">
-          {level4Tags.map((item) => (
+          {TAGS_FOR_LEVEL.map((item) => (
             <Chip
               key={item.id}
               color="bg-beige-tertiary"

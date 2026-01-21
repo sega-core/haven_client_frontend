@@ -1,16 +1,16 @@
 import { type ReactNode } from "react";
 import { Form } from "react-final-form";
-import { FORM_ID } from "./FormGratitude.constant";
-import { TGratitudeForm } from "./FormGratitude.types";
+import { FORM_ID } from "./FormMood.constant";
+import { TMoodForm } from "./FormMood.types";
 
-export const FormGratitude = ({
+export const FormMood = ({
   children,
   onSubmit,
   initialValue,
 }: {
   children: ReactNode;
-  onSubmit: (e: TGratitudeForm) => void;
-  initialValue: TGratitudeForm;
+  onSubmit: (e: TMoodForm) => void;
+  initialValue: TMoodForm;
 }) => {
   return (
     <Form initialValues={initialValue} onSubmit={onSubmit}>

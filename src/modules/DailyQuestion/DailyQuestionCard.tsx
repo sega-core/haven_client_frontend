@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { Block } from "../../components/Block";
 import { Icon } from "../../components/Icon";
 import { Typography } from "../../components/Typography";
@@ -6,15 +6,10 @@ import { DailyQuestionSheet } from "./DailyQuestionSheet";
 import { useGetQuestion } from "../../hooks";
 
 export const DailyQuestionCard = () => {
-  const [isOpen, setIsOpen] = useState(false);
-
-  const onOpen = () => {
-    setIsOpen(true);
-  };
-
-  const onClose = () => {
-    setIsOpen(false);
-  };
+    const [isOpen, setIsOpen] = useState(false);
+  
+    const onOpen = useCallback(() => setIsOpen(true), []);
+    const onClose = useCallback(() => setIsOpen(false), []);
 
   const { data } = useGetQuestion();
 

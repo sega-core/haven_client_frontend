@@ -1,23 +1,31 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { Block } from "../../components/Block";
 import { Chip } from "../../components/Chip";
 import { Icon } from "../../components/Icon";
 import { Typography } from "../../components/Typography";
 import { MOOD_CHIPS } from "./Mood.constants";
 import { MoodSheet } from "./MoodSheet";
+import { useGetMoodTags } from "../../hooks";
 
 export const MoodCard = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [moodData, setMoodData] = useState<{
+    isOpen: boolean;
+    initialLevel?: number;
+  }>({
+    isOpen: false,
+  });
 
-  const onOpen = () => {
-    setIsOpen(true);
-  };
+  const onOpen = useCallback(
+    (initialLevel: number) =>
+      setMoodData((prev) => ({ ...prev, isOpen: true, initialLevel })),
+    [],
+  );
+  const onClose = useCallback(() => setMoodData({ isOpen: false }), []);
 
-  const onClose = () => {
-    setIsOpen(false);
-  };
+  useGetMoodTags();
+
   return (
-    <Block onClick={onOpen}>
+    <Block>
       <div className="flex justify-between items-center">
         <Typography type="heading-xs" className="text-brown-primary">
           Как ваше настроение сегодня?
@@ -30,11 +38,15 @@ export const MoodCard = () => {
             color="bg-beige-tertiary"
             icon={<Icon name={item.iconId} width={18} height={18} />}
             label={item.label}
-            onClick={() => console.log(item.id)}
+            onClick={() => onOpen(item.id)}
           />
         ))}
       </div>
-      <MoodSheet isOpen={isOpen} onClose={onClose} />
+      <MoodSheet
+        isOpen={moodData.isOpen}
+        onClose={onClose}
+        initialLevel={moodData.initialLevel}
+      />
     </Block>
   );
 };
