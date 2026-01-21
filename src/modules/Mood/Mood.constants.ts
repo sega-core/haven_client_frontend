@@ -30,7 +30,7 @@ export const MOOD_CHIPS: { label: string; id: TMoodLevel; iconId: TIcon }[] =
     },
   ];
 
-export const NASTROENIE_TAGS_MAP: Record<string, TMoodTag> = {
+export const MOOD_TAGS_MAP: Record<string, TMoodTag> = {
   // 😭 Очень плохо — level 1
   despair: { label: 'Безысходность', level: 1 },
   hopelessness: { label: 'Отчаяние', level: 1 },

@@ -56,5 +56,14 @@ export const semanticColorsPlugin = plugin(function ({ addUtilities }) {
     '.text-white-secondary': { color: 'var(--text-white-secondary)' },
     '.text-yellow-primary': { color: 'var(--text-yellow-primary)' },
     '.text-yellow-secondary': { color: 'var(--text-yellow-secondary)' },
+    /* Fill */
+    '.fill-beige-primary': { 
+      '--svg-fill': 'var(--text-beige-primary)',
+      'fill': 'var(--svg-fill)',
+    },
+    '.fill-white-primary': { 
+      '--svg-fill': 'var(--text-white-primary)',
+      'fill': 'var(--svg-fill)',
+    },
   });
 });

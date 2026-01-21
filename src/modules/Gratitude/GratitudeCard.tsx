@@ -20,7 +20,6 @@ export const GratitudeCard = () => {
       data?.map((item) => (
         <Chip
           label={getTime(item.createdAt)}
-          color="bg-beige-tertiary"
           key={item.id}
         />
       )),

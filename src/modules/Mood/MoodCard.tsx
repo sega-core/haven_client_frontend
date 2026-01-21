@@ -35,10 +35,10 @@ export const MoodCard = () => {
         {MOOD_CHIPS.map((item) => (
           <Chip
             key={item.id}
-            color="bg-beige-tertiary"
             icon={<Icon name={item.iconId} width={18} height={18} />}
             label={item.label}
             onClick={() => onOpen(item.id)}
+            variant={item.id === moodData.initialLevel ? 'flat':'solid'}
           />
         ))}
       </div>
