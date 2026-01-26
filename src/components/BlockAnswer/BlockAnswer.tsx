@@ -2,10 +2,10 @@ import { getTime } from "../../utils";
 import { Typography } from "../Typography";
 
 export const BlockAnswer = ({
-  text,
+  comment,
   date,
 }: {
-  text: string;
+  comment: string;
   date: string;
 }) => {
   return (
@@ -14,7 +14,7 @@ export const BlockAnswer = ({
       bg-beige-quaternary rounded-3xl cursor-pointer`}
     >
       <Typography type="body-s" className="text-brown-secondary">
-        {text}
+        {comment}
       </Typography>
       <div className="flex justify-end">
         <Typography type="body-s" className="text-brown-secondary">

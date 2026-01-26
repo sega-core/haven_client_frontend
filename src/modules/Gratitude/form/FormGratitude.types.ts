@@ -1,7 +1,7 @@
 export enum EGratitudeField {
-  TEXT = "TEXT",
+  COMMENT = "comment",
 }
 
 export type TGratitudeForm = {
-  [EGratitudeField.TEXT]: string;
+  [EGratitudeField.COMMENT]: string;
 };

@@ -3,15 +3,17 @@ import { Block } from "../../components/Block";
 import { Icon } from "../../components/Icon";
 import { Typography } from "../../components/Typography";
 import { DailyQuestionSheet } from "./DailyQuestionSheet";
-import { useGetQuestion } from "../../hooks";
+import { TDailyQuestion } from "../../api";
 
-export const DailyQuestionCard = () => {
-    const [isOpen, setIsOpen] = useState(false);
-  
-    const onOpen = useCallback(() => setIsOpen(true), []);
-    const onClose = useCallback(() => setIsOpen(false), []);
+type Props = {
+  data?: TDailyQuestion;
+};
 
-  const { data } = useGetQuestion();
+export const DailyQuestionCard = ({ data }: Props) => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const onOpen = useCallback(() => setIsOpen(true), []);
+  const onClose = useCallback(() => setIsOpen(false), []);
 
   return (
     <Block onClick={onOpen}>

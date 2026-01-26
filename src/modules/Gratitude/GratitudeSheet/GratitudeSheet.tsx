@@ -22,7 +22,7 @@ export const GratitudeSheet = ({
 
   const onSubmit = async (values: TGratitudeForm) => {
     try {
-      await mutateAsync(values[EGratitudeField.TEXT]);
+      await mutateAsync(values[EGratitudeField.COMMENT]);
     } catch (error) {
       alert(error);
     } finally {
@@ -41,8 +41,8 @@ export const GratitudeSheet = ({
           </Typography>
           {!isCompleted && <InputText />}
           {!!gratitudes.length &&
-            gratitudes.map(({ text, createdAt }, index) => (
-              <BlockAnswer key={index} text={text} date={createdAt} />
+            gratitudes.map(({ comment, createdAt }, index) => (
+              <BlockAnswer key={index} comment={comment} date={createdAt} />
             ))}
           {!isCompleted && (
             <Button

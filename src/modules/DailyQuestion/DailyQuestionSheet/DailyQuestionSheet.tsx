@@ -10,7 +10,7 @@ import { InputText } from "../field/InputText";
 import { FormDailyQuestion } from "../form/FormDailyQuestion";
 import { INITIAL_FORM } from "../form/FormDailyQuestion.constant";
 import { BlockAnswer } from "../../../components/BlockAnswer";
-import { TQuestion } from "../../../api";
+import { TDailyQuestion } from "../../../api";
 
 export const DailyQuestionSheet = ({
   isOpen,
@@ -19,7 +19,7 @@ export const DailyQuestionSheet = ({
 }: {
   isOpen: boolean;
   onClose: () => void;
-  question?: TQuestion;
+  question?: TDailyQuestion;
 }) => {
   const { mutateAsync, isPending } = useCreateAnswer();
 
@@ -44,7 +44,7 @@ export const DailyQuestionSheet = ({
           </Typography>
           {!isCompleted && <InputText />}
           {isCompleted && (
-            <BlockAnswer text={question.userAnswer} date={question.createdAt} />
+            <BlockAnswer comment={question.userAnswer} date={question.createdAt} />
           )}
           {!isCompleted && (
             <Button

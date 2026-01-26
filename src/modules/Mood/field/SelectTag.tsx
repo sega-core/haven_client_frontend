@@ -2,16 +2,26 @@ import { useField } from "react-final-form";
 import { EMoodField } from "../form/FormMood.types";
 import { Chip } from "../../../components/Chip";
 import { MOOD_TAGS_MAP } from "../Mood.constants";
+import { useEffect } from "react";
 
 export const SelectTags = () => {
-  const { input } = useField(EMoodField.TAGS, {
+  const { input, meta } = useField(EMoodField.TAGS, {
     type: "checkbox",
     multiple: true,
+    validate: (v) => {
+      if (!v) return "SelectTagsError";
+    },
   });
-  const { input: inputLelev } = useField(EMoodField.LEVEL, { type: "radio" });
+  const { input: inputLevel } = useField(EMoodField.LEVEL, { type: "radio" });
+
+  useEffect(() => {
+    if (selectedTags.length > 0) {
+      input.onChange([]);
+    }
+  }, [inputLevel.value]);
 
   const TAGS_FOR_LEVEL = Object.entries(MOOD_TAGS_MAP)
-    .filter(([, tag]) => tag.level === inputLelev.value)
+    .filter(([, tag]) => tag.level === inputLevel.value)
     .map(([id, tag]) => ({
       id,
       label: tag.label,
@@ -26,29 +36,24 @@ export const SelectTags = () => {
   const handleTagClick = (tagId: string) => {
     const currentTags = selectedTags;
 
-    // Если тег уже выбран - убираем его
     if (currentTags.includes(tagId)) {
       input.onChange(currentTags.filter((id) => id !== tagId));
       return;
     }
 
-    // Если уже выбрано 3 тега - не добавляем новый
     if (currentTags.length >= 3) {
-      // Можно показать уведомление или просто игнорировать
       alert("Максимум 3 тега");
       return;
     }
 
-    // Добавляем новый тег
     input.onChange([...currentTags, tagId]);
   };
 
   return (
+    <>
     <div className="flex justify-center gap-2 flex-wrap">
       {TAGS_FOR_LEVEL.map((item) => {
         const isSelected = selectedTags.includes(item.id);
-        /*           const isDisabled = !isSelected && selectedTags.length >= 3;
-         */
         return (
           <Chip
             key={item.id}
@@ -59,5 +64,13 @@ export const SelectTags = () => {
         );
       })}
     </div>
+     {meta.touched && meta.error && <div
+        data-slot="error-message"
+        className="text-tiny text-danger"
+        id="react-aria3070100192-:ro:"
+      >
+        Выбирете хотя бы одну эмоцию или чувство
+      </div>}
+    </>
   );
 };

@@ -22,6 +22,8 @@ export const TargetSheet = ({
 
   const [isToggle, setIsToggle] = useState(false);
 
+  //NOTE: две цели бесплатно
+
   return (
     <Sheet isOpen={isOpen} onClose={onClose} title={title}>
       <FormTarget onSubmit={(e) => console.log(e)} initialValue={INITIAL_FORM}>

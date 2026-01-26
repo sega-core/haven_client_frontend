@@ -4,27 +4,27 @@ import { TMoodTag, TMoodLevel } from "./Mood.types";
 export const MOOD_CHIPS: { label: string; id: TMoodLevel; iconId: TIcon }[] =
   [
     {
-      label: "супер",
+      label: "Супер",
       id: 5,
       iconId: "Super",
     },
     {
-      label: "хорошо",
+      label: "Хорошо",
       id: 4,
       iconId: "Good",
     },
     {
-      label: "норм",
+      label: "Норм",
       id: 3,
       iconId: "Normal",
     },
     {
-      label: "плохо",
+      label: "Плохо",
       id: 2,
       iconId: "Sad",
     },
     {
-      label: "ужасно",
+      label: "Ужасно",
       id: 1,
       iconId: "Terrible",
     },

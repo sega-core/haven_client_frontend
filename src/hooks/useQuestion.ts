@@ -1,11 +1,6 @@
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { getQuestion, postQuestion } from "../api";
-
-const GET_QUESTION = "GET_QUESTION";
-
-export const useGetQuestion = () => {
-  return useQuery({ queryKey: [GET_QUESTION], queryFn: () => getQuestion() });
-};
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { postQuestion } from "../api";
+import { GET_PROGRESS } from "./useProgress";
 
 export const useCreateAnswer = () => {
   const queryClient = useQueryClient();
@@ -13,7 +8,7 @@ export const useCreateAnswer = () => {
   return useMutation({
     mutationFn: (answer: string) => postQuestion(answer),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: [GET_QUESTION] });
+      queryClient.invalidateQueries({ queryKey: [GET_PROGRESS] });
     },
   });
 };

@@ -5,7 +5,12 @@ import { MOOD_CHIPS } from "../Mood.constants";
 import { Icon } from "../../../components/Icon";
 
 export const SelectMood = () => {
-  const { input } = useField(EMoodField.LEVEL, { type: "radio" });
+  const { input } = useField(EMoodField.LEVEL, {
+    type: "radio",
+    validate: (v) => {
+      if (!v) return "SelectMoodError";
+    },
+  });
 
   return (
     <div className="flex justify-center gap-2 flex-wrap">

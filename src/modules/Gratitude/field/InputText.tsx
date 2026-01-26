@@ -3,7 +3,7 @@ import { EGratitudeField } from "../form/FormGratitude.types";
 import { TextArea } from "../../../components/Input";
 
 export const InputText = () => {
-  const { input, meta } = useField(EGratitudeField.TEXT, {
+  const { input, meta } = useField(EGratitudeField.COMMENT, {
     validate: (v) => {
       if (!v) return "InputTextError";
     },

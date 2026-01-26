@@ -3,27 +3,26 @@ import { Block } from "../../components/Block";
 import { Icon } from "../../components/Icon";
 import { Typography } from "../../components/Typography";
 import { GratitudeSheet } from "./GratitudeSheet";
-import { useGetGratitude } from "../../hooks";
 import { Chip } from "../../components/Chip";
 import { getTime } from "../../utils";
+import { TGratitude } from "../../api";
 
-export const GratitudeCard = () => {
+type Props = {
+  data?: TGratitude[];
+};
+
+export const GratitudeCard = ({ data }: Props) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const onOpen = useCallback(() => setIsOpen(true), []);
   const onClose = useCallback(() => setIsOpen(false), []);
 
-  const { data } = useGetGratitude();
-
   const renderChips = useCallback(
     () =>
       data?.map((item) => (
-        <Chip
-          label={getTime(item.createdAt)}
-          key={item.id}
-        />
+        <Chip label={getTime(item.createdAt)} key={item.id} />
       )),
-    [data]
+    [data],
   );
 
   return (

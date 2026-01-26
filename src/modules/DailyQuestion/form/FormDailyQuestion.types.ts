@@ -1,5 +1,5 @@
 export enum EDailyQuestionField {
-  ANSWER = "ANSWER",
+  ANSWER = "answer",
 }
 
 export type TDailyQuestionForm = {

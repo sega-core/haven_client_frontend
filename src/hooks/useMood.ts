@@ -1,15 +1,6 @@
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { getMood, getMoodTags, postMood, TMoodReq } from "../api";
-
-const GET_MOOD = "GET_MOOD";
-const GET_MOOD_TAGS = "GET_MOOD_TAGS";
-
-export const useGetMood = () => {
-  return useQuery({ queryKey: [GET_MOOD], queryFn: () => getMood() });
-};
-export const useGetMoodTags = () => {
-  return useQuery({ queryKey: [GET_MOOD_TAGS], queryFn: () => getMoodTags() });
-};
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { postMood, TMoodReq } from "../api";
+import { GET_PROGRESS } from "./useProgress";
 
 export const useCreateMood = () => {
   const queryClient = useQueryClient();
@@ -17,7 +8,7 @@ export const useCreateMood = () => {
   return useMutation({
     mutationFn: (body: TMoodReq) => postMood(body),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: [GET_MOOD] });
+      queryClient.invalidateQueries({ queryKey: [GET_PROGRESS] });
     },
   });
 };

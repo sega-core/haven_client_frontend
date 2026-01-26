@@ -1,19 +1,14 @@
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { getGratitude, postGratitude } from "../api";
-
-const GET_GRATITUDE = "GET_GRATITUDE";
-
-export const useGetGratitude = () => {
-  return useQuery({ queryKey: [GET_GRATITUDE], queryFn: () => getGratitude() });
-};
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { postGratitude } from "../api";
+import { GET_PROGRESS } from "./useProgress";
 
 export const useCreateGratitude = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: (text: string) => postGratitude(text),
+    mutationFn: (comment: string) => postGratitude(comment),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: [GET_GRATITUDE] });
+      queryClient.invalidateQueries({ queryKey: [GET_PROGRESS] });
     },
   });
 };

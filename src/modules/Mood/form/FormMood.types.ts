@@ -1,7 +1,7 @@
 export enum EMoodField {
-  LEVEL = "LEVEL",
-  TAGS = "TAGS",
-  COMMENT = "COMMENT",
+  LEVEL = "level",
+  TAGS = "tags",
+  COMMENT = "comment",
 }
 
 export type TMoodForm = {
