@@ -4,7 +4,7 @@ import { Input } from "@heroui/input";
 import { DEFAULT_ERROR_MSG } from "../../../constats";
 
 export const InputName = () => {
-  const { input, meta } = useField(ETargetField.NAME, {
+  const { input, meta } = useField(ETargetField.TITLE, {
     validate: (v) => {
       if (!v) return "InputNameError";
     },

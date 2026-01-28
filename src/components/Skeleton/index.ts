@@ -1,1 +1,3 @@
-export * from "./Skeleton";
+export * from "./SkeletonComponent";
+export * from "./Main";
+export * from "./Target";

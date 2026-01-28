@@ -20,8 +20,6 @@ export const MoodCard = ({ data }: Props) => {
     initialLevel: 0,
   });
 
-  console.log({ data });
-
   const onOpen = useCallback(
     (initialLevel: number) =>
       setMoodData((prev) => ({ ...prev, isOpen: true, initialLevel })),

@@ -1,4 +1,4 @@
-export const Skeleton = ({ className = "" }: { className?: string }) => {
+export const SkeletonComponent = ({ className = "" }: { className?: string }) => {
   return (
     <div
       className={`

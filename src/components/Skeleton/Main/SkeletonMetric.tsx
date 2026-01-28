@@ -1,8 +1,8 @@
 import { ReactNode } from "react";
-import { Block } from "../Block";
-import { Skeleton } from "./Skeleton";
+import { Block } from "../../Block";
+import { SkeletonComponent } from "../SkeletonComponent";
 
-export const SkeletonMain = ({
+export const SkeletonMetric = ({
   isLoading,
   children,
 }: {
@@ -16,8 +16,8 @@ export const SkeletonMain = ({
     <div className="grid gap-4">
       {Array.from({ length: 3 }).map((_, index) => (
         <Block key={index}>
-          <Skeleton className="h-6" />
-          <Skeleton className="h-6" />
+          <SkeletonComponent className="h-6" />
+          <SkeletonComponent className="h-6" />
         </Block>
       ))}
     </div>

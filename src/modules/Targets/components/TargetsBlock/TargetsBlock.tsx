@@ -1,26 +1,28 @@
+import { useCallback } from "react";
 import { Circle } from "../../../../components/CircleBlock";
+import { useDoneTarget, useGetTarget } from "../../../../hooks";
+import { SkeletonTargetCircle } from "../../../../components/Skeleton";
 
 export const TargetsBlock = () => {
+  const { data, isLoading } = useGetTarget();
+
+  const { mutate } = useDoneTarget();
+
+  const renderCircle = useCallback(
+    () =>
+      data
+        ?.filter((item) => item.isCanCompletedToday)
+        .map((item, index) => (
+          <Circle {...item} key={index} onChange={() => mutate(item.id)} />
+        )),
+    [data],
+  );
+
   return (
     <div className="flex gap-4 overflow-x-scroll scrollbar-hide w-full">
-      <Circle
-        value={30}
-        name="Пробежка"
-        color=""
-        period={[new Date(), new Date()]}
-      />
-      <Circle
-        value={40}
-        name="Yoga"
-        color={""}
-        period={[new Date(), new Date()]}
-      />
-      <Circle
-        value={50}
-        name="Что-то еще"
-        color={""}
-        period={[new Date(), new Date()]}
-      />
+      <SkeletonTargetCircle isLoading={isLoading}>
+        {renderCircle()}
+      </SkeletonTargetCircle>
     </div>
   );
 };

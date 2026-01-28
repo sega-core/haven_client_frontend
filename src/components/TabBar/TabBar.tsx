@@ -45,7 +45,7 @@ export const TabBar = () => {
 
   return (
     <div className="fixed left-3.5 right-3.5 bottom-4 z-10">
-      <div className="p-2 bg-white-tertiary shadow-lg backdrop-blur-md z-50 w-full rounded-full flex relative">
+      <div className="p-2 bg-white-tertiary shadow-xl/30 backdrop-blur-md z-50 w-full rounded-full flex relative">
         {/* Скользящая подчеркивающая линия */}
         <span
           className="p-2 absolute bottom-0 left-0 top-0 z-20 flex overflow-hidden rounded-full transition-all duration-300 ease-in-out"

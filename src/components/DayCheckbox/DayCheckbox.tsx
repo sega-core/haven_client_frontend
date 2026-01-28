@@ -32,8 +32,8 @@ export const DayCheckbox = ({
           transition-all flex-1
           ${
             checked
-              ? "border border-(--stroke-beige-primary) bg-beige-tertiary"
-              : "border border-transparent bg-beige-tertiary"
+              ? "border-2 border-(--stroke-beige-primary) bg-beige-tertiary"
+              : "border-2 border-transparent bg-beige-tertiary"
           }
         `}
       >

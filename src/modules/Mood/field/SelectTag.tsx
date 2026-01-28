@@ -3,6 +3,7 @@ import { EMoodField } from "../form/FormMood.types";
 import { Chip } from "../../../components/Chip";
 import { MOOD_TAGS_MAP } from "../Mood.constants";
 import { useEffect } from "react";
+import { FieldErrorText } from "../../../components/FieldErrorText";
 
 export const SelectTags = () => {
   const { input, meta } = useField(EMoodField.TAGS, {
@@ -51,26 +52,23 @@ export const SelectTags = () => {
 
   return (
     <>
-    <div className="flex justify-center gap-2 flex-wrap">
-      {TAGS_FOR_LEVEL.map((item) => {
-        const isSelected = selectedTags.includes(item.id);
-        return (
-          <Chip
-            key={item.id}
-            label={item.label}
-            onClick={() => handleTagClick(item.id)}
-            variant={isSelected ? "flat" : "solid"}
-          />
-        );
-      })}
-    </div>
-     {meta.touched && meta.error && <div
-        data-slot="error-message"
-        className="text-tiny text-danger"
-        id="react-aria3070100192-:ro:"
-      >
-        Выбирете хотя бы одну эмоцию или чувство
-      </div>}
+      <div className="flex justify-center gap-2 flex-wrap">
+        {TAGS_FOR_LEVEL.map((item) => {
+          const isSelected = selectedTags.includes(item.id);
+          return (
+            <Chip
+              key={item.id}
+              label={item.label}
+              onClick={() => handleTagClick(item.id)}
+              variant={isSelected ? "flat" : "solid"}
+            />
+          );
+        })}
+      </div>
+      <FieldErrorText
+        isError={meta.touched && meta.error}
+        message={"Выбирете хотя бы одну эмоцию или чувство"}
+      />
     </>
   );
 };

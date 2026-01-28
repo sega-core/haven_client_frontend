@@ -6,7 +6,7 @@ import { I18nProvider } from "@react-aria/i18n";
 import { DEFAULT_ERROR_MSG } from "../../../constats";
 
 export const InputDate = () => {
-  const { input, meta } = useField(ETargetField.START_DATE, {
+  const { input, meta } = useField(ETargetField.DATE, {
     validate: (v) => {
       if (!v) return "InputDateError";
     },

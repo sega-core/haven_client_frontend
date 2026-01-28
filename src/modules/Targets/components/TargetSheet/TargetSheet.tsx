@@ -8,6 +8,11 @@ import { INITIAL_FORM } from "../../form/FormTarget.constant";
 import { useState } from "react";
 import { DayPanel } from "../DayPanel";
 import { ColorPanel } from "../ColorPanel";
+import { useCreateTarget } from "../../../../hooks";
+import { ETargetField, TTargetForm } from "../../form";
+import { getDateFromInternationalized } from "../../../../utils";
+
+const { getTime, getYYYYDDMM } = getDateFromInternationalized();
 
 export const TargetSheet = ({
   isOpen,
@@ -22,11 +27,35 @@ export const TargetSheet = ({
 
   const [isToggle, setIsToggle] = useState(false);
 
-  //NOTE: две цели бесплатно
+  const { mutateAsync, isPending } = useCreateTarget();
+
+  const onSubmit = async (values: TTargetForm) => {
+    try {
+      const title = values[ETargetField.TITLE];
+      const startDate = getYYYYDDMM(values[ETargetField.DATE]?.start);
+      const endDate = getYYYYDDMM(values[ETargetField.DATE]?.end);
+      const weekdays = Object.entries(values[ETargetField.WEEKDAYS] || {})
+        .filter(([, isTrue]) => isTrue)
+        .map(([day]) => day);
+      const notifyTime = getTime(values[ETargetField.NOTIFICATION_TIME]);
+
+      await mutateAsync({
+        title,
+        startDate,
+        endDate,
+        weekdays,
+        notifyTime,
+      });
+    } catch (error) {
+      alert(error);
+    } finally {
+      onClose();
+    }
+  };
 
   return (
     <Sheet isOpen={isOpen} onClose={onClose} title={title}>
-      <FormTarget onSubmit={(e) => console.log(e)} initialValue={INITIAL_FORM}>
+      <FormTarget onSubmit={onSubmit} initialValue={INITIAL_FORM}>
         <div className="grid gap-4 bg-white-primary p-4">
           <InputName />
           <div className="flex gap-2">
@@ -36,18 +65,22 @@ export const TargetSheet = ({
             Цвет цели
           </Typography>
           <ColorPanel />
+          <Typography type="body-md" className="text-brown-primary">
+            Дни цели
+          </Typography>
+          <DayPanel />
           <div className="flex gap-2.5">
             <Switch onChange={() => setIsToggle((prev) => !prev)} />
             <Typography type="heading-xs" className="text-brown-primary">
               Установить напоминание
             </Typography>
           </div>
-          {isToggle && <DayPanel />}
           {isToggle && <InputTime />}
           <Button
             radius="full"
             className="bg-beige-primary text-white"
             type="submit"
+            isLoading={isPending}
           >
             Сохранить
           </Button>

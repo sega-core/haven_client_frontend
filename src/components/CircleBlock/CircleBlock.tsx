@@ -3,36 +3,45 @@ import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import { CircleCheckbox } from "../CircleCheckbox";
 import { Typography } from "../Typography";
-import { format } from "date-fns";
-import { ru } from "date-fns/locale";
+import { formatDateRange } from "../../utils";
+import { TTarget } from "../../api";
 
 type Props = {
-  value: number;
-  color: string;
-  name: string;
-  period: Date[];
-};
+  onChange: () => void;
+} & TTarget;
 
-export const Circle = ({ value, color, name, period }: Props) => {
-  const formattedDates = period.map((d) => format(d, "d LLL", { locale: ru }));
-
-  const result = `${formattedDates[0]} — ${formattedDates[1]}`;
+export const Circle = (props: Props) => {
+  const {
+    startDate,
+    endDate,
+    title,
+    onChange,
+    isCompletedToday,
+    completionRate,
+  } = props;
+  const period = formatDateRange(startDate, endDate);
 
   //TODO: доделать цвет
   return (
     <Block className="max-w-[170px] h-[170px] shrink-0">
       <div className="flex justify-between">
         <div style={{ width: 78, height: 78 }}>
-          <CircularProgressbar value={value} text={`${value}%`} />
+          <CircularProgressbar
+            value={completionRate}
+            text={`${completionRate}%`}
+          />
         </div>
-        <CircleCheckbox />
+        <CircleCheckbox onChange={onChange} checked={isCompletedToday} />
       </div>
       <div>
-        <Typography type="heading-xs" className="text-brown-primary">
-          {name}
+        <Typography
+          type="heading-xs"
+          className="text-brown-primary overflow-hidden text-ellipsis whitespace-nowrap inline-block max-w-full"
+        >
+          {title}
         </Typography>
         <Typography type="body-xs" className="text-brown-secondary">
-          {result}
+          {period}
         </Typography>
       </div>
     </Block>

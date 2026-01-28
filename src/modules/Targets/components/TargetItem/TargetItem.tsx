@@ -3,22 +3,30 @@ import { Block } from "../../../../components/Block";
 import { Typography } from "../../../../components/Typography";
 import { Icon } from "../../../../components/Icon";
 import { ProgressLine } from "../../../../components/ProgressLine";
+import { TTarget } from "../../../../api";
+import { formatDateRange } from "../../../../utils";
+import { DAYS } from "../DayPanel/DayPanel.constant";
+import { useDeleteTarget } from "../../../../hooks";
 
-export const TargetItem = () => {
+export const TargetItem = (target: TTarget) => {
+  const { title, startDate, endDate, notifyTime, weekdays,completionRate, id } = target;
+
+  const {mutate} = useDeleteTarget();
+
   return (
     <Block>
       <div className="flex justify-between items-center">
         <Typography
           type="body-md"
-          className="text-brown-primary"
+          className="text-brown-primary flex-1"
           weight="medium"
         >
-          Вечереняя пробежка
+          {title}
         </Typography>
         <div>
           <Button
             isIconOnly
-            onPress={() => alert("dasd")}
+            onPress={() => alert("edit")}
             variant="light"
             size="sm"
             radius="full"
@@ -27,7 +35,7 @@ export const TargetItem = () => {
           </Button>
           <Button
             isIconOnly
-            onPress={() => alert("dasd")}
+            onPress={() => mutate(id)}
             variant="light"
             size="sm"
             radius="full"
@@ -37,7 +45,7 @@ export const TargetItem = () => {
         </div>
       </div>
       <Typography type="body-s" className="text-brown-primary">
-        1 окт. — 30 ноя.
+        {formatDateRange(startDate, endDate)}
       </Typography>
       <div className="flex items-center gap-1.5">
         <div>
@@ -45,12 +53,13 @@ export const TargetItem = () => {
         </div>
         <div>
           <Typography type="body-s" className="text-brown-primary">
-            17:00 пн–пт
+            {notifyTime.slice(0, 5)}{" "}
+            {weekdays.map((item) => DAYS.find((day) => day.id === item)?.title).join(', ')}
           </Typography>
         </div>
       </div>
       <ProgressLine
-        value={50}
+        value={completionRate}
         colorClass="bg-(--plots-progress-2)"
         height={3}
       />
