@@ -13,7 +13,7 @@ export const Main = () => {
   return (
     <Suspense fallback={<div>fallback</div>}>
       <div className="grid gap-4 w-full">
-        <ProgressLineZen goal={data?.progressPoint || 0} />
+        <ProgressLineZen goal={data?.progressPoint} />
         <TargetsBlock />
         <SkeletonMetric isLoading={isLoading}>
           <MoodCard data={data?.mood} />

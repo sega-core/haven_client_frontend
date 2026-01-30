@@ -1,7 +1,7 @@
 export const Block = ({
   children,
   onClick,
-  className,
+  className = '',
 }: {
   children: React.ReactNode;
   onClick?: () => void;

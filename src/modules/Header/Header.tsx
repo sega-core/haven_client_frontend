@@ -1,5 +1,6 @@
 import { Avatar } from "../../components/Avatar";
 import { Typography } from "../../components/Typography";
+import { CoinBalance } from "./components";
 import { useRouteTitle } from "./hooks/useRouteTitle";
 
 export const Header = () => {
@@ -8,13 +9,14 @@ export const Header = () => {
   return (
     <div className="flex justify-between w-full items-center">
       <Typography
-        type="heading-md"
+        type="heading-s"
         className="text-brown-primary"
         weight="semibold"
       >
         {title}
       </Typography>
-      <div>
+      <div className="flex gap-4">
+        <CoinBalance />
         <Avatar />
       </div>
     </div>

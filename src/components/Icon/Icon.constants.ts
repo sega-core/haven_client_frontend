@@ -45,11 +45,6 @@ import StepBack from '../../assets/icons/step-back.svg?react'
 import StepForward from '../../assets/icons/step-forward.svg?react'
 import Trash from '../../assets/icons/trash.svg?react'
 import User from '../../assets/icons/user.svg?react'
-import ZenLineStage0 from '../../assets/icons/zen-line-stage0.svg?react'
-import ZenLineStage1 from '../../assets/icons/zen-line-stage1.svg?react'
-import ZenLineStage2 from '../../assets/icons/zen-line-stage2.svg?react'
-import ZenLineStage3 from '../../assets/icons/zen-line-stage3.svg?react'
-import ZenLineStage4 from '../../assets/icons/zen-line-stage4.svg?react'
 
 export const ICON_MAP: Partial<Record<TIcon, FC<SVGProps<SVGSVGElement>>>> = {
   'Check': Check,
@@ -97,11 +92,6 @@ export const ICON_MAP: Partial<Record<TIcon, FC<SVGProps<SVGSVGElement>>>> = {
   "StepForward": StepForward,
   "Trash": Trash,
   "User": User,
-  "ZenLineStage0": ZenLineStage0,
-  "ZenLineStage1": ZenLineStage1,
-  "ZenLineStage2": ZenLineStage2,
-  "ZenLineStage3": ZenLineStage3,
-  "ZenLineStage4": ZenLineStage4,
 } as const;
 
 
