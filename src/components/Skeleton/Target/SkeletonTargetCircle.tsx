@@ -14,9 +14,10 @@ export const SkeletonTargetCircle = ({
   }
   return (
     <>
-      {Array.from({ length: 3 }).map((_, index) => (
-        <Block className="max-w-[170px] h-[170px]" key={index}>
+      {Array.from({ length: 2 }).map((_, index) => (
+        <Block className="min-w-[170px] h-[170px]" key={index}>
           <SkeletonComponent className="w-10 h-10"/>
+          <SkeletonComponent className="h-3"/>
           <SkeletonComponent className="h-3"/>
           <SkeletonComponent className="h-3"/>
         </Block>

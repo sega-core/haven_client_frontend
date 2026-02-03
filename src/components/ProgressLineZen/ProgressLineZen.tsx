@@ -6,55 +6,57 @@ import { Typography } from "../Typography";
 const PROGRESS_SEGMENTS = 4;
 const ZEN_SEGMENT_INDEX = 3;
 
+const DayBonus = ({ index, bonus }: { index: number; bonus: number }) => {
+  return (
+    <div
+      key={index}
+      className={`
+              flex flex-col gap-4 items-center p-2 rounded-lg shadow-sm transition-all hover:scale-105
+              bg-beige-tertiary
+            `}
+    >
+      <Typography
+        type="body-s"
+        className="text-beige-primary text-center line-clamp-2 h-8 flex items-center justify-center"
+      >
+        {`${index + 1} день`}
+      </Typography>
+      <div className="flex justify-end w-full">
+        <Typography type="body-s" className="text-beige-primary">
+          {bonus}
+        </Typography>
+        <Icon
+          name="ZenFilled"
+          className="fill-(--stroke-beige-primary)"
+          width={20}
+          height={20}
+        />
+      </div>
+    </div>
+  );
+};
+
 const ZenInfoModalContent = () => (
-  <div className="pb-10 px-4">
+  <div className="pb-6 px-2">
     <div className="space-y-4">
-      <Typography type="body-s" className="text-brown-secondary text-center">
-        Заполняйте трекеры каждый день и забирайте Zen
+      <Typography
+        type="body-s"
+        className="text-brown-secondary text-center mb-2"
+      >
+        Заполняйте трекеры каждый день и забирайте награду
       </Typography>
 
-      <div className="space-y-3">
+      <div className="flex flex-wrap justify-center gap-2.5">
         {[5, 5, 10, 15, 20, 25, 50].map((bonus, index) => (
-          <div
-            key={index}
-            className="flex items-center justify-between p-3 bg-white/50 rounded-lg shadow-md"
-          >
-            <div className="flex items-center gap-3">
-              <div
-                className={`
-                w-8 h-8 rounded-full flex items-center justify-center
-                ${
-                  index === 6
-                    ? "bg-gradient-to-br from-yellow-400 to-orange-500 text-white"
-                    : "bg-amber-100 text-amber-700"
-                }
-              `}
-              >
-                {index + 1}
-              </div>
-              <Typography type="body-s" className="text-brown-primary">
-                {index === 0
-                  ? "Первый день"
-                  : index === 1
-                    ? "Второй день подряд"
-                    : `День ${index + 1} подряд`}
-              </Typography>
-            </div>
-            <div className="text-right">
-              <div className="font-bold text-lg text-beige-primary">+{bonus}</div>
-              <Typography type="body-s" className="text-brown-secondary">
-                Zen
-              </Typography>
-            </div>
-          </div>
+          <div key={index}>{DayBonus({ bonus, index })}</div>
         ))}
       </div>
 
       <Typography
-        type="body-s"
-        className="text-brown-secondary text-center italic pt-2"
+        type="body-xs"
+        className="text-brown-secondary text-center italic pt-1"
       >
-        * Серия сбрасывается, если пропустить день
+        * Серия сбрасывается при пропуске дня
       </Typography>
     </div>
   </div>

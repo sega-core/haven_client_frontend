@@ -3,7 +3,7 @@ import { Circle } from "../../../../components/CircleBlock";
 import { useDoneTarget, useGetTarget } from "../../../../hooks";
 import { SkeletonTargetCircle } from "../../../../components/Skeleton";
 
-export const TargetsBlock = () => {
+export const TargetCards= () => {
   const { data, isLoading } = useGetTarget();
 
   const { mutate } = useDoneTarget();
