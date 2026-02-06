@@ -45,8 +45,3 @@ export type TIcon =
   | "User"
   | "ZenFilled"
   | "ZenOutlined"
-  | "ZenLineStage0"
-  | "ZenLineStage1"
-  | "ZenLineStage2"
-  | "ZenLineStage3"
-  | "ZenLineStage4"

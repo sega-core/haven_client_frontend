@@ -43,7 +43,7 @@ export const MoodCard = ({ data }: Props) => {
   }, [data]);
 
   return (
-    <Block>
+    <Block className="shadow-lg">
       <div className="flex justify-between items-center">
         <Typography type="heading-xs" className="text-brown-primary">
           Как ваше настроение сегодня?

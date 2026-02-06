@@ -22,7 +22,7 @@ const tabs = [
   {
     id: "LibreryBig" as const,
     name: "Практики",
-    route: ROUTES.PRACTICS,
+    route: ROUTES.PRACTICE,
   },
 ];
 
@@ -42,6 +42,8 @@ export const TabBar = () => {
   const tabCount = tabs.length;
   const underlineWidthPercent = 100 / tabCount; // 25%
   const underlineLeftPercent = activeTabIndex * underlineWidthPercent; // 0%, 25%, 50%, 75%
+
+  if(activeTabIndex === -1) return  null
 
   return (
     <div className="fixed left-3.5 right-3.5 bottom-4 z-10">

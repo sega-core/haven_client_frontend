@@ -2,12 +2,13 @@ export const ROUTES = {
   MAIN: '/main',
   TARGETS: '/targets',
   COMUNITY: '/comunity',
-  PRACTICS: '/practics'
+  PRACTICE: '/practice',
+  PRACTICE_ID: '/practice/:id'
 } as const;
 
 export enum ERoutes {
   MAIN = '/main',
   TARGETS = '/targets',
   COMUNITY = '/comunity',
-  PRACTICS = '/practics'
+  PRACTICE = '/practice'
 }

@@ -26,7 +26,7 @@ export const GratitudeCard = ({ data }: Props) => {
   );
 
   return (
-    <Block onClick={onOpen}>
+    <Block onClick={onOpen} className="shadow-lg">
       <div className="flex justify-between items-center">
         <Typography className="text-brown-primary" type="heading-xs">
           Благодарность

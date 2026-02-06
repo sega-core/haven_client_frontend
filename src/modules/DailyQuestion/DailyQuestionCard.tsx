@@ -18,7 +18,7 @@ export const DailyQuestionCard = ({ data }: Props) => {
   const onClose = useCallback(() => setIsOpen(false), []);
     
   return (
-    <Block onClick={onOpen}>
+    <Block onClick={onOpen} className="shadow-lg">
       <div className="flex justify-between items-center">
         <Typography className="text-brown-primary" type="heading-xs">
           Вопрос дня

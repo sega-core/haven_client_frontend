@@ -1,49 +1,34 @@
 import React from "react";
 import { Typography } from "../Typography";
+import { CHIP_COLOR_MAP } from "./Chip.constant";
 
 type TChip = {
   label: string;
-  size?: "sm" | "md" | "lg"; //NOTE: пока нет
-  /* color?: "bg-beige-tertiary";  */ //NOTE: пока один
-  variant?: "solid" | "flat"; //NOTE: пока нет
+  color?: "beige" | "green" | 'mustard'|'white';
+  variant?: "solid" | "flat";
   icon?: React.ReactNode;
   onClick?: () => void;
 };
 
-export const Chip = ({ label, icon, variant = "solid", onClick }: TChip) => {
-  const getStyles = () => {
-    switch (variant) {
-      case "solid":
-        return {
-          bg: "bg-beige-tertiary",
-          text: "text-beige-primary",
-          icon: "text-beige-primary",
-        };
-      case "flat":
-        return {
-          bg: "bg-beige-primary",
-          text: "text-white-primary",
-          icon: "text-white-primary",
-        };
-      default:
-        return {
-          bg: "",
-          text: "",
-          icon: "",
-        };
-    }
-  };
+export const Chip = ({
+  label,
+  icon,
+  color = "beige",
+  variant = "solid",
+  onClick,
+}: TChip) => {
 
-  const styles = getStyles();
+  const styles = CHIP_COLOR_MAP[color][variant];
 
   const coloredIcon =
     icon &&
     React.cloneElement(icon as React.ReactElement, {
-      fill: `var(--${getStyles().icon})`,
+      fill: `var(--${styles.icon})`,
     });
 
   return (
-    <button type="button"
+    <button
+      type="button"
       className={`${styles.bg} ${styles.text} backdrop-blur-md flex py-2 px-4 justify-center items-center rounded-full gap-2 transition-colors`}
       onClick={onClick}
     >

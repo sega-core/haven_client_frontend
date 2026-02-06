@@ -1,7 +1,9 @@
+import { cn } from "@heroui/theme";
+
 export const Block = ({
   children,
   onClick,
-  className = '',
+  className = "",
 }: {
   children: React.ReactNode;
   onClick?: () => void;
@@ -10,8 +12,11 @@ export const Block = ({
   return (
     <div
       onClick={onClick}
-      className={`p-4 flex flex-col w-full gap-3 
-      bg-white-primary rounded-3xl cursor-pointer ${className}`}
+      className={cn(
+        "p-4 flex flex-col w-full gap-3 bg-white-primary rounded-3xl cursor-pointer",
+        "active:scale-95 transition-transform duration-150",
+        className,
+      )}
     >
       {children}
     </div>
