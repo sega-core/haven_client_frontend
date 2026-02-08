@@ -1,30 +1,29 @@
-import { useNavigate } from "react-router";
 import { TPractice } from "../../../api";
 import { Chip } from "../../../components/Chip";
 import { Icon } from "../../../components/Icon";
 import { Typography } from "../../../components/Typography";
-import { ROUTES } from "../../../containers";
 import cn from "../../../utils/cn";
+import { Drawer, useDrawer } from "../../../components/Drawer";
+import { Button } from "@heroui/button";
 
 type Props = {
   item: TPractice;
-  hidePurchasedChip?:boolean;
+  hidePurchasedChip?: boolean;
 };
 export const PracticeCard = ({ item, hidePurchasedChip }: Props) => {
-  const { priceZen, title, tags, id, isPurchased } = item;
+  const { priceZen, title, tags, isPurchased, description } = item;
 
-  const navigate = useNavigate();
+  const drawer = useDrawer();
 
-  const goToDetail = () => {
-    navigate(ROUTES.PRACTICE_ID.replace(":id", String(id)));
-  };
+  console.log('PracticeCard')
 
   return (
     <div
       className={cn(
-        "p-4 rounded-3xl flex flex-col justify-between bg-black-secondary gap-2 h-[179px] relative",
+        "p-4 rounded-3xl flex flex-col justify-between bg-black-secondary gap-2 h-[179px]",
+        "active:scale-95 transition-transform duration-150",
       )}
-      onClick={goToDetail}
+      onClick={() => drawer.openMain()}
     >
       <div className="flex gap-2 justify-end z-10">
         {!isPurchased && (
@@ -35,7 +34,7 @@ export const PracticeCard = ({ item, hidePurchasedChip }: Props) => {
           />
         )}
         {isPurchased && !hidePurchasedChip && (
-          <Chip color="green" label='Куплено' />
+          <Chip color="green" label="Куплено" />
         )}
       </div>
       <div className="grid gap-2 z-10">
@@ -71,6 +70,31 @@ export const PracticeCard = ({ item, hidePurchasedChip }: Props) => {
           )}
         </div>
       )} */}
+      <Drawer
+        drawerMainProps={drawer.drawerProps.main}
+        drawerNastedProps={drawer.drawerProps.nested}
+        mainContent={
+          <div className="flex flex-col gap-4">
+            <Typography
+              type="heading-xs"
+              className="text-center w-full text-brown-primary"
+              weight="semibold"
+            >
+              {title}
+            </Typography>
+            <Typography type="body-s" className="text-brown-primary">
+              {description}
+            </Typography>
+            <Button
+              radius="full"
+              className="bg-beige-primary text-white"
+              type="submit"
+            >
+              Перейти к практике
+            </Button>
+          </div>
+        }
+      />
     </div>
   );
 };
