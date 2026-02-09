@@ -2,6 +2,7 @@ import { useCallback, useState } from "react";
 import { PracticeBundleCard, PracticeCard } from "../../modules/Practice";
 import { useGetPractice, useGetPracticeBundle } from "../../hooks";
 import { Tabs, Tab } from "@heroui/tabs";
+import VaulDrawer from "./TestDrawer";
 
 export const Practice = () => {
   const [activeTab, setActiveTab] = useState<"my" | "bundle" | "practice">(
@@ -44,7 +45,9 @@ export const Practice = () => {
         <Tabs
           aria-label="Tabs radius"
           radius={"full"}
-          onSelectionChange={(e) => setActiveTab(e as "my" | "bundle" | "practice")}
+          onSelectionChange={(e) =>
+            setActiveTab(e as "my" | "bundle" | "practice")
+          }
           classNames={{
             tabList: "bg-white-tertiary",
             tabContent: "group-data-[selected=true]:text-beige-primary",

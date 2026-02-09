@@ -29,9 +29,14 @@ export type TPraciteBundle = {
   }[];
 };
 
-export const getPractice = async () => {
+export const getPractices = async () => {
   return (await axiosClient.get<TPractice[]>(`/practices`)).data;
 };
-export const getPracticeBundle = async () => {
+
+export const getPracticeBundles = async () => {
   return (await axiosClient.get<TPraciteBundle[]>(`/practice-bundles`)).data;
+};
+
+export const getPracticeInstructions = async (pratcticeId:number) => {
+  return (await axiosClient.get<{instructions:string}>(`/practice/${pratcticeId}`)).data;
 };

@@ -1,99 +1,95 @@
-// components/Drawer.tsx
-import { Drawer as DrawerVaul } from "vaul";
+// components/DrawerDesktopFix.tsx
+import { Drawer as VaulDrawer } from "vaul";
 import { Typography } from "../Typography";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
+import cn from "../../utils/cn";
 
 type Props = {
   title?: string;
-  mainContent?: React.ReactNode;
-  nastedContent?: React.ReactNode;
-  drawerMainProps: {
-    open: boolean;
-    onOpenChange: (open: boolean) => void;
-  };
-  drawerNastedProps?: {
-    open: boolean;
-    onOpenChange: (open: boolean) => void;
-  };
+  children: React.ReactNode;
+  open: boolean;
+  onClose: () => void;
+  isNasted?: boolean;
 };
 
-export const Drawer = ({
-  title,
-  mainContent,
-  nastedContent,
-  drawerMainProps,
-  drawerNastedProps,
-}: Props) => {
-  // Синхронизируем состояния
+export const Drawer = ({ title, children, open, onClose, isNasted }: Props) => {
+  const contentRef = useRef<HTMLDivElement>(null);
+  const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
   useEffect(() => {
-    if (!drawerMainProps.open && drawerNastedProps?.open) {
-      drawerNastedProps.onOpenChange(false);
-    }
-  }, [drawerMainProps.open, drawerNastedProps]);
+    if (!open || isMobile) return;
+
+    const handleClickOutside = (e: MouseEvent) => {
+      if (
+        contentRef.current &&
+        !contentRef.current.contains(e.target as Node)
+      ) {
+        console.log("Click outside detected, closing drawer");
+        onClose();
+      }
+    };
+
+    const timer = setTimeout(() => {
+      document.addEventListener("click", handleClickOutside);
+    }, 100);
+
+    return () => {
+      clearTimeout(timer);
+      document.removeEventListener("click", handleClickOutside);
+    };
+  }, [open, isMobile, onClose]);
+
+  const DrawerComponent = isNasted ? VaulDrawer.NestedRoot : VaulDrawer.Root;
 
   return (
-    <>
-      {/* Основной дровер */}
-      <DrawerVaul.Root 
-        open={drawerMainProps.open} 
-        onOpenChange={drawerMainProps.onOpenChange}
-      >
-        <DrawerVaul.Portal>
-          <DrawerVaul.Overlay className="fixed inset-0 bg-[#00000099] z-40" />
-          <DrawerVaul.Content className="z-50 bg-white-primary rounded-t-4xl flex flex-col fixed bottom-0 left-0 right-0 max-h-[90vh] outline-none">
-            {/* Хэндл для драга */}
+    <DrawerComponent
+      open={open}
+      onOpenChange={(open) => {
+        if (!open) onClose();
+      }}
+      shouldScaleBackground={isMobile}
+      dismissible={isMobile}
+    >
+      <VaulDrawer.Portal>
+        <VaulDrawer.Overlay
+          className={cn(
+            "fixed inset-0 bg-[#00000099]",
+            `${!isNasted ? "z-40" : "z-42"}`,
+          )}
+        />
+
+        <VaulDrawer.Content
+          ref={contentRef}
+          className={cn(
+            "bg-white-primary rounded-t-4xl flex flex-col fixed bottom-0 left-0 right-0 max-h-[90vh] outline-none",
+            `${!isNasted ? "z-41" : "z-43"}`,
+          )}
+          onPointerDownOutside={(e) => {
+            if (!isMobile) {
+              e.preventDefault();
+            }
+          }}
+        >
+          {isMobile && (
             <div className="flex justify-center p-2">
               <div className="w-12 h-1.5 rounded-full bg-beige-primary" />
             </div>
-            
-            <div className="px-4 pb-8 flex-1 overflow-auto">
-              {title && (
-                <div className="mb-4 text-center">
-                  <Typography
-                    type="heading-xs"
-                    className="text-brown-primary"
-                    weight="semibold"
-                  >
-                    {title}
-                  </Typography>
-                </div>
-              )}
-              
-              <div className="max-w-md mx-auto">
-                {mainContent}
-              </div>
-            </div>
-          </DrawerVaul.Content>
-        </DrawerVaul.Portal>
-      </DrawerVaul.Root>
+          )}
 
-      {/* Вложенный дровер (отдельный, не внутри основного) */}
-      {drawerNastedProps && (
-        <DrawerVaul.Root 
-          open={drawerNastedProps.open} 
-          onOpenChange={drawerNastedProps.onOpenChange}
-        >
-          <DrawerVaul.Portal>
-            <DrawerVaul.Overlay className="fixed inset-0 bg-[#00000099] z-60" />
-            <DrawerVaul.Content className="z-70 bg-white-primary rounded-t-4xl flex flex-col fixed bottom-0 left-0 right-0 max-h-[85vh] outline-none">
-              {/* Хэндл для драга */}
-              <div className="flex justify-center p-2">
-                <div className="w-12 h-1.5 rounded-full bg-beige-primary" />
-              </div>
-              
-              <div className="px-4 pb-8 flex-1 overflow-auto">
-                <div className="max-w-md mx-auto">
-                  {nastedContent || (
-                    <Typography type="body-md" className="text-brown-primary">
-                      Вложенный контент
-                    </Typography>
-                  )}
-                </div>
-              </div>
-            </DrawerVaul.Content>
-          </DrawerVaul.Portal>
-        </DrawerVaul.Root>
-      )}
-    </>
+          <div
+            className={`px-4 pb-6 flex-1 overflow-auto gap-4 flex flex-col ${!isMobile ? "pt-6" : ""}`}
+          >
+           <Typography
+                type="heading-xs"
+                className="text-brown-primary text-center"
+                weight="semibold"
+              >
+                {title}
+              </Typography>
+            <div className="max-w-md mx-auto">{children}</div>
+          </div>
+        </VaulDrawer.Content>
+      </VaulDrawer.Portal>
+    </DrawerComponent>
   );
 };

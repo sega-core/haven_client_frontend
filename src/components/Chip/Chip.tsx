@@ -4,9 +4,10 @@ import { CHIP_COLOR_MAP } from "./Chip.constant";
 
 type TChip = {
   label: string;
-  color?: "beige" | "green" | 'mustard'|'white';
+  color?: "beige" | "green" | "mustard" | "white";
   variant?: "solid" | "flat";
   icon?: React.ReactNode;
+  iconPostition?: "start" | "end";
   onClick?: () => void;
 };
 
@@ -15,9 +16,9 @@ export const Chip = ({
   icon,
   color = "beige",
   variant = "solid",
+  iconPostition = "start",
   onClick,
 }: TChip) => {
-
   const styles = CHIP_COLOR_MAP[color][variant];
 
   const coloredIcon =
@@ -32,8 +33,9 @@ export const Chip = ({
       className={`${styles.bg} ${styles.text} backdrop-blur-md flex py-2 px-4 justify-center items-center rounded-full gap-2 transition-colors`}
       onClick={onClick}
     >
-      {coloredIcon}
+      {iconPostition === "start" && coloredIcon}
       <Typography type="body-s">{label}</Typography>
+      {iconPostition === "end" && coloredIcon}
     </button>
   );
 };

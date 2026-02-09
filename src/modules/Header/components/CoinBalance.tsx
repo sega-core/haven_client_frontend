@@ -8,7 +8,12 @@ export const CoinBalance = () => {
 
   return (
     <div className="bg-white-tertiary rounded-full py-2 px-4 flex justify-center items-center gap-2">
-      <Icon name="ZenFilled" width={18} height={18} className="fill-(--stroke-beige-primary)"/>
+      <Icon
+        name="ZenFilled"
+        width={18}
+        height={18}
+        className="fill-(--stroke-beige-primary)"
+      />
       {isLoading ? (
         <SkeletonComponent className="h-4 w-4" />
       ) : (

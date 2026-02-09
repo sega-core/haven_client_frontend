@@ -5,17 +5,18 @@ import { Typography } from "../../../components/Typography";
 import cn from "../../../utils/cn";
 import { Drawer, useDrawer } from "../../../components/Drawer";
 import { Button } from "@heroui/button";
+import { useGetPracticeInstructions } from "../../../hooks";
 
 type Props = {
   item: TPractice;
   hidePurchasedChip?: boolean;
 };
 export const PracticeCard = ({ item, hidePurchasedChip }: Props) => {
-  const { priceZen, title, tags, isPurchased, description } = item;
+  const { priceZen, title, tags, isPurchased, description, id } = item;
 
   const drawer = useDrawer();
 
-  console.log('PracticeCard')
+  const { data } = useGetPracticeInstructions(id, isPurchased && drawer.isOpen);
 
   return (
     <div
@@ -23,12 +24,13 @@ export const PracticeCard = ({ item, hidePurchasedChip }: Props) => {
         "p-4 rounded-3xl flex flex-col justify-between bg-black-secondary gap-2 h-[179px]",
         "active:scale-95 transition-transform duration-150",
       )}
-      onClick={() => drawer.openMain()}
+      onClick={() => drawer.open()}
     >
       <div className="flex gap-2 justify-end z-10">
         {!isPurchased && (
           <Chip
             icon={<Icon name="ZenFilled" width={14} height={14} />}
+            iconPostition="end"
             color="green"
             label={String(priceZen)}
           />
@@ -42,10 +44,7 @@ export const PracticeCard = ({ item, hidePurchasedChip }: Props) => {
           type="heading-xs"
           className="text-white-primary flex items-center gap-2"
         >
-          {title}{" "}
-          {!isPurchased && (
-            <Icon name="LockFilled" className="fill-(--text-white-primary)" />
-          )}
+          {title}
         </Typography>
         <div className="flex gap-2 flex-wrap">
           {tags?.map((item, index) => (
@@ -71,27 +70,23 @@ export const PracticeCard = ({ item, hidePurchasedChip }: Props) => {
         </div>
       )} */}
       <Drawer
-        drawerMainProps={drawer.drawerProps.main}
-        drawerNastedProps={drawer.drawerProps.nested}
-        mainContent={
+        title={title}
+        open={drawer.isOpen}
+        onClose={drawer.close}
+        children={
           <div className="flex flex-col gap-4">
-            <Typography
-              type="heading-xs"
-              className="text-center w-full text-brown-primary"
-              weight="semibold"
-            >
-              {title}
-            </Typography>
             <Typography type="body-s" className="text-brown-primary">
-              {description}
+              {!isPurchased ? description : data?.instructions}
             </Typography>
-            <Button
-              radius="full"
-              className="bg-beige-primary text-white"
-              type="submit"
-            >
-              Перейти к практике
-            </Button>
+            {!isPurchased && (
+              <Button
+                radius="full"
+                className="bg-beige-primary text-white"
+                type="submit"
+              >
+                Купить
+              </Button>
+            )}
           </div>
         }
       />

@@ -1,37 +1,48 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 
 export const useDrawer = () => {
-  const [mainOpen, setMainOpen] = useState(false);
-  const [nestedOpen, setNestedOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
-  const openMain = useCallback(() => {setMainOpen(true)}, []);
-  const closeMain = useCallback(() => setMainOpen(false), []);
-  
-  const openNested = useCallback(() => setNestedOpen(true), []);
-  const closeNested = useCallback(() => setNestedOpen(false), []);
-
-  const closeAll = useCallback(() => {
-    setNestedOpen(false);
-    setMainOpen(false);
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(/iPhone|iPad|iPod|Android/i.test(navigator.userAgent));
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
+  const open = useCallback(() => {
+    setIsOpen(true);
+  }, [isMobile]);
+
+  const close = useCallback(() => {
+    setIsOpen(false);
+  }, []);
+
+  useEffect(() => {
+    if (!isOpen || isMobile) return;
+
+    const handleOverlayClick = (e: MouseEvent) => {
+      const overlay = document.querySelector('[data-vaul-overlay]');
+      if (overlay && e.target === overlay) {
+        console.log('Desktop overlay click detected');
+        close();
+      }
+    };
+
+    document.addEventListener('click', handleOverlayClick);
+    return () => document.removeEventListener('click', handleOverlayClick);
+  }, [isOpen, isMobile, close]);
+
   return {
-    mainOpen,
-    nestedOpen,
-    openMain,
-    closeMain,
-    openNested,
-    closeNested,
-    closeAll,
+    isOpen,
+    open,
+    close,
     drawerProps: {
-      main: {
-        open: mainOpen,
-        onOpenChange: setMainOpen,
-      },
-      nested: {
-        open: nestedOpen,
-        onOpenChange: setNestedOpen,
-      },
+      open: isOpen,
+      onOpenChange: setIsOpen,
     },
   };
 };

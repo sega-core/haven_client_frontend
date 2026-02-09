@@ -1,11 +1,11 @@
-import { TPraciteBundle, TPractice } from "../../../api";
+import { TPraciteBundle } from "../../../api";
 import { Chip } from "../../../components/Chip";
-import { Icon } from "../../../components/Icon";
 import { Typography } from "../../../components/Typography";
 import cn from "../../../utils/cn";
 import { Drawer, useDrawer } from "../../../components/Drawer";
 import { Button } from "@heroui/button";
-import { useCallback, useState } from "react";
+import { useCallback } from "react";
+import { PracticeBundleItem } from "./PracticeBundleItem";
 
 type Props = {
   item: TPraciteBundle;
@@ -18,23 +18,17 @@ export const PracticeBundleCard = ({ item }: Props) => {
     tags,
     practiceBundleItems,
     description,
+    isApplyDiscount,
+    priceRub,
   } = item;
 
   const drawer = useDrawer();
 
-  const [selectedPractice, setSelectedPractice] = useState<TPractice>();
-
   const handleCardClick = useCallback(() => {
-    drawer.openMain();
+    drawer.open();
   }, [drawer]);
 
-  const handlePracticeSelect = useCallback(
-    (practice: TPractice) => {
-      setSelectedPractice(practice);
-      drawer.openNested();
-    },
-    [drawer],
-  );
+  const price = isApplyDiscount ? priceRubWithDiscount : priceRub;
 
   return (
     <div
@@ -45,9 +39,7 @@ export const PracticeBundleCard = ({ item }: Props) => {
       onClick={handleCardClick}
     >
       <div className="flex gap-2 justify-end z-10">
-        {priceRubWithDiscount && !isPurchasedBundle && (
-          <Chip color="mustard" label={`${priceRubWithDiscount}₽`} />
-        )}
+        {!isPurchasedBundle && <Chip color="mustard" label={`${price}₽`} />}
         {isPurchasedBundle && <Chip color="mustard" label="Куплено" />}
       </div>
       <div className="grid gap-2 z-10">
@@ -56,9 +48,6 @@ export const PracticeBundleCard = ({ item }: Props) => {
           className="text-white-primary flex items-center gap-2"
         >
           {title}
-          {!isPurchasedBundle && (
-            <Icon name="LockFilled" className="fill-(--text-white-primary)" />
-          )}
         </Typography>
         <div className="flex gap-2 flex-wrap">
           {tags?.map((item, index) => (
@@ -84,17 +73,11 @@ export const PracticeBundleCard = ({ item }: Props) => {
         </div>
       )} */}
       <Drawer
-        drawerMainProps={drawer.drawerProps.main}
-        drawerNastedProps={drawer.drawerProps.nested}
-        mainContent={
+        title={title}
+        open={drawer.isOpen}
+        onClose={drawer.close}
+        children={
           <div className="flex flex-col gap-4">
-            <Typography
-              type="heading-xs"
-              className="text-center w-full text-brown-primary"
-              weight="semibold"
-            >
-              {title}
-            </Typography>
             <Typography type="body-s" className="text-brown-primary">
               {description}
             </Typography>
@@ -102,40 +85,15 @@ export const PracticeBundleCard = ({ item }: Props) => {
               Практики
             </Typography>
             {practiceBundleItems.map((item, index) => (
-              <div
-                className="p-4 bg-beige-tertiary rounded-2xl flex justify-between"
-                key={index}
-                onClick={() => {
-                  handlePracticeSelect(item.practice);
-                }}
-              >
-                <Typography type="body-s" className="text-brown-primary">
-                  {item.practice.title}
-                </Typography>
-                <Icon name="ChevronRight" />
-              </div>
+              <PracticeBundleItem item={item.practice} key={index} />
             ))}
             <Button
               radius="full"
               className="bg-beige-primary text-white"
               type="submit"
             >
-              Купить набор
+              Купить за {priceRubWithDiscount}₽
             </Button>
-          </div>
-        }
-        nastedContent={
-          <div className="flex flex-col gap-4">
-            <Typography
-              type="heading-xs"
-              className="text-center w-full text-brown-primary"
-              weight="semibold"
-            >
-              {selectedPractice?.title}
-            </Typography>
-            <Typography type="body-s" className="text-brown-primary">
-              {selectedPractice?.description}
-            </Typography>
           </div>
         }
       />

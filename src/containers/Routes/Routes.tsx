@@ -7,7 +7,6 @@ export const AppRoutes = () => {
   const Targets = lazy(() => import("../../pages/Targets"));
   const Comunity = lazy(() => import("../../pages/Comunity"));
   const Practice = lazy(() => import("../../pages/Practice"));
-  const PracticeDetail = lazy(() => import("../../pages/Practice/[slug]"));
 
   return (
     <Suspense fallback={<div>fallback</div>}>
@@ -16,7 +15,6 @@ export const AppRoutes = () => {
         <Route path={ROUTES.TARGETS} element={<Targets />} />
         <Route path={ROUTES.COMUNITY} element={<Comunity />} />
         <Route path={ROUTES.PRACTICE} element={<Practice />} />
-        <Route path={ROUTES.PRACTICE_ID} element={<PracticeDetail />} />
         <Route path="*" element={<Navigate replace to={ROUTES.MAIN} />} />
       </Routes>
     </Suspense>

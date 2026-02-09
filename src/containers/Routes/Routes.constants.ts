@@ -3,7 +3,6 @@ export const ROUTES = {
   TARGETS: '/targets',
   COMUNITY: '/comunity',
   PRACTICE: '/practice',
-  PRACTICE_ID: '/practice/:id'
 } as const;
 
 export enum ERoutes {
