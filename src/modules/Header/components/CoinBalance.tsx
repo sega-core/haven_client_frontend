@@ -18,7 +18,7 @@ export const CoinBalance = () => {
         <SkeletonComponent className="h-4 w-4" />
       ) : (
         <Typography type="body-s" className="text-beige-primary">
-          {data?.total}
+          {data?.balance}
         </Typography>
       )}
     </div>

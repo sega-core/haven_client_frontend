@@ -89,13 +89,14 @@ export const PracticeBundleCard = ({ item }: Props) => {
             {practiceBundleItems.map((item, index) => (
               <PracticeBundleItem item={item.practice} key={index} />
             ))}
-            <Button
+            {!isPurchasedBundle && <Button
               radius="full"
               className="bg-beige-primary text-white"
               type="submit"
+              onPress={()=>alert('robokassa')}
             >
               Купить за {priceRubWithDiscount}₽
-            </Button>
+            </Button>}
           </div>
         }
       />

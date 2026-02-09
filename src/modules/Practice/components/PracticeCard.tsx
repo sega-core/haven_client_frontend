@@ -5,7 +5,7 @@ import { Typography } from "../../../components/Typography";
 import cn from "../../../utils/cn";
 import { Drawer, useDrawer } from "../../../components/Drawer";
 import { Button } from "@heroui/button";
-import { useGetPracticeInstructions } from "../../../hooks";
+import { useGetPracticeInstructions, useSpendCoin } from "../../../hooks";
 
 type Props = {
   item: TPractice;
@@ -17,6 +17,8 @@ export const PracticeCard = ({ item, hidePurchasedChip }: Props) => {
   const drawer = useDrawer();
 
   const { data } = useGetPracticeInstructions(id, isPurchased && drawer.isOpen);
+
+  const { mutate } = useSpendCoin();
 
   return (
     <div
@@ -83,8 +85,20 @@ export const PracticeCard = ({ item, hidePurchasedChip }: Props) => {
                 radius="full"
                 className="bg-beige-primary text-white"
                 type="submit"
+                onPress={() => {
+                  mutate({
+                    amount: priceZen,
+                    practiceId: id
+                  });
+                }}
               >
-                Купить
+                Купить за {priceZen}
+                <Icon
+                  name="ZenFilled"
+                  width={14}
+                  height={14}
+                  className="fill-(--stroke-white-primary)"
+                />
               </Button>
             )}
           </div>
