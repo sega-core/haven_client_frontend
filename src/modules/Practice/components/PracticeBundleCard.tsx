@@ -30,6 +30,8 @@ export const PracticeBundleCard = ({ item }: Props) => {
 
   const price = isApplyDiscount ? priceRubWithDiscount : priceRub;
 
+  //TODO: сделать перечеркнуто при скидке
+
   return (
     <div
       className={cn(

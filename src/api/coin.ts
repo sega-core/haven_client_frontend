@@ -10,5 +10,5 @@ export const getCoin = async () => {
 };
 
 export const postCoin = async () => {
-  return (await axiosClient.post(`/coin`)).data;
+  return (await axiosClient.post<{bonus:number}>(`/coin`)).data;
 };

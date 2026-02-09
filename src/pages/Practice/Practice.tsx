@@ -2,7 +2,6 @@ import { useCallback, useState } from "react";
 import { PracticeBundleCard, PracticeCard } from "../../modules/Practice";
 import { useGetPractice, useGetPracticeBundle } from "../../hooks";
 import { Tabs, Tab } from "@heroui/tabs";
-import VaulDrawer from "./TestDrawer";
 
 export const Practice = () => {
   const [activeTab, setActiveTab] = useState<"my" | "bundle" | "practice">(

@@ -2,12 +2,12 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
 import App from "./App";
-import { HeroUIProvider } from "@heroui/system";
+import { HeroUiProvider } from "./containers";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <HeroUIProvider>
+    <HeroUiProvider>
       <App />
-    </HeroUIProvider>
-  </StrictMode>
+    </HeroUiProvider>
+  </StrictMode>,
 );
