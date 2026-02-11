@@ -26,16 +26,11 @@ export const Practice = () => {
 
   const renderMyPractice = useCallback(
     () =>
-      bundles
-        ?.flatMap((bundle) =>
-          bundle.practiceBundleItems
-            .map((item) => item.practice)
-            .filter((practice) => practice?.isPurchased === true),
-        )
-        .map((item, index) => (
-          <PracticeCard item={item} key={index} hidePurchasedChip />
-        )),
-    [bundles],
+      practices
+        ?.filter((item) => item.isPurchased)
+        .map((item, index) => <PracticeCard item={item} key={index} />),
+
+    [practices],
   );
 
   return (

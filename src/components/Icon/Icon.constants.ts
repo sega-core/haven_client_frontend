@@ -45,6 +45,7 @@ import StepBack from '../../assets/icons/step-back.svg?react'
 import StepForward from '../../assets/icons/step-forward.svg?react'
 import Trash from '../../assets/icons/trash.svg?react'
 import User from '../../assets/icons/user.svg?react'
+import Rub from '../../assets/icons/rub.svg?react'
 
 export const ICON_MAP: Partial<Record<TIcon, FC<SVGProps<SVGSVGElement>>>> = {
   'Check': Check,
@@ -92,6 +93,7 @@ export const ICON_MAP: Partial<Record<TIcon, FC<SVGProps<SVGSVGElement>>>> = {
   "StepForward": StepForward,
   "Trash": Trash,
   "User": User,
+  "Rub": Rub,
 } as const;
 
 

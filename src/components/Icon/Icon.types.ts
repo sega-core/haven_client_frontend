@@ -45,3 +45,4 @@ export type TIcon =
   | "User"
   | "ZenFilled"
   | "ZenOutlined"
+  | "Rub"
