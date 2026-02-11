@@ -8,7 +8,25 @@ export const Practice = () => {
     "my",
   );
   const { data: bundles } = useGetPracticeBundle();
-  const { data: practices } = useGetPractice();
+  const { data: practices2 } = useGetPractice();
+
+  console.log(practices2)
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const practices = [
+    {
+        "id": 1,
+        "title": "Зеркало проекций",
+        "subTitle": "Осознание переносов и работа с проекциями",
+        "description": "Эта практика помогает заметить, какие качества и чувства мы бессознательно «переносим» на других людей. Всё, что сильно задевает, восхищает или раздражает в окружающих, часто говорит о наших собственных внутренних процессах. В практике ты научишься видеть эти отражения и мягко возвращать внимание к себе — без самокритики и осуждения. Это помогает лучше понимать свои реакции, снижать конфликты и глубже узнавать себя.",
+        "tags": [],
+        "priceZen": 130,
+        "isActive": true,
+        "createdAt": "2026-02-07T15:27:37.285Z",
+        "updatedAt": "2026-02-07T15:27:37.285Z",
+        "isPurchased": true
+    },
+]
 
   const renderBundleList = useCallback(
     () =>
