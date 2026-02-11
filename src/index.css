@@ -15,6 +15,36 @@
   scrollbar-width: none;
 }
 
+* {
+  /* Отключает зумирование на iOS при двойном тапе */
+  -webkit-touch-callout: none;
+  -webkit-text-size-adjust: none;
+  -webkit-tap-highlight-color: transparent;
+
+  /* Запретить выделение на всём сайте */
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Для input полей iOS */
+input,
+select,
+textarea {
+  font-size: 16px; /* Минимальный размер, чтобы iOS не зумил */
+}
+
+/* Разрешить выделение на инпутах и текстовых полях */
+input,
+textarea,
+[contenteditable="true"] {
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+  user-select: text;
+}
+
 /* .ripple {
   position: absolute;
   border-radius: 50%;

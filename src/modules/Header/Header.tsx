@@ -1,10 +1,16 @@
 import { Avatar } from "../../components/Avatar";
 import { Typography } from "../../components/Typography";
+import { useSafeLaunchParams } from "../../hooks";
 import { CoinBalance } from "./components";
 import { useRouteTitle } from "./hooks/useRouteTitle";
 
 export const Header = () => {
   const { title } = useRouteTitle();
+
+  const { tgWebAppData } = useSafeLaunchParams();
+
+  const firstName = tgWebAppData?.user?.firstName;
+  const photoUrl = tgWebAppData?.user?.photoUrl;
 
   return (
     <div className="flex justify-between w-full items-center">
@@ -13,11 +19,11 @@ export const Header = () => {
         className="text-brown-primary"
         weight="semibold"
       >
-        {title}
+        {title?.replace("%user_name%", String(firstName))}
       </Typography>
       <div className="flex gap-4">
         <CoinBalance />
-        <Avatar />
+        <Avatar image={photoUrl} />
       </div>
     </div>
   );

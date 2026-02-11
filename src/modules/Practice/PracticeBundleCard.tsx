@@ -53,7 +53,7 @@ export const PracticeBundleCard = ({ item }: Props) => {
               </div>
             }
             isPurchased={isPurchasedBundle}
-            price={priceRub}
+            price={price}
             currency="rub"
             handlePay={handlePay}
           />
