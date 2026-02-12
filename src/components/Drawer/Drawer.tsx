@@ -51,7 +51,8 @@ export const Drawer = forwardRef<HTMLDivElement, DrawerProps>(
         onOpenChange={(isOpen) => {
           if (!isOpen) onClose();
         }}
-        shouldScaleBackground={isMobile}
+         shouldScaleBackground={false}
+         noBodyStyles={true} 
         dismissible={isMobile}
       >
         <VaulDrawer.Portal>
@@ -75,11 +76,13 @@ export const Drawer = forwardRef<HTMLDivElement, DrawerProps>(
               }
             }}
           >
-            {isMobile && (
-              <div className="flex justify-center p-2">
-                <div className="w-12 h-1.5 rounded-full bg-beige-primary" />
-              </div>
-            )}
+            <div className="flex justify-center p-2">
+              <div className="w-12 h-1.5 rounded-full bg-beige-primary" />
+            </div>
+
+                    {JSON.stringify(isMobile)}
+                    ---
+        {JSON.stringify(navigator.userAgent)}
 
             <div
               className={cn(
@@ -102,7 +105,7 @@ export const Drawer = forwardRef<HTMLDivElement, DrawerProps>(
         </VaulDrawer.Portal>
       </DrawerComponent>
     );
-  }
+  },
 );
 
 Drawer.displayName = "Drawer";
