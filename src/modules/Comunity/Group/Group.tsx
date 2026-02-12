@@ -1,3 +1,4 @@
+import { Button } from "@heroui/button";
 import { Avatar } from "../../../components/Avatar";
 import { Block } from "../../../components/Block";
 import { Typography } from "../../../components/Typography";
@@ -6,9 +7,9 @@ import AvatarComunity from "../../../assets/images/avatarComunity.png";
 
 export const Group = () => {
   return (
-    <Block onClick={() => console.log("gotogroup")}>
+    <Block>
       <div className="flex gap-2 items-center">
-        <Avatar image={AvatarComunity} />
+        <Avatar image={AvatarComunity}/>
         <div className="flex-1">
           <Typography type="heading-xs" className="text-brown-primary">
             Haven
@@ -17,9 +18,20 @@ export const Group = () => {
             Рады всем без исключений!
           </Typography>
         </div>
-        <div>
-          <Icon name="Plus" width={20} height={20} />
-        </div>
+        <Button
+          isIconOnly
+          onPress={() => alert("link to tg group")}
+          variant="light"
+          size="sm"
+          radius="full"
+        >
+          <Icon
+            name='Plus'
+            width={20}
+            height={20}
+            /* className="fill-(--stroke-white-primary)" */
+          />
+        </Button>
       </div>
     </Block>
   );

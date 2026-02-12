@@ -86,7 +86,7 @@ export const Drawer = forwardRef<HTMLDivElement, DrawerProps>(
 
             <div
               className={cn(
-                "p-4 flex-1 overflow-auto gap-4 flex flex-col",
+                "px-4 pb-6 flex-1 overflow-auto gap-4 flex flex-col",
                 !isMobile ? "pt-6" : "",
               )}
             >

@@ -1,4 +1,5 @@
 import { Button } from "@heroui/button";
+import { Sheet } from "../../../../components/Sheet";
 import { Typography } from "../../../../components/Typography";
 import { Switch } from "@heroui/switch";
 import { FormTarget } from "../../form/FormTarget";
@@ -13,7 +14,17 @@ import { getDateFromInternationalized } from "../../../../utils";
 
 const { getTime, getYYYYDDMM } = getDateFromInternationalized();
 
-export const TargetSheet = ({ onClose }: { onClose: () => void }) => {
+export const TargetSheet = ({
+  isOpen,
+  onClose,
+  type,
+}: {
+  isOpen: boolean;
+  onClose: () => void;
+  type: "add" | "edit";
+}) => {
+  const title = type === "add" ? "Создание цели" : "Редактирование цели";
+
   const [isToggle, setIsToggle] = useState(false);
 
   const { mutateAsync, isPending } = useCreateTarget();
@@ -43,36 +54,38 @@ export const TargetSheet = ({ onClose }: { onClose: () => void }) => {
   };
 
   return (
-    <FormTarget onSubmit={onSubmit} initialValue={INITIAL_FORM}>
-      <div className="grid gap-4 bg-white-primary">
-        <InputName />
-        <div className="flex gap-2">
-          <InputDate />
-        </div>
-        <Typography type="body-md" className="text-brown-primary">
-          Цвет цели
-        </Typography>
-        <ColorPanel />
-        <Typography type="body-md" className="text-brown-primary">
-          Дни цели
-        </Typography>
-        <DayPanel />
-        <div className="flex gap-2.5">
-          <Switch onChange={() => setIsToggle((prev) => !prev)} />
-          <Typography type="heading-xs" className="text-brown-primary">
-            Установить напоминание
+    <Sheet isOpen={isOpen} onClose={onClose} title={title}>
+      <FormTarget onSubmit={onSubmit} initialValue={INITIAL_FORM}>
+        <div className="grid gap-4 bg-white-primary p-4">
+          <InputName />
+          <div className="flex gap-2">
+            <InputDate />
+          </div>
+          <Typography type="body-md" className="text-brown-primary">
+            Цвет цели
           </Typography>
+          <ColorPanel />
+          <Typography type="body-md" className="text-brown-primary">
+            Дни цели
+          </Typography>
+          <DayPanel />
+          <div className="flex gap-2.5">
+            <Switch onChange={() => setIsToggle((prev) => !prev)} />
+            <Typography type="heading-xs" className="text-brown-primary">
+              Установить напоминание
+            </Typography>
+          </div>
+          {isToggle && <InputTime />}
+          <Button
+            radius="full"
+            className="bg-beige-primary text-white"
+            type="submit"
+            isLoading={isPending}
+          >
+            Сохранить
+          </Button>
         </div>
-        {isToggle && <InputTime />}
-        <Button
-          radius="full"
-          className="bg-beige-primary text-white"
-          type="submit"
-          isLoading={isPending}
-        >
-          Сохранить
-        </Button>
-      </div>
-    </FormTarget>
+      </FormTarget>
+    </Sheet>
   );
 };

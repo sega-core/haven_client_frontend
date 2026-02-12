@@ -1,4 +1,4 @@
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
 import { Block } from "../../components/Block";
 import { Icon } from "../../components/Icon";
 import { Typography } from "../../components/Typography";
@@ -6,21 +6,16 @@ import { GratitudeSheet } from "./GratitudeSheet";
 import { Chip } from "../../components/Chip";
 import { getTime } from "../../utils";
 import { TGratitude } from "../../api";
-import { useDrawerContext } from "../../components/Drawer";
 
 type Props = {
   data?: TGratitude[];
 };
 
 export const GratitudeCard = ({ data }: Props) => {
-  const { openDrawer, closeDrawer } = useDrawerContext();
+  const [isOpen, setIsOpen] = useState(false);
 
-  const handleOpenGratitudeSheet = useCallback(() => {
-    openDrawer({
-      title: "Трекер благодарности",
-      content: <GratitudeSheet onClose={closeDrawer} gratitudes={data || []} />,
-    });
-  }, [openDrawer, closeDrawer]);
+  const onOpen = useCallback(() => setIsOpen(true), []);
+  const onClose = useCallback(() => setIsOpen(false), []);
 
   const renderChips = useCallback(
     () =>
@@ -31,7 +26,7 @@ export const GratitudeCard = ({ data }: Props) => {
   );
 
   return (
-    <Block onClick={handleOpenGratitudeSheet} className="shadow-lg">
+    <Block onClick={onOpen} className="shadow-lg">
       <div className="flex justify-between items-center">
         <Typography className="text-brown-primary" type="heading-xs">
           Благодарность
@@ -47,6 +42,11 @@ export const GratitudeCard = ({ data }: Props) => {
       {!!data?.length && (
         <div className="flex gap-3 flex-wrap">{renderChips()}</div>
       )}
+      <GratitudeSheet
+        isOpen={isOpen}
+        onClose={onClose}
+        gratitudes={data || []}
+      />
     </Block>
   );
 };

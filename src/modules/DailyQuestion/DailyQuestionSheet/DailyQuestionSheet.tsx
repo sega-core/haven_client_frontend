@@ -1,4 +1,5 @@
 import { Button } from "@heroui/button";
+import { Sheet } from "../../../components/Sheet";
 import { Typography } from "../../../components/Typography";
 import { useCreateAnswer } from "../../../hooks";
 import {
@@ -12,9 +13,11 @@ import { BlockAnswer } from "../../../components/BlockAnswer";
 import { TDailyQuestion } from "../../../api";
 
 export const DailyQuestionSheet = ({
+  isOpen,
   onClose,
   question,
 }: {
+  isOpen: boolean;
   onClose: () => void;
   question?: TDailyQuestion;
 }) => {
@@ -33,29 +36,28 @@ export const DailyQuestionSheet = ({
   const isCompleted = question?.userAnswer;
 
   return (
-    <FormDailyQuestion onSubmit={onSubmit} initialValue={INITIAL_FORM}>
-      <div className="grid gap-4 bg-white-primary">
-        <Typography type="body-s" className="text-brown-primary text-center">
-          {question?.question}
-        </Typography>
-        {!isCompleted && <InputText />}
-        {isCompleted && (
-          <BlockAnswer
-            comment={question.userAnswer}
-            date={question.createdAt}
-          />
-        )}
-        {!isCompleted && (
-          <Button
-            radius="full"
-            className="bg-beige-primary text-white"
-            isLoading={isPending}
-            type="submit"
-          >
-            Сохранить
-          </Button>
-        )}
-      </div>
-    </FormDailyQuestion>
+    <Sheet isOpen={isOpen} onClose={onClose} title="Вопрос дня">
+      <FormDailyQuestion onSubmit={onSubmit} initialValue={INITIAL_FORM}>
+        <div className="grid gap-4 bg-white-primary p-4">
+          <Typography type="body-s" className="text-brown-primary text-center">
+            {question?.question}
+          </Typography>
+          {!isCompleted && <InputText />}
+          {isCompleted && (
+            <BlockAnswer comment={question.userAnswer} date={question.createdAt} />
+          )}
+          {!isCompleted && (
+            <Button
+              radius="full"
+              className="bg-beige-primary text-white"
+              isLoading={isPending}
+              type="submit"
+            >
+              Сохранить
+            </Button>
+          )}
+        </div>
+      </FormDailyQuestion>
+    </Sheet>
   );
 };
