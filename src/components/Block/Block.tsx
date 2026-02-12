@@ -1,4 +1,4 @@
-import { cn } from "@heroui/theme";
+import cn from "../../utils/cn";
 
 export const Block = ({
   children,

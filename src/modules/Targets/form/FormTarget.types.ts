@@ -1,8 +1,7 @@
-import { CalendarDate, Time } from "@internationalized/date";
-
 export enum ETargetField {
   TITLE = "TITLE",
-  DATE = "DATE",
+  START_DATE = "START_DATE",
+  END_DATE = "END_DATE",
   NOTIFICATION_TIME = "NOTIFICATION_TIME",
   WEEKDAYS = "WEEKDAYS",
   COLOR = "COLOR",
@@ -40,8 +39,9 @@ export type TPartialWeekdays = Partial<TWeekdays>;
 
 export type TTargetForm = {
   [ETargetField.TITLE]: string;
-  [ETargetField.DATE]?: { start: CalendarDate; end: CalendarDate };
-  [ETargetField.NOTIFICATION_TIME]?: Time;
+  [ETargetField.START_DATE]?: string;
+  [ETargetField.END_DATE]?: string;
+  [ETargetField.NOTIFICATION_TIME]?: string;
   [ETargetField.WEEKDAYS]?: TPartialWeekdays;
   [ETargetField.COLOR]: ETargetColor;
 };

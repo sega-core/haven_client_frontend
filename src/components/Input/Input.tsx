@@ -1,30 +1,86 @@
-export const Input = ({ placeholder }: { placeholder: string }) => {
+import { FieldInputProps } from 'react-final-form';
+import { DEFAULT_ERROR_MSG } from '../../constats';
+
+interface HavenInputProps {
+  input: FieldInputProps;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  meta: any;
+  placeholder?: string;
+  type?: string;
+  className?: string;
+  containerClassName?: string;
+  isRequired?: boolean;
+  errorMessage?: string;
+}
+
+export const Input = ({ 
+  input, 
+  meta, 
+  placeholder = 'Введите текст...',
+  type = 'text',
+  className = '',
+  containerClassName = '',
+  isRequired,
+  errorMessage = DEFAULT_ERROR_MSG
+}: HavenInputProps) => {
+  
+  const showError = meta.touched && meta.error;
+  const errorText = meta.error || errorMessage;
+
   return (
-    <div className="relative w-80">
-      <input
-        type="text"
-        id="comment"
-        placeholder=""
-        className="
-      peer w-full rounded-xl border border-gray-300 px-3 pt-5 pb-2
-      text-gray-900 placeholder-transparent
-      focus:border-sky-500 focus:ring-2 focus:ring-sky-200 focus:outline-none
-      transition-all duration-300 ease-in-out
-    "
-      />
-      <label
-        htmlFor="comment"
-        className="
-      absolute left-3 top-4 text-gray-500 text-base
-      transition-all duration-300 ease-in-out origin-[0]
-      peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100
-      peer-focus:-translate-y-3 peer-focus:scale-90 peer-focus:text-sky-600
-      peer-not-placeholder-shown:-translate-y-3 peer-not-placeholder-shown:scale-90
-      peer-not-placeholder-shown:text-gray-700
-    "
+    <div className="flex flex-col gap-1">
+      <div 
+        className={`
+          p-4 
+          flex 
+          flex-col 
+          justify-center 
+          items-start 
+          gap-4
+          rounded-2xl
+          transition-all
+          duration-200
+          ${showError 
+            ? 'bg-[rgba(239,68,68,0.20)] ring-2 ring-red-500/50' 
+            : 'bg-[rgba(182,135,90,0.20)] hover:bg-[rgba(182,135,90,0.30)]'
+          }
+          ${meta.active ? 'ring-2 ring-[rgba(182,135,90,0.40)]' : ''}
+          ${containerClassName}
+        `}
       >
-        {placeholder}
-      </label>
+        <input
+          {...input}
+          type={type}
+          placeholder={placeholder}
+          required={isRequired || showError}
+          className={`
+            w-full
+            bg-transparent
+            outline-none
+            border-none
+            text-[#1a1a1a]
+            placeholder:text-[rgba(26,26,26,0.4)]
+            font-normal
+            leading-normal
+            disabled:opacity-50
+            disabled:cursor-not-allowed
+            ${className}
+          `}
+        />
+      </div>
+      
+      {/* Error message */}
+      {showError && (
+        <p className="
+          text-sm 
+          text-red-500 
+          mt-1 
+          px-4
+          animate-fadeIn
+        ">
+          {errorText}
+        </p>
+      )}
     </div>
   );
 };

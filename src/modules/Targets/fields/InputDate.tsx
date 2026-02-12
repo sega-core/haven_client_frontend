@@ -1,29 +1,30 @@
 import { useField } from "react-final-form";
 import { ETargetField } from "../form/FormTarget.types";
-import { DateRangePicker } from "@heroui/date-picker";
-import { getLocalTimeZone, today } from "@internationalized/date";
-import { I18nProvider } from "@react-aria/i18n";
 import { DEFAULT_ERROR_MSG } from "../../../constats";
+import { DatePicker } from "../../../components/Input";
 
-export const InputDate = () => {
-  const { input, meta } = useField(ETargetField.DATE, {
+const fieldMap = {
+  start: {
+    placeholder: "Дата от",
+    field: ETargetField.START_DATE,
+  },
+  end: {
+    placeholder: "Дата по",
+    field: ETargetField.END_DATE,
+  },
+};
+export const InputDate = ({ type }: { type: "start" | "end" }) => {
+  const { input, meta } = useField(fieldMap[type].field, {
     validate: (v) => {
-      if (!v) return "InputDateError";
+      if (!v) return DEFAULT_ERROR_MSG;
     },
   });
 
   return (
-    <I18nProvider locale="ru-RU">
-      <DateRangePicker
-        label="Период"
-        aria-label="Период"
-        size="sm"
-        onChange={(e) => input.onChange(e)}
-        minValue={today(getLocalTimeZone())}
-        {...(input.value && { value: input.value })}
-        {...(meta.touched && meta.error && { isRequired: true })}
-        errorMessage={DEFAULT_ERROR_MSG}
-      />
-    </I18nProvider>
+    <DatePicker
+      input={input}
+      meta={meta}
+      placeholder={fieldMap[type].placeholder}
+    />
   );
 };

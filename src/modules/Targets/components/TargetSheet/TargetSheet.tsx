@@ -9,9 +9,6 @@ import { DayPanel } from "../DayPanel";
 import { ColorPanel } from "../ColorPanel";
 import { useCreateTarget } from "../../../../hooks";
 import { ETargetField, TTargetForm } from "../../form";
-import { getDateFromInternationalized } from "../../../../utils";
-
-const { getTime, getYYYYDDMM } = getDateFromInternationalized();
 
 export const TargetSheet = ({ onClose }: { onClose: () => void }) => {
   const [isToggle, setIsToggle] = useState(false);
@@ -19,14 +16,15 @@ export const TargetSheet = ({ onClose }: { onClose: () => void }) => {
   const { mutateAsync, isPending } = useCreateTarget();
 
   const onSubmit = async (values: TTargetForm) => {
+    console.log(values);
     try {
       const title = values[ETargetField.TITLE];
-      const startDate = getYYYYDDMM(values[ETargetField.DATE]?.start);
-      const endDate = getYYYYDDMM(values[ETargetField.DATE]?.end);
+      const startDate = values[ETargetField.START_DATE] || "";
+      const endDate = values[ETargetField.END_DATE] || "";
       const weekdays = Object.entries(values[ETargetField.WEEKDAYS] || {})
         .filter(([, isTrue]) => isTrue)
         .map(([day]) => day);
-      const notifyTime = getTime(values[ETargetField.NOTIFICATION_TIME]);
+      const notifyTime = values[ETargetField.NOTIFICATION_TIME];
 
       await mutateAsync({
         title,
@@ -46,8 +44,9 @@ export const TargetSheet = ({ onClose }: { onClose: () => void }) => {
     <FormTarget onSubmit={onSubmit} initialValue={INITIAL_FORM}>
       <div className="grid gap-4 bg-white-primary">
         <InputName />
-        <div className="flex gap-2">
-          <InputDate />
+        <div className="flex gap-2 w-full justify-between">
+          <InputDate type="start" />
+          <InputDate type="end" />
         </div>
         <Typography type="body-md" className="text-brown-primary">
           Цвет цели
