@@ -31,7 +31,6 @@ export const GratitudeSheet = ({
 
   return (
     <FormGratitude onSubmit={onSubmit} initialValue={INITIAL_FORM}>
-      <input className="border-1"/>
       <div className="grid gap-4 bg-white-primary">
         <Typography type="body-s" className="text-brown-primary text-center">
           За что вы благодарны сегоднящнему дню?
