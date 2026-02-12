@@ -15,11 +15,11 @@ interface DrawerProps {
 
 export const Drawer = forwardRef<HTMLDivElement, DrawerProps>(
   ({ title, children, open, onClose, isNasted, className }) => {
-
     const DrawerComponent = isNasted ? VaulDrawer.NestedRoot : VaulDrawer.Root;
 
     return (
       <DrawerComponent
+        repositionInputs={false}
         open={open}
         onOpenChange={(isOpen) => {
           if (!isOpen) onClose();
