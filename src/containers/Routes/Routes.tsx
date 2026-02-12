@@ -9,7 +9,7 @@ export const AppRoutes = () => {
   const Practice = lazy(() => import("../../pages/Practice"));
 
   return (
-    <Suspense fallback={<div>fallback</div>}>
+    <Suspense fallback={<></>}>
       <Routes>
         <Route path={ROUTES.MAIN} element={<Main />} />
         <Route path={ROUTES.TARGETS} element={<Targets />} />
