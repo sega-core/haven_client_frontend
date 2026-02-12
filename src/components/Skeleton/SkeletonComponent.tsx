@@ -1,12 +1,8 @@
+import cn from "../../utils/cn";
+
 export const SkeletonComponent = ({ className = "" }: { className?: string }) => {
   return (
-    <div
-      className={`
-        bg-beige-tertiary
-        animate-pulse 
-        rounded-full
-        ${className}
-      `}
-    />
+        <div className={cn(className, "bg-gray-200 animate-pulse rounded-full")} />
+
   );
 };

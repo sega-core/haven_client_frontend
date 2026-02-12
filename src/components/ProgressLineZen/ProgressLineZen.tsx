@@ -1,4 +1,3 @@
-import { Button } from "@heroui/button";
 import { Icon } from "../Icon";
 import { useModal } from "../../hooks";
 import { Typography } from "../Typography";
@@ -103,20 +102,14 @@ export const ProgressLineZen = ({ goal = 0 }: { goal?: number }) => {
           />
         ))}
       </div>
-      <Button
-        isIconOnly
-        onPress={() => onOpen()}
-        variant="light"
-        size="sm"
-        radius="full"
-      >
+      <div onClick={onOpen} className="pointer pl-2">
         <Icon
           name="Info"
           width={20}
           height={20}
           className="fill-(--stroke-white-primary)"
         />
-      </Button>
+      </div>
       <Modal
         title="Зарабатывай Zen"
         size="lg"

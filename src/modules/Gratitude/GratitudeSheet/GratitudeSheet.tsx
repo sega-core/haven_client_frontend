@@ -1,5 +1,4 @@
 import { Button } from "@heroui/button";
-import { Sheet } from "../../../components/Sheet";
 import { Typography } from "../../../components/Typography";
 import { FormGratitude } from "../form/FormGratitude";
 import { INITIAL_FORM } from "../form/FormGratitude.constant";
@@ -10,11 +9,9 @@ import { TGratitude } from "../../../api";
 import { BlockAnswer } from "../../../components/BlockAnswer";
 
 export const GratitudeSheet = ({
-  isOpen,
   onClose,
   gratitudes,
 }: {
-  isOpen: boolean;
   onClose: () => void;
   gratitudes: TGratitude[];
 }) => {
@@ -33,29 +30,27 @@ export const GratitudeSheet = ({
   const isCompleted = gratitudes.length >= 3;
 
   return (
-    <Sheet isOpen={isOpen} onClose={onClose} title="Трекер благодарности">
-      <FormGratitude onSubmit={onSubmit} initialValue={INITIAL_FORM}>
-        <div className="grid gap-4 bg-white-primary p-4">
-          <Typography type="body-s" className="text-brown-primary text-center">
-            За что вы благодарны сегоднящнему дню?
-          </Typography>
-          {!isCompleted && <InputText />}
-          {!!gratitudes.length &&
-            gratitudes.map(({ comment, createdAt }, index) => (
-              <BlockAnswer key={index} comment={comment} date={createdAt} />
-            ))}
-          {!isCompleted && (
-            <Button
-              radius="full"
-              className="bg-beige-primary text-white"
-              type="submit"
-              isLoading={isPending}
-            >
-              Сохранить
-            </Button>
-          )}
-        </div>
-      </FormGratitude>
-    </Sheet>
+    <FormGratitude onSubmit={onSubmit} initialValue={INITIAL_FORM}>
+      <div className="grid gap-4 bg-white-primary">
+        <Typography type="body-s" className="text-brown-primary text-center">
+          За что вы благодарны сегоднящнему дню?
+        </Typography>
+        {!isCompleted && <InputText />}
+        {!!gratitudes.length &&
+          gratitudes.map(({ comment, createdAt }, index) => (
+            <BlockAnswer key={index} comment={comment} date={createdAt} />
+          ))}
+        {!isCompleted && (
+          <Button
+            radius="full"
+            className="bg-beige-primary text-white"
+            type="submit"
+            isLoading={isPending}
+          >
+            Сохранить
+          </Button>
+        )}
+      </div>
+    </FormGratitude>
   );
 };
