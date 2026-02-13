@@ -7,4 +7,4 @@ export * from "./useTarget";
 export * from "./useCoin";
 export * from "./useModal";
 export * from "./usePractice";
-export * from './useSafeLaunchParams';
+export * from './useTelegramApi';

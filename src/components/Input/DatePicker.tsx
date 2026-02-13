@@ -18,6 +18,7 @@ interface HavenNativeDateProps {
   minDate?: string;
   maxDate?: string;
   label?: string;
+  fullWidth?: boolean; // Добавляем пропс для опциональной полной ширины
 }
 
 export const DatePicker = ({
@@ -30,6 +31,7 @@ export const DatePicker = ({
   minDate,
   maxDate,
   label,
+  fullWidth = true, // По умолчанию true для растягивания
 }: HavenNativeDateProps) => {
   const showError = meta.touched && meta.error;
   const errorText = meta.error || errorMessage;
@@ -42,13 +44,16 @@ export const DatePicker = ({
 
   // Обработчик клика по контейнеру
   const handleContainerClick = () => {
-    inputRef.current?.showPicker(); // Для современных браузеров
-    // или
-    inputRef.current?.click(); // Альтернативный вариант
+    inputRef.current?.showPicker();
   };
 
   return (
-    <div className="flex flex-col gap-1">
+    <div className={`
+      flex 
+      flex-col 
+      gap-1
+      ${fullWidth ? 'w-full' : ''}
+    `}>
       {label && (
         <label
           className="
@@ -58,6 +63,7 @@ export const DatePicker = ({
             mb-1
             px-1
             cursor-pointer
+            w-fit
           "
           onClick={handleContainerClick}
         >
@@ -69,7 +75,7 @@ export const DatePicker = ({
       <div
         onClick={handleContainerClick}
         className={`
-          p-4 
+          px-4 py-3 
           flex 
           flex-col 
           justify-center 
@@ -80,16 +86,16 @@ export const DatePicker = ({
           duration-200
           relative
           cursor-pointer
-          ${
-            showError
-              ? "bg-[rgba(239,68,68,0.20)] ring-2 ring-red-500/50"
-              : "bg-[rgba(182,135,90,0.20)] hover:bg-[rgba(182,135,90,0.30)]"
+          w-full
+          ${showError
+            ? "bg-[rgba(239,68,68,0.20)] ring-2 ring-red-500/50"
+            : "bg-[rgba(182,135,90,0.20)] hover:bg-[rgba(182,135,90,0.30)]"
           }
           ${meta.active ? "ring-2 ring-[rgba(182,135,90,0.40)]" : ""}
           ${containerClassName}
         `}
       >
-        {/* Нативный input - видимый для скринридеров но прозрачный */}
+        {/* Нативный input */}
         <input
           {...input}
           ref={inputRef}
@@ -114,20 +120,21 @@ export const DatePicker = ({
         {/* Отображаемое значение */}
         <div
           className="
-          w-full
-          flex
-          items-center
-          justify-between
-          text-[#1a1a1a]
-          font-normal
-          leading-normal
-          pointer-events-none
-        "
+            w-full
+            flex
+            items-center
+            justify-between
+            text-[#1a1a1a]
+            font-normal
+            leading-normal
+            pointer-events-none
+          "
         >
           <span
             className={`
-            ${!input.value ? "text-[rgba(26,26,26,0.4)]" : ""}
-          `}
+              truncate
+              ${!input.value ? "text-[rgba(26,26,26,0.4)]" : ""}
+            `}
           >
             {input.value ? displayValue : placeholder}
           </span>
@@ -139,7 +146,7 @@ export const DatePicker = ({
             viewBox="0 0 24 24"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
-            className="text-[rgba(182,135,90,0.80)]"
+            className="text-[rgba(182,135,90,0.80)] flex-shrink-0"
           >
             <rect
               x="3"
@@ -161,12 +168,13 @@ export const DatePicker = ({
       {showError && (
         <p
           className="
-          text-sm 
-          text-red-500 
-          mt-1 
-          px-4
-          animate-fadeIn
-        "
+            text-sm 
+            text-red-500 
+            mt-1 
+            px-4
+            animate-fadeIn
+            w-full
+          "
         >
           {errorText}
         </p>

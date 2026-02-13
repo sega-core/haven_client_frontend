@@ -16,7 +16,6 @@ export const TargetSheet = ({ onClose }: { onClose: () => void }) => {
   const { mutateAsync, isPending } = useCreateTarget();
 
   const onSubmit = async (values: TTargetForm) => {
-    console.log(values);
     try {
       const title = values[ETargetField.TITLE];
       const startDate = values[ETargetField.START_DATE] || "";
@@ -44,7 +43,7 @@ export const TargetSheet = ({ onClose }: { onClose: () => void }) => {
     <FormTarget onSubmit={onSubmit} initialValue={INITIAL_FORM}>
       <div className="grid gap-4 bg-white-primary">
         <InputName />
-        <div className="flex gap-2 w-full justify-between">
+        <div className="flex gap-4 w-full justify-between">
           <InputDate type="start" />
           <InputDate type="end" />
         </div>

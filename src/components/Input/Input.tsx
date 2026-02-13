@@ -31,7 +31,7 @@ export const Input = ({
     <div className="flex flex-col gap-1">
       <div 
         className={`
-          p-4 
+          px-4 py-3 
           flex 
           flex-col 
           justify-center 

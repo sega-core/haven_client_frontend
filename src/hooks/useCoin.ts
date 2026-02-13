@@ -1,7 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { getCoin, postCoin, spendCoin, TCoin } from "../api";
-import { addToast } from "@heroui/toast";
 import { GET_PRACTICE, GET_PRACTICE_BUNDLE } from "./usePractice";
+import { havenToast } from "../components/Toast";
 
 export const GET_COIN = "GET_COIN";
 
@@ -26,9 +26,7 @@ export const useCreateDailyCoin = () => {
     mutationFn: () => postCoin(),
     onSuccess: ({ bonus }) => {
       queryClient.invalidateQueries({ queryKey: [GET_COIN] });
-      addToast({
-        title: `Вам начислено ${bonus} zen`,
-      });
+      havenToast.coins(bonus);
     },
   });
 };

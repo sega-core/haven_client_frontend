@@ -1,18 +1,14 @@
 import { useField } from "react-final-form";
-import { TextArea } from "../../../components/Input";
+import { Textarea } from "../../../components/Input";
 import { EMoodField } from "../form/FormMood.types";
+import { DEFAULT_ERROR_MSG } from "../../../constats";
 
 export const InputText = () => {
   const { input, meta } = useField(EMoodField.COMMENT, {
     validate: (v) => {
-      if (!v) return "InputTextError";
+      if (!v) return DEFAULT_ERROR_MSG;
     },
   });
 
-  return (
-    <TextArea
-      {...input}
-      {...(meta.touched && meta.error && { isInvalid: true })}
-    />
-  );
+  return <Textarea input={input} meta={meta} />;
 };

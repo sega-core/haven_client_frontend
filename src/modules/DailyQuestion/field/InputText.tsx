@@ -1,18 +1,14 @@
 import { useField } from "react-final-form";
 import { EDailyQuestionField } from "../form/FormDailyQuestion.types";
-import { TextArea } from "../../../components/Input";
+import { Textarea } from "../../../components/Input";
+import { DEFAULT_ERROR_MSG } from "../../../constats";
 
 export const InputText = () => {
   const { input, meta } = useField(EDailyQuestionField.ANSWER, {
     validate: (v) => {
-      if (!v) return "InputTextError";
+      if (!v) return DEFAULT_ERROR_MSG;
     },
   });
 
-  return (
-    <TextArea
-      {...input}
-      {...(meta.touched && meta.error && { isInvalid: true })}
-    />
-  );
+  return <Textarea input={input} meta={meta} />;
 };

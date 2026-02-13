@@ -11,7 +11,6 @@
   },
   "dependencies": {
     "@heroui/button": "2.2.27",
-    "@heroui/input": "^2.4.28",
     "@heroui/modal": "^2.2.27",
     "@heroui/switch": "^2.2.24",
     "@heroui/tabs": "^2.2.27",

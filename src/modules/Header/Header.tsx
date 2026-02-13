@@ -1,13 +1,13 @@
 import { Avatar } from "../../components/Avatar";
 import { Typography } from "../../components/Typography";
-import { useSafeLaunchParams } from "../../hooks";
+import { useLaunchParamsTelegram } from "../../hooks";
 import { CoinBalance } from "./components";
 import { useRouteTitle } from "./hooks/useRouteTitle";
 
 export const Header = () => {
   const { title } = useRouteTitle();
 
-  const { tgWebAppData } = useSafeLaunchParams();
+  const { tgWebAppData } = useLaunchParamsTelegram();
 
   const firstName = tgWebAppData?.user?.firstName;
   const photoUrl = tgWebAppData?.user?.photoUrl;
