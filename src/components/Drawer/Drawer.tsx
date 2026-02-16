@@ -37,7 +37,7 @@ export const Drawer = ({
             `${!isNasted ? "z-40" : "z-42"}`,
           )}
         />
-
+        <VaulDrawer.Title className="hidden"/>
         <VaulDrawer.Content
           className={cn(
             "bg-white-primary rounded-t-4xl flex flex-col fixed bottom-0 left-0 right-0 max-h-[90vh] outline-none",
