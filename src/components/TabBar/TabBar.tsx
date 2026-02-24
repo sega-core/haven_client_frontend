@@ -30,24 +30,22 @@ export const TabBar = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  // Определяем активный индекс на основе текущего пути
   const activeTabIndex =
-    tabs.findIndex((tab) => tab.route === location.pathname) ?? 0; // Если не найдено, по умолчанию 0
+    tabs.findIndex((tab) => tab.route === location.pathname) ?? 0;
 
   const handleTabClick = (route: string) => {
-    navigate(route); // Навигация через React Router
+    navigate(route);
   };
 
-  // Рассчитываем проценты для underline (предполагаем 4 равных таба, 25% каждый)
   const tabCount = tabs.length;
-  const underlineWidthPercent = 100 / tabCount; // 25%
-  const underlineLeftPercent = activeTabIndex * underlineWidthPercent; // 0%, 25%, 50%, 75%
+  const underlineWidthPercent = 100 / tabCount;
+  const underlineLeftPercent = activeTabIndex * underlineWidthPercent;
 
-  if(activeTabIndex === -1) return  null
+  if (activeTabIndex === -1) return null;
 
   return (
-    <div className="fixed left-3.5 right-3.5 bottom-4 z-10">
-      <div className="p-2 bg-white-tertiary shadow-xl/30 backdrop-blur-md z-50 w-full rounded-full flex relative">
+    <div className="fixed left-0 right-0 w-full px-3.5 bottom-4 z-10">
+      <div className="max-w-md mx-auto p-2 bg-white-tertiary shadow-xl/30 backdrop-blur-md z-50 w-full rounded-full flex relative">
         {/* Скользящая подчеркивающая линия */}
         <span
           className="p-2 absolute bottom-0 left-0 top-0 z-20 flex overflow-hidden rounded-full transition-all duration-300 ease-in-out"

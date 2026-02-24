@@ -5,12 +5,14 @@ import { CoinBalance } from "./components";
 import { useRouteTitle } from "./hooks/useRouteTitle";
 
 export const Header = () => {
-  const { title } = useRouteTitle();
+  const { title, isVisibleHeader } = useRouteTitle();
 
   const { tgWebAppData } = useLaunchParamsTelegram();
 
   const firstName = tgWebAppData?.user?.firstName;
   const photoUrl = tgWebAppData?.user?.photoUrl;
+
+  if (!isVisibleHeader) return null;
 
   return (
     <div className="flex justify-between w-full items-center">

@@ -1,11 +1,36 @@
 import axios from "axios";
+import { tokenService } from "../utils/tokenService";
 
-const instance = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || "/api",
+export const axiosClient = axios;
+
+const baseUrl = import.meta.env.VITE_API_URL;
+
+axiosClient.defaults.baseURL = baseUrl;
+axiosClient.defaults.withCredentials = true;
+
+axiosClient.interceptors.request.use((config) => {
+  const token = tokenService.getJwtToken();
+
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+
+  return config;
 });
 
-export const setHeader = (header: string, value: string) => {
-  instance.defaults.headers[header] = value;
-};
+axiosClient.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    if (error.response && error.response.data) {
+      if (error.response.status === 401) {
+        tokenService.removeJwtToken();
 
-export const axiosClient = instance;
+        if (!window.location.pathname.includes("/login")) {
+          window.location.href = "/login";
+        }
+      }
+      return Promise.reject(error.response);
+    }
+    return Promise.reject(error.message);
+  },
+);

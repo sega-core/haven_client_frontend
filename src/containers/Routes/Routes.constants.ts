@@ -3,11 +3,6 @@ export const ROUTES = {
   TARGETS: '/targets',
   COMUNITY: '/comunity',
   PRACTICE: '/practice',
+  ERROR:'/error',
+  LOGIN:'/login'
 } as const;
-
-export enum ERoutes {
-  MAIN = '/main',
-  TARGETS = '/targets',
-  COMUNITY = '/comunity',
-  PRACTICE = '/practice'
-}

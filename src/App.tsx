@@ -3,15 +3,10 @@ import { TabBar } from "./components/TabBar";
 import { BrowserRouter } from "react-router-dom";
 import { Header } from "./modules/Header";
 import { QueryClientProvider, AppRoutes, DrawerProvider } from "./containers";
-import { initTelegramApi, useRawLaunchParamsTelegram } from "./hooks";
-import { setHeader } from "./config";
+import { initTelegramApi } from "./hooks";
 
 function App() {
   initTelegramApi();
-
-  const rawData = useRawLaunchParamsTelegram();
-
-  setHeader("X-Telegram-Init-Data", `${rawData}`);
 
   return (
     <QueryClientProvider>
