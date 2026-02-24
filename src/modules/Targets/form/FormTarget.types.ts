@@ -43,5 +43,5 @@ export type TTargetForm = {
   [ETargetField.END_DATE]?: string;
   [ETargetField.NOTIFICATION_TIME]?: string;
   [ETargetField.WEEKDAYS]?: TPartialWeekdays;
-  [ETargetField.COLOR]: ETargetColor;
+  [ETargetField.COLOR]: string;
 };

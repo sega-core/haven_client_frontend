@@ -1,13 +1,17 @@
+import { cn } from "../../utils";
+
 type ColorCheckboxProps = {
   checked: boolean;
   name?: string;
   value?: string;
+  color:string;
   onChange: (checked: boolean) => void;
 };
 
 export const ColorCheckbox = ({
   checked,
   value,
+  color,
   onChange,
 }: ColorCheckboxProps) => {
   return (
@@ -22,16 +26,13 @@ export const ColorCheckbox = ({
       />
 
       <div
-        className={`
-          w-7 h-7 rounded-full min-w-0 flex items-center justify-center gap-2
-          transition-all flex-1
-          ${
-            checked
-              ? "border-2 border-(--stroke-beige-primary)"
-              : "border border-transparent"
-          }
-          ${value}
-        `}
+        className={cn(
+          "w-7 h-7 rounded-full min-w-0 flex items-center justify-center gap-2 transition-all flex-1",
+          checked
+            ? "border-2 border-(--stroke-beige-primary)"
+            : "border border-transparent",
+            color
+        )}
       ></div>
     </label>
   );

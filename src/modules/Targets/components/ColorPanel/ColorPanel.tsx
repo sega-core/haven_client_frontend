@@ -8,11 +8,12 @@ export const ColorPanel = () => {
     <Field name={ETargetField.COLOR}>
       {({ input }) => (
         <div className="flex flex-wrap gap-2 items-center">
-          {COLORS.map(({ value, id }) => (
+          {COLORS.map(({ value, id, color }) => (
             <ColorCheckbox
               key={id}
               checked={input.value === value}
               value={value}
+              color={color}
               onChange={() => input.onChange(value)}
             />
           ))}

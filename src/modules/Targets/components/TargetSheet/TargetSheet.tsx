@@ -1,6 +1,5 @@
 import { Button } from "@heroui/button";
 import { Typography } from "../../../../components/Typography";
-import { Switch } from "@heroui/switch";
 import { FormTarget } from "../../form/FormTarget";
 import { InputDate, InputName, InputTime } from "../../fields";
 import { INITIAL_FORM } from "../../form/FormTarget.constant";
@@ -9,6 +8,7 @@ import { DayPanel } from "../DayPanel";
 import { ColorPanel } from "../ColorPanel";
 import { useCreateTarget } from "../../../../hooks";
 import { ETargetField, TTargetForm } from "../../form";
+import { Switch } from "../../../../components/Switch";
 
 export const TargetSheet = ({ onClose }: { onClose: () => void }) => {
   const [isToggle, setIsToggle] = useState(false);
@@ -24,6 +24,7 @@ export const TargetSheet = ({ onClose }: { onClose: () => void }) => {
         .filter(([, isTrue]) => isTrue)
         .map(([day]) => day);
       const notifyTime = values[ETargetField.NOTIFICATION_TIME];
+      const color = values[ETargetField.COLOR];
 
       await mutateAsync({
         title,
@@ -31,6 +32,7 @@ export const TargetSheet = ({ onClose }: { onClose: () => void }) => {
         endDate,
         weekdays,
         notifyTime,
+        color
       });
     } catch (error) {
       alert(error);
@@ -56,7 +58,7 @@ export const TargetSheet = ({ onClose }: { onClose: () => void }) => {
         </Typography>
         <DayPanel />
         <div className="flex gap-2.5">
-          <Switch onChange={() => setIsToggle((prev) => !prev)} />
+          <Switch onChange={() => setIsToggle((prev) => !prev)} size="lg"/>
           <Typography type="heading-xs" className="text-brown-primary">
             Установить напоминание
           </Typography>

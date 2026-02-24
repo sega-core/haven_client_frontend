@@ -18,7 +18,7 @@ interface HavenNativeDateProps {
   minDate?: string;
   maxDate?: string;
   label?: string;
-  fullWidth?: boolean; // Добавляем пропс для опциональной полной ширины
+  fullWidth?: boolean;
 }
 
 export const DatePicker = ({

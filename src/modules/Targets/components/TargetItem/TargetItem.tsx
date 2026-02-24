@@ -9,9 +9,18 @@ import { DAYS } from "../DayPanel/DayPanel.constant";
 import { useDeleteTarget } from "../../../../hooks";
 
 export const TargetItem = (target: TTarget) => {
-  const { title, startDate, endDate, notifyTime, weekdays,completionRate, id } = target;
+  const {
+    title,
+    startDate,
+    endDate,
+    notifyTime,
+    weekdays,
+    completionRate,
+    color,
+    id,
+  } = target;
 
-  const {mutate} = useDeleteTarget();
+  const { mutate } = useDeleteTarget();
 
   return (
     <Block>
@@ -24,7 +33,7 @@ export const TargetItem = (target: TTarget) => {
           {title}
         </Typography>
         <div>
-          <Button
+          {/* <Button
             isIconOnly
             onPress={() => alert("edit")}
             variant="light"
@@ -32,7 +41,7 @@ export const TargetItem = (target: TTarget) => {
             radius="full"
           >
             <Icon name="PenSquare" width={20} height={20} />
-          </Button>
+          </Button> */}
           <Button
             isIconOnly
             onPress={() => mutate(id)}
@@ -48,19 +57,23 @@ export const TargetItem = (target: TTarget) => {
         {formatDateRange(startDate, endDate)}
       </Typography>
       <div className="flex items-center gap-1.5">
-        <div>
-          <Icon name="AlarmClock" />
-        </div>
+        {notifyTime && (
+          <div>
+            <Icon name="AlarmClock" />
+          </div>
+        )}
         <div>
           <Typography type="body-s" className="text-brown-primary">
             {notifyTime.slice(0, 5)}{" "}
-            {weekdays.map((item) => DAYS.find((day) => day.id === item)?.title).join(', ')}
+            {weekdays
+              .map((item) => DAYS.find((day) => day.id === item)?.title)
+              .join(", ")}
           </Typography>
         </div>
       </div>
       <ProgressLine
         value={completionRate}
-        colorClass="bg-(--plots-progress-2)"
+        color={color}
         height={3}
       />
     </Block>

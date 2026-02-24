@@ -1,9 +1,13 @@
+import { getColorWithOpacity } from "../../utils";
+
 export const CircleCheckbox = ({
   checked,
   onChange,
+  color,
 }: {
   checked: boolean;
   onChange: () => void;
+  color: string;
 }) => {
   const disabled = checked;
 
@@ -18,32 +22,46 @@ export const CircleCheckbox = ({
         rounded-full
         border-1.5
         transition-all duration-300 ease-in-out
-        ${
-          checked
-            ? "bg-blue-500 border-blue-500 border-none"
-            : "bg-white border-(--stroke-color-1-secondary)"
-        }
-        ${
-          disabled
-            ? "opacity-50 cursor-not-allowed"
-            : "hover:ring-2 hover:ring-blue-300 active:scale-90 cursor-pointer"
+        ${disabled 
+          ? "opacity-50 cursor-not-allowed" 
+          : "hover:ring-2 active:scale-90 cursor-pointer"
         }
       `}
+      style={{
+        backgroundColor: checked ? color : 'white',
+        borderColor: checked ? color : 'var(--stroke-color-1-secondary)',
+        borderWidth: checked ? '0px' : '1.5px',
+        borderStyle: 'solid',
+        ...(checked ? { border: 'none' } : {}),
+      }}
       aria-disabled={disabled}
     >
-      {checked && !disabled && (
-        <span className="absolute w-full h-full rounded-full bg-blue-400 opacity-30"></span>
+      {checked && (
+        <span 
+          className="absolute w-full h-full rounded-full animate-pulse"
+          style={{ 
+            backgroundColor: getColorWithOpacity(color, 0.3),
+            animation: 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite'
+          }}
+        />
       )}
+      
       {checked && disabled && (
-        <span className="absolute w-full h-full rounded-full bg-gray-400 opacity-30"></span>
+        <span 
+          className="absolute w-full h-full rounded-full"
+          style={{ backgroundColor: 'rgba(0,0,0,0.2)' }}
+        />
       )}
+      
       <svg
         className={`
           w-3 h-3
-          transition-transform duration-300 ease-in-out
+          transition-all duration-300 ease-in-out
           ${checked ? "scale-100 opacity-100" : "scale-0 opacity-0"}
-          ${disabled ? "text-gray-100" : "text-white"}
         `}
+        style={{
+          color: checked ? 'white' : color,
+        }}
         viewBox="0 0 24 24"
         fill="none"
         stroke="currentColor"

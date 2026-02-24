@@ -1,12 +1,10 @@
-// TypographyMap.ts
-
-import { TTypography } from "./Typography.types";
-
 export interface ITypographyStyle {
   fontSize: string;
   lineHeight: string;
   type: string
 }
+
+export type TTypography = 'heading-xs' | 'heading-s' | 'heading-md' | 'heading-lg' | 'body-xxs' | 'body-xs' | 'body-s' | 'body-md' | 'body-lg';
 
 export const TYPOGRAPHY_MAP: Record<TTypography, ITypographyStyle> = {
   'heading-xs': {
