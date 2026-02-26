@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Typography } from "../Typography";
 import { Button } from "@heroui/button";
+import { useNavigate } from "react-router";
 
 export const ErrorComponent = ({
   error,
@@ -26,9 +27,11 @@ export const ErrorComponent = ({
     }
   };
 
+  const navigate = useNavigate();
+
   return (
     <div className="flex items-center justify-center min-h-[60vh] px-4">
-      <div className="w-full max-w-md text-center bg-white shadow-lg rounded-2xl p-8 border border-red-100">
+      <div className="w-full max-w-md text-center bg-warning-50 shadow-lg rounded-2xl p-8">
         <div className="flex items-center justify-center mb-4">
           <div className="w-12 h-12 flex items-center justify-center rounded-full bg-red-100 text-red-600 text-2xl">
             😅
@@ -42,6 +45,14 @@ export const ErrorComponent = ({
         <Typography type="body-s" className="text-gray-500 mb-6 break-words">
           {error?.message || "Произошла непредвиденная ошибка"}
         </Typography>
+        <Button
+          color="danger"
+          variant="solid"
+          onPress={() => navigate("/login")}
+          className="w-full"
+        >
+          Попробовать снова
+        </Button>
         <Button
           variant="bordered"
           onPress={onCopyError}

@@ -12,7 +12,6 @@
   "dependencies": {
     "@heroui/button": "2.2.27",
     "@heroui/modal": "^2.2.27",
-    "@heroui/switch": "^2.2.24",
     "@heroui/tabs": "^2.2.27",
     "@heroui/theme": "^2.4.26",
     "@heroui/toast": "^2.0.20",

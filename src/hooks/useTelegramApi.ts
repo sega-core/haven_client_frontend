@@ -1,8 +1,8 @@
 import {
   init,
   postEvent,
+  retrieveRawInitData,
   useLaunchParams,
-  useRawLaunchParams,
 } from "@tma.js/sdk-react";
 
 export const initTelegramApi = () => {
@@ -16,7 +16,7 @@ export const initTelegramApi = () => {
 
 export const useRawLaunchParamsTelegram = () => {
   try {
-    return useRawLaunchParams();
+    return retrieveRawInitData();
   } catch {
     return undefined;
   }
@@ -24,7 +24,6 @@ export const useRawLaunchParamsTelegram = () => {
 
 export const useLaunchParamsTelegram = () => {
   try {
-    // Пытаемся использовать хук
     const params = useLaunchParams(true);
     return {
       ...params,
@@ -32,7 +31,6 @@ export const useLaunchParamsTelegram = () => {
       error: null,
     };
   } catch (error) {
-    // Если упал - возвращаем мок
     console.warn("Telegram Mini App hook failed:", error);
     return {
       tgWebAppData: null,
