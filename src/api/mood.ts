@@ -2,7 +2,7 @@ import { axiosClient } from "../config";
 
 export type TMood = {
   id: number;
-  level: number;
+  level: 1 | 2 | 3 | 4 | 5;
   tags: string[];
   comment: string;
   createdAt: string;

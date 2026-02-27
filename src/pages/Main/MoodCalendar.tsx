@@ -13,15 +13,10 @@ import { MOOD_TAGS_MAP } from "../../modules/Mood/Mood.constants";
 import { Typography } from "../../components/Typography";
 import { Chip } from "../../components/Chip";
 import { BlockAnswer } from "../../components/BlockAnswer";
+import { TMood } from "../../api";
 
 interface MoodCalendarProps {
-  data: Array<{
-    id: number;
-    createdAt: Date | string;
-    level: 1 | 2 | 3 | 4 | 5;
-    tags: string[];
-    comment?: string;
-  }>;
+  data: TMood[];
   initialDate?: Date;
 }
 
@@ -248,17 +243,13 @@ const DayDetailsModal = ({
 }: {
   isOpen: boolean;
   onClose: () => void;
-  dayData?: (typeof data)[0];
+  dayData?: TMood;
   date: Date;
 }) => {
   if (!isOpen) return null;
 
   const getTagLabel = (tagKey: string) => {
     return MOOD_TAGS_MAP[tagKey]?.label || tagKey;
-  };
-
-  const getTagLevel = (tagKey: string) => {
-    return MOOD_TAGS_MAP[tagKey]?.level;
   };
 
   return (
