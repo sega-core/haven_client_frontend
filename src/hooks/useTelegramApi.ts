@@ -27,17 +27,18 @@ export const useLaunchParamsTelegram = () => {
     const params = useLaunchParams(true);
     return {
       ...params,
+      firstName: params.tgWebAppData?.user?.firstName,
+      photoUrl: params.tgWebAppData?.user?.photoUrl,
+      username: params.tgWebAppData?.user?.username,
       isWebApp: true,
       error: null,
     };
   } catch (error) {
     console.warn("Telegram Mini App hook failed:", error);
     return {
-      tgWebAppData: null,
-      tgWebAppVersion: "7.0",
-      tgWebAppPlatform: "web",
-      tgWebAppThemeParams: {},
-      tgWebAppStartParam: null,
+      firstName: undefined,
+      photoUrl: undefined,
+      username: undefined,
       isWebApp: false,
       error: error as Error,
     };

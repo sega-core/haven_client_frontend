@@ -112,7 +112,7 @@ export const ProgressLineZen = ({ goal = 0 }: { goal?: number }) => {
       </div>
       <Modal
         title="Зарабатывай Zen"
-        size="lg"
+        size="sm"
         body={<div>{ZenInfoModalContent()}</div>}
       />
     </div>

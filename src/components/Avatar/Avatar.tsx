@@ -1,4 +1,6 @@
+import { useNavigate } from "react-router";
 import { Icon } from "../Icon";
+import { ROUTES } from "../../containers";
 
 type TAvatar = {
   image?: string | null;
@@ -9,10 +11,17 @@ type TAvatar = {
 export const Avatar = ({ image, name, size = 42 }: TAvatar) => {
   const initials = name?.trim()?.charAt(0)?.toUpperCase() ?? null;
 
+  const navigate = useNavigate();
+
+  const goToProfile = () => {
+    navigate(ROUTES.PROFILE);
+  };
+
   return (
     <div
-      className="flex items-center justify-center rounded-full bg-white-secondary overflow-hidden select-none"
+      className="flex items-center justify-center rounded-full bg-white-tertiary overflow-hidden select-none"
       style={{ width: size, height: size }}
+      onClick={goToProfile}
     >
       {image ? (
         <img

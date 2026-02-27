@@ -25,23 +25,26 @@ export const Practice = () => {
     [practices],
   );
 
-const renderMyPractice = useCallback(() => {
+  const renderMyPractice = useCallback(() => {
     const myPractices = practices?.filter((item) => item.isPurchased);
-    
+
     if (!myPractices?.length) {
       return (
         <div className="flex flex-col items-center justify-center py-12 px-4 text-center">
-          <Typography type='body-lg' className="text-brown-primary mb-2">
+          <Typography type="body-lg" className="text-brown-primary mb-2">
             У вас пока нет купленных практик
           </Typography>
           <Typography type="body-s" className="text-brown-secondary">
-            Перейдите во вкладку "Практики" или "Коллеции", чтобы выбрать подходящие
+            Перейдите во вкладку "Практики" или "Коллеции", чтобы выбрать
+            подходящие
           </Typography>
         </div>
       );
     }
-    
-    return myPractices.map((item, index) => <PracticeCard item={item} key={index} />);
+
+    return myPractices.map((item, index) => (
+      <PracticeCard item={item} key={index} />
+    ));
   }, [practices]);
 
   return (

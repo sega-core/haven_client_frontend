@@ -30,9 +30,11 @@ export const DailyQuestionCard = ({ data }: Props) => {
         </Typography>
         <Icon name="ChevronRight" width={24} height={24} />
       </div>
-      <Typography className="text-brown-primary" type="body-s">
-        Ваша ежедневная порция рефлексии.
-      </Typography>
+      {!data?.createdAt && (
+        <Typography className="text-brown-primary" type="body-s">
+          Ваша ежедневная порция рефлексии.
+        </Typography>
+      )}
       {!!data?.createdAt && (
         <div className="flex">
           <Chip label={getTime(data.createdAt)} />

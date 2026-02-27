@@ -1,8 +1,13 @@
 export const ROUTES = {
-  MAIN: '/main',
-  TARGETS: '/targets',
-  COMUNITY: '/comunity',
-  PRACTICE: '/practice',
-  ERROR:'/error',
-  LOGIN:'/login'
+  MAIN: "/main",
+  TARGETS: "/targets",
+  COMUNITY: "/comunity",
+  PRACTICE: "/practice",
+  ERROR: "/error",
+  LOGIN: "/login",
+  PROFILE: "/profile",
+  SUBSCRIPTION: "/profile/subscription",
+  FAQ: "/profile/faq",
+  TERMS: "/profile/terms",
+  PRIVACY: "/profile/privacy",
 } as const;

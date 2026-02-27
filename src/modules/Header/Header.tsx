@@ -1,16 +1,35 @@
+/* import { Button } from "@heroui/button"; */
 import { Avatar } from "../../components/Avatar";
 import { Typography } from "../../components/Typography";
 import { useLaunchParamsTelegram } from "../../hooks";
 import { CoinBalance } from "./components";
 import { useRouteTitle } from "./hooks/useRouteTitle";
+import { Icon } from "../../components/Icon";
+import { useNavigate } from "react-router";
 
 export const Header = () => {
-  const { title, isVisibleHeader } = useRouteTitle();
+  const { title, isVisibleHeader, isVisibleBreadcrumb } = useRouteTitle();
 
-  const { tgWebAppData } = useLaunchParamsTelegram();
+  const { firstName, photoUrl } = useLaunchParamsTelegram();
 
-  const firstName = tgWebAppData?.user?.firstName;
-  const photoUrl = tgWebAppData?.user?.photoUrl;
+  const navigate = useNavigate();
+
+  if (isVisibleBreadcrumb) {
+    return (
+      <div className="flex justify-between w-full min-h-[42px]" onClick={() => navigate(-1)}>
+        <div className="flex items-center gap-2">
+          <Icon name="ChevronLeft" width={24} height={24} />
+          <Typography
+            type="heading-s"
+            className="text-brown-primary"
+            weight="semibold"
+          >
+            {title}
+          </Typography>
+        </div>
+      </div>
+    );
+  }
 
   if (!isVisibleHeader) return null;
 
@@ -24,6 +43,9 @@ export const Header = () => {
         {title?.replace("%user_name%", String(firstName))}
       </Typography>
       <div className="flex gap-4">
+        {/* <Button radius="full" isIconOnly className="bg-white-tertiary">
+          <Icon name="Calendar" />
+        </Button> */}
         <CoinBalance />
         <Avatar image={photoUrl} />
       </div>

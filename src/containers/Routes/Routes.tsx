@@ -9,17 +9,26 @@ export const AppRoutes = () => {
   const Comunity = lazy(() => import("../../pages/Comunity"));
   const Practice = lazy(() => import("../../pages/Practice"));
   const Error = lazy(() => import("../../pages/Error"));
+  const Profile = lazy(() => import("../../pages/Profile"));
+  const Subscription = lazy(() => import("../../pages/Subscription"));
+  const Faq = lazy(() => import("../../pages/Faq"));
+  const Terms = lazy(() => import("../../pages/Terms"));
+  const Privacy = lazy(() => import("../../pages/Privacy"));
 
   return (
     <Suspense fallback={<></>}>
       <Routes>
-        
         <Route path={ROUTES.LOGIN} element={<Login />} />
         <Route path={ROUTES.MAIN} element={<Main />} />
         <Route path={ROUTES.TARGETS} element={<Targets />} />
         <Route path={ROUTES.COMUNITY} element={<Comunity />} />
         <Route path={ROUTES.PRACTICE} element={<Practice />} />
         <Route path={ROUTES.ERROR} element={<Error />} />
+        <Route path={ROUTES.PROFILE} element={<Profile />} />
+        <Route path={ROUTES.SUBSCRIPTION} element={<Subscription />} />
+        <Route path={ROUTES.FAQ} element={<Faq />} />
+        <Route path={ROUTES.TERMS} element={<Terms />} />
+        <Route path={ROUTES.PRIVACY} element={<Privacy />} />
         <Route path="*" element={<Navigate replace to={ROUTES.LOGIN} />} />
       </Routes>
     </Suspense>

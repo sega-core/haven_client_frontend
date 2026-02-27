@@ -9,8 +9,9 @@ export type TTarget = {
   notifyTime: string;
   completionRate: number;
   isCompletedToday: boolean;
-  isCanCompletedToday:boolean;
-  color:string;
+  isCanCompletedToday: boolean;
+  color: string;
+  status: "active" | "completed" | "overdue" | "notStarted";
 };
 
 export type TTargetCreate = {
@@ -19,7 +20,7 @@ export type TTargetCreate = {
   endDate: string;
   weekdays: string[];
   notifyTime?: string;
-  color?:string;
+  color?: string;
 };
 
 export const getTarget = async () => {

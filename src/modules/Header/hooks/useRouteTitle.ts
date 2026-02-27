@@ -10,9 +10,11 @@ export const useRouteTitle = () => {
     return HEADER_TITLE[pathname as keyof typeof HEADER_TITLE];
   }, [pathname]);
 
-  const isVisibleHeader = ![ROUTES.LOGIN, ROUTES.ERROR].some(
+  const isVisibleHeader = ![ROUTES.LOGIN, ROUTES.ERROR, ROUTES.PROFILE].some(
     (route) => route === pathname,
   );
 
-  return { title, isVisibleHeader };
+  const isVisibleBreadcrumb = pathname.includes(ROUTES.PROFILE);
+
+  return { title, isVisibleHeader, isVisibleBreadcrumb };
 };
