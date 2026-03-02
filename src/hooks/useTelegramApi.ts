@@ -9,6 +9,7 @@ export const initTelegramApi = () => {
   try {
     init();
     postEvent("web_app_setup_swipe_behavior", { allow_vertical_swipe: false });
+    postEvent("web_app_request_fullscreen");
   } catch (error) {
     console.log(error);
   }

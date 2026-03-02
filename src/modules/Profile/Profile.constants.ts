@@ -30,14 +30,13 @@ export const menuSections: TProfileSection[] = [
       {
         id: "documentation",
         label: "Часто задаваемые вопросы",
-        icon: "❓",
+        icon: "🤔",
         route: ROUTES.FAQ,
       },
       {
         id: "news",
         label: "Новости",
-        icon: "📰",
-        route: "/news",
+        icon: "📨",
         external: "https://t.me/sega_core",
       },
     ],
