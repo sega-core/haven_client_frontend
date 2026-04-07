@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { format } from "date-fns";
 import { ru } from "date-fns/locale";
 import { MOOD_TAGS_MAP } from "../Mood/Mood.constants";
@@ -25,13 +25,17 @@ export const DayDetailsModal = ({
   onClose: () => void;
   dayData?: {
     mood?: TMood;
-    gratitude?: TGratitude;
+    gratitude?: TGratitude[];
     dailyQuestion?: TDailyQuestion;
   };
   date: Date;
 }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const touchStartX = useRef<number | null>(null);
+
+  useEffect(() => {
+    if (!isOpen) setCurrentIndex(0);
+  }, [isOpen]);
 
   if (!isOpen) return null;
 
@@ -91,13 +95,16 @@ export const DayDetailsModal = ({
       title: "Благодарность",
       content: (
         <>
-          {dayData?.gratitude ? (
+          {dayData?.gratitude?.length ? (
             <div className="flex flex-col gap-4">
               <div className="flex gap-2 flex-col">
-                <BlockAnswer
-                  comment={dayData?.gratitude?.comment}
-                  date={dayData?.gratitude.createdAt}
-                />
+                {dayData?.gratitude.map((item, index) => (
+                  <BlockAnswer
+                    key={index}
+                    comment={item.comment}
+                    date={item.createdAt}
+                  />
+                ))}
               </div>
             </div>
           ) : (

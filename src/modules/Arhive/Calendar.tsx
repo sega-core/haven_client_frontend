@@ -74,7 +74,7 @@ export const Calendar = () => {
       mood: data?.mood?.find(
         (entry) => format(new Date(entry.createdAt), "yyyy-MM-dd") === dateStr,
       ),
-      gratitude: data?.gratitude.find(
+      gratitude: data?.gratitude.filter(
         (entry) => format(new Date(entry.createdAt), "yyyy-MM-dd") === dateStr,
       ),
       dailyQuestion: data?.dailyQuestion.find(

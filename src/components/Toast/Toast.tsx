@@ -23,8 +23,8 @@ export const havenToast = {
       classNames: {
         base: cn(
           "py-4 px-5 rounded-[16px]",
-          "bg-beige-primary",
-          "border border-[var(--background-beige-primary)] ",
+          "bg-cold-green-primary",
+          "border border-[var(--background-color-2-primary)] ",
           "backdrop-blur-sm shadow-lg",
         ),
         title: "text-white-primary",
