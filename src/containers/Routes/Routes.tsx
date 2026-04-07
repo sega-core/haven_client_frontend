@@ -14,6 +14,8 @@ export const AppRoutes = () => {
   const Faq = lazy(() => import("../../pages/Faq"));
   const Terms = lazy(() => import("../../pages/Terms"));
   const Privacy = lazy(() => import("../../pages/Privacy"));
+  const Archive = lazy(() => import("../../pages/Archive"));
+  const Breath = lazy(() => import("../../pages/Breath"));
 
   return (
     <Suspense fallback={<></>}>
@@ -23,6 +25,8 @@ export const AppRoutes = () => {
         <Route path={ROUTES.TARGETS} element={<Targets />} />
         <Route path={ROUTES.COMUNITY} element={<Comunity />} />
         <Route path={ROUTES.PRACTICE} element={<Practice />} />
+        <Route path={ROUTES.ARCHIVE} element={<Archive />} />
+        <Route path={ROUTES.BREATH} element={<Breath />} />
         <Route path={ROUTES.ERROR} element={<Error />} />
         <Route path={ROUTES.PROFILE} element={<Profile />} />
         <Route path={ROUTES.SUBSCRIPTION} element={<Subscription />} />

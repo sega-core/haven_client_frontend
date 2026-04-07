@@ -41,7 +41,7 @@ export const GratitudeCard = ({ data }: Props) => {
       {!data?.length && (
         <Typography className="text-brown-primary" type="body-s">
           Фокус на приятных мелочах помогает бороться с тревогой и
-          беспокойством.
+          беспокойством
         </Typography>
       )}
       {!!data?.length && (

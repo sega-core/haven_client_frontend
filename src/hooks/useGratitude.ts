@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { postGratitude } from "../api";
-import { GET_PROGRESS } from "./useProgress";
+import { GET_PROGRESS, GET_PROGRESS_RANGE } from "./useProgress";
 
 export const useCreateGratitude = () => {
   const queryClient = useQueryClient();
@@ -9,6 +9,7 @@ export const useCreateGratitude = () => {
     mutationFn: (comment: string) => postGratitude(comment),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: [GET_PROGRESS] });
+      queryClient.invalidateQueries({ queryKey: [GET_PROGRESS_RANGE] });
     },
   });
 };

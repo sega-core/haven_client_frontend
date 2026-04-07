@@ -17,3 +17,15 @@ export type TProgress = {
 export const getProgress = async () => {
   return (await axiosClient.get<TProgress>(`/progress`)).data;
 };
+
+export const getProgressRange = async (params: {
+  startdDate?: string;
+  endDate?: string;
+}) => {
+  return (
+    await axiosClient.get<{ mood: TMood[]; gratitude: TGratitude[]; dailyQuestion:TDailyQuestion[] }>(
+      `/progress-range`,
+      { params },
+    )
+  ).data;
+};

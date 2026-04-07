@@ -9,18 +9,10 @@ import {
 } from "date-fns";
 import { ru } from "date-fns/locale";
 import { useState } from "react";
-import { MOOD_TAGS_MAP } from "../../modules/Mood/Mood.constants";
-import { Typography } from "../../components/Typography";
-import { Chip } from "../../components/Chip";
-import { BlockAnswer } from "../../components/BlockAnswer";
-import { TMood } from "../../api";
+import { useGetProgressRange } from "../../hooks";
+import { DayDetailsModal } from "./Slider";
 
-interface MoodCalendarProps {
-  data: TMood[];
-  initialDate?: Date;
-}
-
-const MOOD_CONFIG = {
+export const MOOD_CONFIG = {
   1: {
     emoji: "😞",
     bgColor: "rgba(82, 47, 41, 0.25)",
@@ -47,13 +39,19 @@ const MOOD_CONFIG = {
     label: "Супер",
   },
 };
+const initialDate = new Date();
 
-export const MoodCalendar = ({
-  data,
-  initialDate = new Date(),
-}: MoodCalendarProps) => {
+export const Calendar = () => {
   const [currentDate, setCurrentDate] = useState(initialDate);
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
+
+  const startDate = startOfMonth(currentDate);
+  const endDate = endOfMonth(currentDate);
+
+  const { data } = useGetProgressRange({
+    startDate: format(startOfMonth(currentDate), "yyyy-MM-dd"),
+    endDate: format(endOfMonth(currentDate), "yyyy-MM-dd"),
+  });
 
   const goToPreviousMonth = () => {
     setCurrentDate((prev) => subMonths(prev, 1));
@@ -63,9 +61,6 @@ export const MoodCalendar = ({
     setCurrentDate((prev) => addMonths(prev, 1));
   };
 
-  const startDate = startOfMonth(currentDate);
-  const endDate = endOfMonth(currentDate);
-
   const daysInMonth = eachDayOfInterval({ start: startDate, end: endDate });
 
   const firstDayOfMonth = startDate.getDay();
@@ -73,11 +68,19 @@ export const MoodCalendar = ({
 
   const calendarDays = [...Array(startOffset).fill(null), ...daysInMonth];
 
-  const getMoodForDate = (date: Date) => {
+  const getDataForDate = (date: Date) => {
     const dateStr = format(date, "yyyy-MM-dd");
-    return data.find(
-      (entry) => format(new Date(entry.createdAt), "yyyy-MM-dd") === dateStr,
-    );
+    return {
+      mood: data?.mood?.find(
+        (entry) => format(new Date(entry.createdAt), "yyyy-MM-dd") === dateStr,
+      ),
+      gratitude: data?.gratitude.find(
+        (entry) => format(new Date(entry.createdAt), "yyyy-MM-dd") === dateStr,
+      ),
+      dailyQuestion: data?.dailyQuestion.find(
+        (entry) => format(new Date(entry.createdAt), "yyyy-MM-dd") === dateStr,
+      ),
+    };
   };
 
   const handleDayClick = (date: Date) => {
@@ -89,7 +92,7 @@ export const MoodCalendar = ({
   };
 
   const selectedDayData = selectedDate
-    ? getMoodForDate(selectedDate)
+    ? getDataForDate(selectedDate)
     : undefined;
 
   return (
@@ -167,7 +170,7 @@ export const MoodCalendar = ({
               );
             }
 
-            const mood = getMoodForDate(date);
+            const mood = getDataForDate(date).mood;
             const dayNumber = format(date, "d");
             const isCurrentMonth = isSameMonth(date, currentDate);
             const isToday =
@@ -222,8 +225,6 @@ export const MoodCalendar = ({
           })}
         </div>
       </div>
-
-      {/* Модальное окно с деталями дня */}
       <DayDetailsModal
         isOpen={selectedDate !== null}
         onClose={closeModal}
@@ -231,96 +232,5 @@ export const MoodCalendar = ({
         date={selectedDate || new Date()}
       />
     </>
-  );
-};
-
-// Модальное окно для отображения деталей дня
-const DayDetailsModal = ({
-  isOpen,
-  onClose,
-  dayData,
-  date,
-}: {
-  isOpen: boolean;
-  onClose: () => void;
-  dayData?: TMood;
-  date: Date;
-}) => {
-  if (!isOpen) return null;
-
-  const getTagLabel = (tagKey: string) => {
-    return MOOD_TAGS_MAP[tagKey]?.label || tagKey;
-  };
-
-  return (
-    <div
-      className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4"
-      onClick={onClose}
-    >
-      <div
-        className="bg-white-primary rounded-2xl max-w-sm w-full p-6"
-        onClick={(e) => e.stopPropagation()}
-      >
-        <div className="flex items-center justify-between mb-4">
-          <h3 className="text-lg font-medium text-brown-primary">
-            {format(date, "d MMMM yyyy", { locale: ru })}
-          </h3>
-          <button
-            onClick={onClose}
-            className="w-8 h-8 rounded-lg flex items-center justify-center
-                     text-brown-primary hover:bg-beige-primary transition-colors"
-          >
-            <svg
-              className="w-5 h-5"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M6 18L18 6M6 6l12 12"
-              />
-            </svg>
-          </button>
-        </div>
-
-        {dayData ? (
-          <div className="flex flex-col gap-4">
-            <div className="flex gap-2 flex-col">
-              <Typography type="body-md" className="text-brown-primary">
-                Мое настроение
-              </Typography>
-              <div>
-                <Chip label={MOOD_CONFIG[dayData.level].label} />
-              </div>
-            </div>
-            <div className="flex gap-2 flex-col">
-              <Typography type="body-md" className="text-brown-primary">
-                Мои эмоции и чувства
-              </Typography>
-              <div className="flex flex-wrap gap-2">
-                {dayData.tags.map((item) => {
-                  const tag = getTagLabel(item);
-                  return <Chip label={tag} />;
-                })}
-              </div>
-            </div>
-            <div className="flex gap-2 flex-col">
-              <Typography type="body-md" className="text-brown-primary">
-                Мои эмоции и чувства
-              </Typography>
-              <BlockAnswer comment={dayData.comment} date={dayData.createdAt} />
-            </div>
-          </div>
-        ) : (
-          <div className="text-center py-8 text-brown-secondary">
-            <div className="text-4xl mb-3">📝</div>
-            <p>На этот день нет записей</p>
-          </div>
-        )}
-      </div>
-    </div>
   );
 };

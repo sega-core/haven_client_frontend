@@ -8,7 +8,7 @@ export const Group = () => {
   return (
     <Block onClick={() => console.log("gotogroup")}>
       <div className="flex gap-2 items-center">
-        <Avatar image={AvatarComunity} />
+        <Avatar image={AvatarComunity} disableLoading/>
         <div className="flex-1">
           <Typography type="heading-xs" className="text-brown-primary">
             Haven

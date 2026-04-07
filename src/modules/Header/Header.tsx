@@ -43,9 +43,6 @@ export const Header = () => {
         {title?.replace("%user_name%", String(firstName))}
       </Typography>
       <div className="flex gap-4">
-        {/* <Button radius="full" isIconOnly className="bg-white-tertiary">
-          <Icon name="Calendar" />
-        </Button> */}
         <CoinBalance />
         <Avatar image={photoUrl} />
       </div>

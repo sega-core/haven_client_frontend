@@ -11,9 +11,9 @@ const tabs = [
     route: ROUTES.MAIN,
   },
   {
-    id: "Goal" as const,
-    name: "Цели",
-    route: ROUTES.TARGETS,
+    id: "Calendar" as const,
+    name: "Каледарь",
+    route: ROUTES.ARCHIVE,
   },
   {
     id: "MessageCircle" as const,
@@ -31,7 +31,9 @@ export const TabBar = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const activeTabIndex = tabs.findIndex((tab) => tab.route === location.pathname);
+  const activeTabIndex = tabs.findIndex(
+    (tab) => tab.route === location.pathname,
+  );
 
   const handleTabChange = (index: number) => {
     navigate(tabs[index].route);
@@ -50,10 +52,11 @@ export const TabBar = () => {
           selectedKey={activeTabIndex.toString()}
           onSelectionChange={(key) => handleTabChange(Number(key))}
           classNames={{
-            tabList: "bg-white-tertiary shadow-xl/30 backdrop-blur-md p-2 w-full",
+            tabList:
+              "bg-white-tertiary shadow-xl/30 backdrop-blur-md p-2 w-full",
             tab: "h-auto py-3",
             cursor: "bg-beige-tertiary",
-            base:'w-full'
+            base: "w-full",
           }}
         >
           {tabs.map((tab, index) => (
@@ -68,9 +71,9 @@ export const TabBar = () => {
                     fill="text-brown-primary"
                     className="fill-(--text-brown-primary)"
                   />
-                  <Typography 
-                    type="body-xs" 
-                    weight="medium" 
+                  <Typography
+                    type="body-xs"
+                    weight="medium"
                     className="text-brown-primary"
                   >
                     {tab.name}

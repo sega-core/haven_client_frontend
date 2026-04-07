@@ -5,6 +5,7 @@ import { TargetCards } from "../../modules/Targets";
 import { DailyQuestionCard } from "../../modules/DailyQuestion";
 import { useGetProgress } from "../../hooks";
 import { SkeletonMetric } from "../../components/Skeleton";
+import { Card } from "../../components/Card";
 
 export const Main = () => {
   const { data, isLoading } = useGetProgress();
@@ -12,6 +13,7 @@ export const Main = () => {
   return (
     <div className="grid gap-4 w-full">
       <ProgressLineZen goal={data?.progressPoint} />
+      <Card />
       <TargetCards />
       <SkeletonMetric isLoading={isLoading}>
         <MoodCard data={data?.mood} />

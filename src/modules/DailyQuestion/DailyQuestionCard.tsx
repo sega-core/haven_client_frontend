@@ -32,7 +32,7 @@ export const DailyQuestionCard = ({ data }: Props) => {
       </div>
       {!data?.createdAt && (
         <Typography className="text-brown-primary" type="body-s">
-          Ваша ежедневная порция рефлексии.
+          Ваша ежедневная порция рефлексии
         </Typography>
       )}
       {!!data?.createdAt && (

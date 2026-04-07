@@ -6,6 +6,8 @@ export const HEADER_TITLE = {
   [ROUTES.COMUNITY]: "Комьюнити",
   [ROUTES.PRACTICE]: "Практики",
   [ROUTES.PROFILE]: "Профиль",
+  [ROUTES.ARCHIVE]: "Каледарь",
+  [ROUTES.BREATH]: "Дыхание",
   [ROUTES.SUBSCRIPTION]: "Управление подпиской",
   [ROUTES.PRIVACY]: "Политика конфиденциальности",
   [ROUTES.TERMS]: "Оферта",

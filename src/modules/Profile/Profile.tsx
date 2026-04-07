@@ -53,10 +53,7 @@ export const Profile = () => {
                 <button
                   key={item.id}
                   onClick={() => handleMenuItemClick(item)}
-                  className="w-full flex items-center justify-between px-4 py-4
-                           hover:bg-beige-primary/30 transition-colors
-                           active:bg-beige-primary"
-                >
+                  className="w-full flex items-center justify-between px-4 py-4">
                   <div className="flex items-center gap-3">
                     {item.icon && (
                       <span className="text-xl w-6 text-center">

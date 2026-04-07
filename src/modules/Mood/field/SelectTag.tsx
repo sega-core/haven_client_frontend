@@ -3,15 +3,11 @@ import { EMoodField } from "../form/FormMood.types";
 import { Chip } from "../../../components/Chip";
 import { MOOD_TAGS_MAP } from "../Mood.constants";
 import { useEffect } from "react";
-import { FieldErrorText } from "../../../components/FieldErrorText";
 
 export const SelectTags = () => {
-  const { input, meta } = useField(EMoodField.TAGS, {
+  const { input } = useField(EMoodField.TAGS, {
     type: "checkbox",
-    multiple: true,
-    validate: (v) => {
-      if (!v) return "SelectTagsError";
-    },
+    multiple: true
   });
   const { input: inputLevel } = useField(EMoodField.LEVEL, { type: "radio" });
 
@@ -65,10 +61,6 @@ export const SelectTags = () => {
           );
         })}
       </div>
-      <FieldErrorText
-        isError={meta.touched && meta.error}
-        message={"Выбирете хотя бы одну эмоцию или чувство"}
-      />
     </>
   );
 };

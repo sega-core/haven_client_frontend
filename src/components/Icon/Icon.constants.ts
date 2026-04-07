@@ -21,7 +21,6 @@ import Terrible from '../../assets/icons/terrible.svg?react'
 import ZenFilled from '../../assets/icons/zen-filled.svg?react'
 import ZenOutlined from '../../assets/icons/zen-outlined.svg?react'
 import AlarmClock from '../../assets/icons/alarm-clock.svg?react'
-import CalendarDays from '../../assets/icons/calendar-days.svg?react'
 import Calendar from '../../assets/icons/calendar.svg?react'
 import Close from '../../assets/icons/close.svg?react'
 import Goal from '../../assets/icons/goal.svg?react'
@@ -46,6 +45,7 @@ import StepForward from '../../assets/icons/step-forward.svg?react'
 import Trash from '../../assets/icons/trash.svg?react'
 import User from '../../assets/icons/user.svg?react'
 import Rub from '../../assets/icons/rub.svg?react'
+import Lotus from '../../assets/icons/lotus.svg?react'
 
 export const ICON_MAP: Partial<Record<TIcon, FC<SVGProps<SVGSVGElement>>>> = {
   'Check': Check,
@@ -70,7 +70,6 @@ export const ICON_MAP: Partial<Record<TIcon, FC<SVGProps<SVGSVGElement>>>> = {
   'ZenFilled': ZenFilled,
   'ZenOutlined': ZenOutlined,
   'AlarmClock': AlarmClock,
-  "CalendarDays": CalendarDays,
   "Calendar": Calendar,
   "Close": Close,
   "Goal": Goal,
@@ -94,6 +93,7 @@ export const ICON_MAP: Partial<Record<TIcon, FC<SVGProps<SVGSVGElement>>>> = {
   "Trash": Trash,
   "User": User,
   "Rub": Rub,
+  "Lotus":Lotus,
 } as const;
 
 

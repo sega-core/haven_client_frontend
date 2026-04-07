@@ -10,4 +10,6 @@ export const ROUTES = {
   FAQ: "/profile/faq",
   TERMS: "/profile/terms",
   PRIVACY: "/profile/privacy",
+  ARCHIVE: "/archive",
+  BREATH: "/breath",
 } as const;
