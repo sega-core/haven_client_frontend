@@ -27,7 +27,6 @@ export default defineConfig({
 
           "heroui-core": [
             "@heroui/button",
-            "@heroui/modal",
             "@heroui/tabs",
             "@heroui/theme",
             "@heroui/toast",
