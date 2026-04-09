@@ -5,5 +5,5 @@ import { EMoodField } from "../form/FormMood.types";
 export const InputText = () => {
   const { input, meta } = useField(EMoodField.COMMENT);
 
-  return <Textarea input={input} meta={meta} placeholder="Добавить комментарий..."/>;
+  return <Textarea input={input} meta={meta} maxLength={1000} placeholder="Добавить комментарий..."/>;
 };

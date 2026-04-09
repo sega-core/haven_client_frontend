@@ -30,7 +30,7 @@ export const MoodSheet = ({
         comment,
       });
     } catch (error) {
-      alert(error);
+      console.error(error);
     } finally {
       onClose();
     }

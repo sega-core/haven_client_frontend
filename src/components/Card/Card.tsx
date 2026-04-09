@@ -11,17 +11,25 @@ const cards = [
     color: "bg-vinous-secondary",
     emoji: "🎯",
   },
-  /* {
-    id: "Goal" as const,
-    name: "Карты",
-    route: ROUTES.TARGETS,
-    gradient: "from-purple-100 to-pink-100",
-  }, */
   {
     id: "Goal" as const,
     name: "Дыхание",
     route: ROUTES.BREATH,
     color: "bg-cold-green-secondary",
+    emoji: "🌀",
+  },
+  {
+    id: "Goal" as const,
+    name: "Карта",
+    route: ROUTES.BREATH,
+    color: "bg-brown-secondary",
+    emoji: "🪬",
+  },
+  {
+    id: "Goal" as const,
+    name: "Дзен",
+    route: ROUTES.BREATH,
+    color: "bg-mustard-secondary",
     emoji: "🧘",
   },
 ];
@@ -31,9 +39,10 @@ export const Card = () => {
 
   return (
     <div className="flex gap-4">
-      {cards.map((item) => (
+      {cards.map((item, index) => (
         <div
-          className="flex flex-col h-full"
+          key={index}
+          className="flex flex-col h-full active:scale-95 transition-transform duration-150"
           onClick={() => navigate(item.route)}
         >
           <div
@@ -47,7 +56,7 @@ export const Card = () => {
           </div>
           <Typography
             type={"heading-xs"}
-            className="text-brown-primary text-center"
+            className="text-brown-primary text-center text-[14px]"
           >
             {item.name}
           </Typography>

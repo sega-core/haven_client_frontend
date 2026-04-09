@@ -27,7 +27,7 @@ export const TargetItem = (target: TTarget) => {
       <div className="flex justify-between items-center">
         <Typography
           type="body-md"
-          className="text-brown-primary flex-1"
+          className="text-brown-primary flex-1 truncate"
           weight="medium"
         >
           {title}

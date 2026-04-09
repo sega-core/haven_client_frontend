@@ -10,7 +10,7 @@ import {
 import { ru } from "date-fns/locale";
 import { useState } from "react";
 import { useGetProgressRange } from "../../hooks";
-import { DayDetailsModal } from "./Slider";
+import { DayDetailsModal } from "./DayDetailsModal";
 
 export const MOOD_CONFIG = {
   1: {
@@ -108,7 +108,7 @@ export const Calendar = () => {
               <button
                 onClick={goToPreviousMonth}
                 className="w-8 h-8 rounded-lg flex items-center justify-center
-                         text-brown-primary hover:bg-beige-primary transition-colors"
+                         text-brown-primary transition-colors"
                 aria-label="Предыдущий месяц"
               >
                 <svg
@@ -129,7 +129,7 @@ export const Calendar = () => {
               <button
                 onClick={goToNextMonth}
                 className="w-8 h-8 rounded-lg flex items-center justify-center
-                         text-brown-primary hover:bg-beige-primary transition-colors"
+                         text-brown-primary transition-colors"
                 aria-label="Следующий месяц"
               >
                 <svg

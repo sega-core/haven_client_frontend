@@ -9,7 +9,11 @@ type TAvatar = {
   disableLoading?: boolean;
 };
 
-export const Avatar = ({ image, size = 42, disableLoading = false }: TAvatar) => {
+export const Avatar = ({
+  image,
+  size = 42,
+  disableLoading = false,
+}: TAvatar) => {
   const [imageError, setImageError] = useState(false);
   const [isLoading, setIsLoading] = useState(!disableLoading);
 
@@ -28,7 +32,7 @@ export const Avatar = ({ image, size = 42, disableLoading = false }: TAvatar) =>
     setIsLoading(false);
   };
 
-  const showIcon = !image || imageError;
+  const showIcon = !image || imageError || isLoading;
 
   return (
     <div
@@ -38,11 +42,6 @@ export const Avatar = ({ image, size = 42, disableLoading = false }: TAvatar) =>
     >
       {!showIcon && (
         <>
-          {isLoading && !disableLoading && (
-            <div className="absolute inset-0 flex items-center justify-center bg-white-tertiary">
-              <div className="w-1/3 h-1/3 rounded-full border-2 border-gray-300 border-t-gray-600 animate-spin" />
-            </div>
-          )}
           <img
             src={image}
             alt={"avatar"}
@@ -54,7 +53,7 @@ export const Avatar = ({ image, size = 42, disableLoading = false }: TAvatar) =>
           />
         </>
       )}
-      {(showIcon || (!isLoading && !image)) && (
+      {(showIcon || !image) && (
         <div className="text-gray-400">
           <Icon name="User" />
         </div>

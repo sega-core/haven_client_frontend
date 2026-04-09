@@ -16,6 +16,7 @@ export const InputName = () => {
       input={input}
       meta={meta}
       isRequired
+      maxLength={50}
     />
   );
 };

@@ -1,6 +1,7 @@
 import { Icon } from "../Icon";
-import { useModal } from "../../hooks";
 import { Typography } from "../Typography";
+import { Modal } from "../Modal";
+import { useState } from "react";
 
 const PROGRESS_SEGMENTS = 4;
 const ZEN_SEGMENT_INDEX = 3;
@@ -36,28 +37,23 @@ const DayBonus = ({ index, bonus }: { index: number; bonus: number }) => {
 };
 
 const ZenInfoModalContent = () => (
-  <div className="pb-6 px-2">
-    <div className="space-y-4">
-      <Typography
-        type="body-s"
-        className="text-brown-secondary text-center mb-2"
-      >
-        Заполняйте трекеры каждый день и забирайте награду
-      </Typography>
+  <div className="space-y-4">
+    <Typography type="body-s" className="text-brown-secondary text-center mb-2">
+      Заполняйте трекеры каждый день и забирайте награду
+    </Typography>
 
-      <div className="flex flex-wrap justify-center gap-2.5">
-        {[5, 5, 10, 15, 20, 25, 50].map((bonus, index) => (
-          <div key={index}>{DayBonus({ bonus, index })}</div>
-        ))}
-      </div>
-
-      <Typography
-        type="body-xs"
-        className="text-brown-secondary text-center italic pt-1"
-      >
-        * Серия сбрасывается при пропуске дня
-      </Typography>
+    <div className="flex flex-wrap justify-center gap-2.5">
+      {[5, 5, 10, 15, 20, 25, 50].map((bonus, index) => (
+        <div key={index}>{DayBonus({ bonus, index })}</div>
+      ))}
     </div>
+
+    <Typography
+      type="body-xs"
+      className="text-brown-secondary text-center italic pt-1"
+    >
+      * Серия сбрасывается при пропуске дня
+    </Typography>
   </div>
 );
 
@@ -87,8 +83,17 @@ const Segment = ({
 
 export const ProgressLineZen = ({ goal = 0 }: { goal?: number }) => {
   const segments = Array.from({ length: PROGRESS_SEGMENTS }, (_, i) => i);
-  const { onOpen, Modal } = useModal();
   const isGoalCompleted = goal >= 3;
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
 
   return (
     <div className="flex justify-between items-center">
@@ -102,7 +107,7 @@ export const ProgressLineZen = ({ goal = 0 }: { goal?: number }) => {
           />
         ))}
       </div>
-      <div onClick={onOpen} className="pointer pl-2">
+      <div onClick={openModal} className="pointer pl-2">
         <Icon
           name="Info"
           width={20}
@@ -111,9 +116,9 @@ export const ProgressLineZen = ({ goal = 0 }: { goal?: number }) => {
         />
       </div>
       <Modal
-        title="Зарабатывай Zen"
-        size="sm"
-        body={<div>{ZenInfoModalContent()}</div>}
+        isOpen={isModalOpen}
+        onClose={closeModal}
+        children={<div>{ZenInfoModalContent()}</div>}
       />
     </div>
   );

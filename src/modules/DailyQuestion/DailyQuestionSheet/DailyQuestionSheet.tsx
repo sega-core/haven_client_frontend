@@ -24,7 +24,7 @@ export const DailyQuestionSheet = ({
     try {
       await mutateAsync(values[EDailyQuestionField.ANSWER]);
     } catch (error) {
-      alert(error);
+      console.error(error);
     } finally {
       onClose();
     }

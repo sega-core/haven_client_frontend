@@ -1,12 +1,14 @@
+// DayDetailsModal.tsx
 import { useState, useRef, useEffect } from "react";
 import { format } from "date-fns";
 import { ru } from "date-fns/locale";
-import { MOOD_TAGS_MAP } from "../Mood/Mood.constants";
 import { Typography } from "../../components/Typography";
 import { Chip } from "../../components/Chip";
 import { BlockAnswer } from "../../components/BlockAnswer";
 import { TDailyQuestion, TGratitude, TMood } from "../../api";
+import { MOOD_TAGS_MAP } from "../Mood/Mood.constants";
 import { MOOD_CONFIG } from "./Calendar";
+import { Modal } from "../../components/Modal";
 
 const EmptyState = () => (
   <div className="text-center py-8 text-brown-secondary">
@@ -15,12 +17,7 @@ const EmptyState = () => (
   </div>
 );
 
-export const DayDetailsModal = ({
-  isOpen,
-  onClose,
-  dayData,
-  date,
-}: {
+interface DayDetailsModalProps {
   isOpen: boolean;
   onClose: () => void;
   dayData?: {
@@ -29,15 +26,20 @@ export const DayDetailsModal = ({
     dailyQuestion?: TDailyQuestion;
   };
   date: Date;
-}) => {
+}
+
+export const DayDetailsModal = ({
+  isOpen,
+  onClose,
+  dayData,
+  date,
+}: DayDetailsModalProps) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const touchStartX = useRef<number | null>(null);
 
   useEffect(() => {
     if (!isOpen) setCurrentIndex(0);
   }, [isOpen]);
-
-  if (!isOpen) return null;
 
   const getTagLabel = (tagKey: string) => {
     return MOOD_TAGS_MAP[tagKey]?.label || tagKey;
@@ -136,32 +138,6 @@ export const DayDetailsModal = ({
         </>
       ),
     },
-    /*     {
-      id: "metaphorical",
-      title: "Метафорическая карта",
-      icon: "🃏",
-      content: (
-        <div>
-          <Typography
-            type="body-lg"
-            className="text-brown-primary text-center mb-4"
-          >
-            Какая карта вам выпала?
-          </Typography>
-          {hasMetaphoricalCard ? (
-            <div className="bg-beige-primary/30 rounded-xl p-4">
-              <p className="text-brown-primary leading-relaxed whitespace-pre-wrap">
-                {dayData!.metaphoricalCard}
-              </p>
-            </div>
-          ) : (
-            <p className="text-brown-secondary text-center">
-              Нет выбранной метафорической карты
-            </p>
-          )}
-        </div>
-      ),
-    }, */
   ];
 
   const nextSlide = () => {
@@ -192,17 +168,13 @@ export const DayDetailsModal = ({
   };
 
   return (
-    <div
-      className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4"
-      onClick={onClose}
-    >
+    <Modal isOpen={isOpen} onClose={onClose}>
       <div
-        className="bg-white-primary rounded-2xl max-w-sm w-full overflow-hidden"
-        onClick={(e) => e.stopPropagation()}
         onTouchStart={handleTouchStart}
         onTouchEnd={handleTouchEnd}
+        className="grid gap-3"
       >
-        <div className="flex items-center justify-between p-4">
+        <div className="flex items-center justify-between">
           <h3 className="text-lg font-medium text-brown-primary">
             {format(date, "d MMMM yyyy", { locale: ru })}
           </h3>
@@ -227,16 +199,15 @@ export const DayDetailsModal = ({
           </button>
         </div>
 
-        <div className="text-center pb-2">
-          <Typography className="text-brown-primary" type="body-lg">
-            {slides[currentIndex].title}
-          </Typography>
-        </div>
+        <Typography className="text-brown-primary" type="body-lg">
+          {slides[currentIndex].title}
+        </Typography>
 
-        <div className="min-h-[300px] transition-all duration-300 px-4 pb-4">
+        <div className="min-h-[300px] transition-all duration-300">
           {slides[currentIndex].content}
         </div>
-        <div className="flex justify-center gap-2 pt-4 pb-4">
+
+        <div className="flex justify-center gap-2">
           {slides.map((_, idx) => (
             <button
               key={idx}
@@ -253,6 +224,6 @@ export const DayDetailsModal = ({
           ))}
         </div>
       </div>
-    </div>
+    </Modal>
   );
 };

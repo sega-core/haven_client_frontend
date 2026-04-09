@@ -4,25 +4,34 @@ export const CircleCheckbox = ({
   checked,
   onChange,
   color,
+  isCanCompletedToday
 }: {
   checked: boolean;
   onChange: () => void;
   color: string;
+  isCanCompletedToday: boolean;
 }) => {
-  const disabled = checked;
+  const isDisabled = checked || !isCanCompletedToday;
+
+  const handleClick = () => {
+    console.log('asd')
+    if (!isDisabled) {
+      onChange();
+    }
+  };
 
   return (
     <button
       type="button"
-      onClick={() => !disabled && onChange()}
-      disabled={disabled}
+      onClick={handleClick}
+      disabled={isDisabled}
       className={`
         relative flex justify-center items-center
         w-6 h-6 p-1
         rounded-full
         border-1.5
         transition-all duration-300 ease-in-out
-        ${disabled 
+        ${isDisabled 
           ? "opacity-50 cursor-not-allowed" 
           : "hover:ring-2 active:scale-90 cursor-pointer"
         }
@@ -34,8 +43,8 @@ export const CircleCheckbox = ({
         borderStyle: 'solid',
         ...(checked ? { border: 'none' } : {}),
       }}
-      aria-disabled={disabled}
-    >
+/*       aria-disabled={isDisabled}
+ */    >
       {checked && (
         <span 
           className="absolute w-full h-full rounded-full animate-pulse"
@@ -46,11 +55,25 @@ export const CircleCheckbox = ({
         />
       )}
       
-      {checked && disabled && (
+      {checked && isDisabled && (
         <span 
           className="absolute w-full h-full rounded-full"
           style={{ backgroundColor: 'rgba(0,0,0,0.2)' }}
         />
+      )}
+
+      {!checked && !isCanCompletedToday && (
+        <svg
+          className="w-3 h-3"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          style={{ color: getColorWithOpacity(color, 0.5) }}
+        >
+          <rect x="5" y="11" width="14" height="11" rx="2" ry="2"></rect>
+          <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+        </svg>
       )}
       
       <svg
@@ -58,6 +81,7 @@ export const CircleCheckbox = ({
           w-3 h-3
           transition-all duration-300 ease-in-out
           ${checked ? "scale-100 opacity-100" : "scale-0 opacity-0"}
+          absolute
         `}
         style={{
           color: checked ? 'white' : color,

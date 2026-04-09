@@ -23,7 +23,7 @@ const phases = [
   {
     name: "exhale",
     duration: 4,
-    label: "Выхайте пока не завершится круг",
+    label: "Выдыхайте пока не завершится круг",
     fillFrom: 100,
     fillTo: 0,
   },

@@ -81,7 +81,7 @@ export const DatePicker = ({
           justify-center 
           items-start 
           gap-4
-          rounded-[16px]
+          rounded-2xl
           transition-all
           duration-200
           relative

@@ -12,8 +12,8 @@ export const Main = () => {
 
   return (
     <div className="grid gap-4 w-full">
-      <ProgressLineZen goal={data?.progressPoint} />
       <Card />
+      <ProgressLineZen goal={data?.progressPoint} />
       <TargetCards />
       <SkeletonMetric isLoading={isLoading}>
         <MoodCard data={data?.mood} />

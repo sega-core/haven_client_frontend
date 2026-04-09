@@ -32,14 +32,16 @@ export const Textarea = ({
   fullWidth = true,
   rows = 4,
   maxLength,
-  showCount = false,
+  showCount = true,
   resize = "vertical",
 }: HavenTextareaProps) => {
   const showError = meta.touched && meta.error;
   const errorText = meta.error || errorMessage;
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
-  // Определяем класс для resize
+  const currentLength = input.value?.length || 0;
+  const remainingChars = currentLength;
+
   const resizeClass = {
     none: "resize-none",
     vertical: "resize-y",
@@ -83,7 +85,7 @@ export const Textarea = ({
             justify-center 
             items-start 
             gap-2
-            rounded-[16px]
+            rounded-2xl
             transition-all
             duration-200
             relative
@@ -122,33 +124,38 @@ export const Textarea = ({
         />
       </div>
 
-      {/* Счетчик символов и ошибка */}
       <div className="flex justify-between items-center px-1">
-        {showError && (
-          <p
-            className="
+        <div className="flex-1">
+          {showError && (
+            <p
+              className="
                 text-sm 
                 text-red-500 
                 animate-fadeIn
               "
-          >
-            {errorText}
-          </p>
-        )}
+            >
+              {errorText}
+            </p>
+          )}
+        </div>
+
         {showCount && maxLength && (
-          <span
-            className={`
-              text-xs 
-              ml-auto
-              ${
-                (input.value?.length || 0) >= maxLength
-                  ? "text-red-500"
-                  : "text-[rgba(26,26,26,0.4)]"
-              }
-            `}
-          >
-            {input.value?.length || 0}/{maxLength}
-          </span>
+          <div className="flex flex-col items-end">
+            <span
+              className={`
+                text-xs 
+                font-mono
+                whitespace-nowrap
+                ${
+                  remainingChars > maxLength - 10
+                    ? "text-orange-500"
+                    : "text-[rgba(26,26,26,0.4)]"
+                }
+              `}
+            >
+              {remainingChars} / {maxLength}
+            </span>
+          </div>
         )}
       </div>
     </div>

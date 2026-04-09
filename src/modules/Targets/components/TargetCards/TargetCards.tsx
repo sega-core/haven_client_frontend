@@ -11,8 +11,7 @@ export const TargetCards= () => {
   const renderCircle = useCallback(
     () =>
       data
-        ?.filter((item) => item.isCanCompletedToday)
-        .map((item, index) => (
+        ?.map((item, index) => (
           <Circle {...item} key={index} onChange={() => mutate(item.id)} />
         )),
     [data],

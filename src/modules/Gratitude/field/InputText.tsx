@@ -10,5 +10,5 @@ export const InputText = () => {
     },
   });
 
-  return <Textarea input={input} meta={meta} />;
+  return <Textarea input={input} maxLength={1000} meta={meta} />;
 };

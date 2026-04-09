@@ -8,10 +8,10 @@ import { DayPanel } from "../DayPanel";
 import { ColorPanel } from "../ColorPanel";
 import { useCreateTarget } from "../../../../hooks";
 import { ETargetField, TTargetForm } from "../../form";
-import { Switch } from "../../../../components/Switch";
-
+/* import { Switch } from "../../../../components/Switch";
+ */
 export const TargetSheet = ({ onClose }: { onClose: () => void }) => {
-  const [isToggle, setIsToggle] = useState(false);
+  const [isToggle] = useState(false);
 
   const { mutateAsync, isPending } = useCreateTarget();
 
@@ -32,10 +32,10 @@ export const TargetSheet = ({ onClose }: { onClose: () => void }) => {
         endDate,
         weekdays,
         notifyTime,
-        color
+        color,
       });
     } catch (error) {
-      alert(error);
+      console.error(error);
     } finally {
       onClose();
     }
@@ -57,12 +57,12 @@ export const TargetSheet = ({ onClose }: { onClose: () => void }) => {
           Дни цели
         </Typography>
         <DayPanel />
-        <div className="flex gap-2.5">
-          <Switch onChange={() => setIsToggle((prev) => !prev)} size="lg"/>
+        {/* <div className="flex gap-2.5">
+          <Switch onChange={() => setIsToggle((prev) => !prev)} size="lg" />
           <Typography type="heading-xs" className="text-brown-primary">
             Установить напоминание
           </Typography>
-        </div>
+        </div> */}
         {isToggle && <InputTime />}
         <Button
           radius="full"

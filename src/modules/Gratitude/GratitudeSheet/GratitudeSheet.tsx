@@ -21,7 +21,7 @@ export const GratitudeSheet = ({
     try {
       await mutateAsync(values[EGratitudeField.COMMENT]);
     } catch (error) {
-      alert(error);
+      console.error(error);
     } finally {
       onClose();
     }

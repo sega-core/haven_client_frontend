@@ -22,6 +22,7 @@ export const havenToast = {
       hideIcon: true,
       classNames: {
         base: cn(
+          "mt-16",
           "py-4 px-5 rounded-[16px]",
           "bg-cold-green-primary",
           "border border-[var(--background-color-2-primary)] ",

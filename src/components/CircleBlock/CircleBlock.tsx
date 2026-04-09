@@ -18,6 +18,7 @@ export const Circle = (props: Props) => {
     title,
     onChange,
     isCompletedToday,
+    isCanCompletedToday,
     completionRate,
     color,
   } = props;
@@ -51,6 +52,7 @@ export const Circle = (props: Props) => {
           onChange={onChange}
           checked={isCompletedToday}
           color={color}
+          isCanCompletedToday={isCanCompletedToday}
         />
       </div>
 
