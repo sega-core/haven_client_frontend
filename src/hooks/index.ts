@@ -4,7 +4,6 @@ export * from "./useMood";
 export * from "./useProgress";
 export * from "./useTarget";
 export * from "./useCoin";
-export * from "./useModal";
 export * from "./usePractice";
 export * from "./useTelegramApi";
 export * from "./useAuth";
