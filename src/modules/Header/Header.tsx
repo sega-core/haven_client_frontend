@@ -1,4 +1,3 @@
-/* import { Button } from "@heroui/button"; */
 import { Avatar } from "../../components/Avatar";
 import { Typography } from "../../components/Typography";
 import { useLaunchParamsTelegram } from "../../hooks";
@@ -6,6 +5,7 @@ import { CoinBalance } from "./components";
 import { useRouteTitle } from "./hooks/useRouteTitle";
 import { Icon } from "../../components/Icon";
 import { useNavigate } from "react-router";
+import { ROUTES } from "../../containers";
 
 export const Header = () => {
   const { title, isVisibleHeader, isVisibleBreadcrumb } = useRouteTitle();
@@ -16,7 +16,10 @@ export const Header = () => {
 
   if (isVisibleBreadcrumb) {
     return (
-      <div className="flex justify-between w-full min-h-[42px]" onClick={() => navigate(-1)}>
+      <div
+        className="flex justify-between w-full min-h-[42px]"
+        onClick={() => navigate(-1)}
+      >
         <div className="flex items-center gap-2">
           <Icon name="ChevronLeft" width={24} height={24} />
           <Typography
@@ -44,7 +47,7 @@ export const Header = () => {
       </Typography>
       <div className="flex gap-4">
         <CoinBalance />
-        <Avatar image={photoUrl} />
+        <Avatar image={photoUrl} onClick={() => navigate(ROUTES.PROFILE)} />
       </div>
     </div>
   );

@@ -12,4 +12,6 @@ export const HEADER_TITLE = {
   [ROUTES.PRIVACY]: "Политика конфиденциальности",
   [ROUTES.TERMS]: "Оферта",
   [ROUTES.FAQ]: "Часто задаваемые вопросы",
+  [ROUTES.META_CARD]: "Метафорическая карта",
+  [ROUTES.AUDIO_HELP]: "Слова поддержки",
 };

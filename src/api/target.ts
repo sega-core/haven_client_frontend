@@ -11,7 +11,8 @@ export type TTarget = {
   isCompletedToday: boolean;
   isCanCompletedToday: boolean;
   color: string;
-  status: "active" | "completed" | "overdue" | "notStarted";
+  status: "active" | "completed" | "overdue";
+  isDone: boolean;
 };
 
 export type TTargetCreate = {

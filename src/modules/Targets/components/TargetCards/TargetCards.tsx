@@ -10,7 +10,7 @@ export const TargetCards= () => {
 
   const renderCircle = useCallback(
     () =>
-      data
+      data?.filter((item)=>item.status === 'active')
         ?.map((item, index) => (
           <Circle {...item} key={index} onChange={() => mutate(item.id)} />
         )),

@@ -16,6 +16,8 @@ export const AppRoutes = () => {
   const Privacy = lazy(() => import("../../pages/Privacy"));
   const Archive = lazy(() => import("../../pages/Archive"));
   const Breath = lazy(() => import("../../pages/Breath"));
+  const MetaCard = lazy(() => import("../../pages/MetaCard"));
+  const AudioHelp = lazy(() => import("../../pages/AudioHelp"));
 
   return (
     <Suspense fallback={<></>}>
@@ -27,6 +29,8 @@ export const AppRoutes = () => {
         <Route path={ROUTES.PRACTICE} element={<Practice />} />
         <Route path={ROUTES.ARCHIVE} element={<Archive />} />
         <Route path={ROUTES.BREATH} element={<Breath />} />
+        <Route path={ROUTES.META_CARD} element={<MetaCard />} />
+        <Route path={ROUTES.AUDIO_HELP} element={<AudioHelp />} />
         <Route path={ROUTES.ERROR} element={<Error />} />
         <Route path={ROUTES.PROFILE} element={<Profile />} />
         <Route path={ROUTES.SUBSCRIPTION} element={<Subscription />} />

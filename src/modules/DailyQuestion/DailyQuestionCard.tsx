@@ -20,7 +20,7 @@ export const DailyQuestionCard = ({ data }: Props) => {
       title: "Вопрос дня",
       content: <DailyQuestionSheet onClose={closeDrawer} question={data} />,
     });
-  }, [openDrawer, closeDrawer]);
+  }, [openDrawer, closeDrawer, data]);
 
   return (
     <Block onClick={handleOpenDailyQuestionSheet} className="shadow-lg">

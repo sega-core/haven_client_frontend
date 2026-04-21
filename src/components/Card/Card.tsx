@@ -21,14 +21,14 @@ const cards = [
   {
     id: "Goal" as const,
     name: "Карта",
-    route: ROUTES.BREATH,
+    route: ROUTES.META_CARD,
     color: "bg-brown-secondary",
     emoji: "🪬",
   },
   {
     id: "Goal" as const,
     name: "Дзен",
-    route: ROUTES.BREATH,
+    route: ROUTES.AUDIO_HELP,
     color: "bg-mustard-secondary",
     emoji: "🧘",
   },

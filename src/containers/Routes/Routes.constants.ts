@@ -12,4 +12,6 @@ export const ROUTES = {
   PRIVACY: "/profile/privacy",
   ARCHIVE: "/archive",
   BREATH: "/breath",
+  META_CARD: "/meta-card",
+  AUDIO_HELP: "/audio-help",
 } as const;

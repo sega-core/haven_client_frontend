@@ -20,7 +20,7 @@ export const GratitudeCard = ({ data }: Props) => {
       title: "Трекер благодарности",
       content: <GratitudeSheet onClose={closeDrawer} gratitudes={data || []} />,
     });
-  }, [openDrawer, closeDrawer]);
+  }, [openDrawer, closeDrawer, data]);
 
   const renderChips = useCallback(
     () =>

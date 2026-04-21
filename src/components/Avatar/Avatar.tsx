@@ -1,27 +1,21 @@
-import { useNavigate } from "react-router";
 import { useState } from "react";
 import { Icon } from "../Icon";
-import { ROUTES } from "../../containers";
 
 type TAvatar = {
   image?: string | null;
   size?: number;
   disableLoading?: boolean;
+  onClick?: () => void;
 };
 
 export const Avatar = ({
   image,
   size = 42,
   disableLoading = false,
+  onClick,
 }: TAvatar) => {
   const [imageError, setImageError] = useState(false);
   const [isLoading, setIsLoading] = useState(!disableLoading);
-
-  const navigate = useNavigate();
-
-  const goToProfile = () => {
-    navigate(ROUTES.PROFILE);
-  };
 
   const handleImageError = () => {
     setImageError(true);
@@ -38,7 +32,7 @@ export const Avatar = ({
     <div
       className="flex items-center justify-center rounded-full bg-white-tertiary overflow-hidden select-none cursor-pointer relative"
       style={{ width: size, height: size }}
-      onClick={goToProfile}
+      onClick={() => onClick?.()}
     >
       {!showIcon && (
         <>

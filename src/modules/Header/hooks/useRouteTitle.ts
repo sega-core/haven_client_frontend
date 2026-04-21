@@ -16,11 +16,17 @@ export const useRouteTitle = () => {
     ROUTES.PROFILE,
     ROUTES.TARGETS,
     ROUTES.BREATH,
+    ROUTES.META_CARD,
+    ROUTES.AUDIO_HELP,
   ].some((route) => route === pathname);
 
-  const isVisibleBreadcrumb = [ROUTES.PROFILE, ROUTES.TARGETS, ROUTES.BREATH].some(
-    (route) => pathname.includes(route),
-  );
+  const isVisibleBreadcrumb = [
+    ROUTES.PROFILE,
+    ROUTES.TARGETS,
+    ROUTES.BREATH,
+    ROUTES.META_CARD,
+    ROUTES.AUDIO_HELP,
+  ].some((route) => pathname.includes(route));
 
   return { title, isVisibleHeader, isVisibleBreadcrumb };
 };

@@ -4,6 +4,7 @@ import { useLaunchParamsTelegram } from "../../hooks";
 import { useNavigate } from "react-router-dom";
 import { version } from "../../../package.json";
 import { menuSections, TProfileSection } from "./Profile.constants";
+import { ROUTES } from "../../containers";
 
 export const Profile = () => {
   const navigate = useNavigate();
@@ -23,7 +24,11 @@ export const Profile = () => {
     <div>
       <div className="p-2 mb-2">
         <div className="flex flex-col items-center gap-4">
-          <Avatar image={photoUrl} size={90} />
+          <Avatar
+            image={photoUrl}
+            size={90}
+            onClick={() => navigate(ROUTES.PROFILE)}
+          />
           <div className="text-center">
             <Typography type="heading-lg" className="text-brown-primary mb-1">
               {firstName}
@@ -53,7 +58,8 @@ export const Profile = () => {
                 <button
                   key={item.id}
                   onClick={() => handleMenuItemClick(item)}
-                  className="w-full flex items-center justify-between px-4 py-4">
+                  className="w-full flex items-center justify-between px-4 py-4"
+                >
                   <div className="flex items-center gap-3">
                     {item.icon && (
                       <span className="text-xl w-6 text-center">
