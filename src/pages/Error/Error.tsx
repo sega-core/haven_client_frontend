@@ -7,8 +7,10 @@ export const ErrorPage = () => {
   const error = location?.state?.error;
 
   return (
-    <div className="grid gap-4 w-full">
-      <ErrorComponent error={error} />
+    <div className="fixed inset-0 z-50 flex items-center justify-center backdrop-blur-sm bg-black/50">
+      <div className="max-w-lg w-full">
+        <ErrorComponent error={error} />
+      </div>
     </div>
   );
 };

@@ -9,6 +9,7 @@ export type TPractice = {
   priceZen: number;
   isPurchased: boolean;
   isActive: boolean;
+  imgUrl?: string;
 };
 
 export type TPraciteBundle = {
@@ -22,6 +23,7 @@ export type TPraciteBundle = {
   priceRub: number;
   isActive: boolean;
   tags: string[];
+  imgUrl?: string;
   practiceBundleItems: {
     practice: TPractice;
     practiceId: number;
@@ -37,6 +39,8 @@ export const getPracticeBundles = async () => {
   return (await axiosClient.get<TPraciteBundle[]>(`/practice-bundles`)).data;
 };
 
-export const getPracticeInstructions = async (pratcticeId:number) => {
-  return (await axiosClient.get<{instructions:string}>(`/practice/${pratcticeId}`)).data;
+export const getPracticeInstructions = async (pratcticeId: number) => {
+  return (
+    await axiosClient.get<{ instructions: string }>(`/practice/${pratcticeId}`)
+  ).data;
 };

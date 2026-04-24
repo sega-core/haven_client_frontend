@@ -27,8 +27,8 @@ export const ErrorComponent = ({
     }
   };
 
-/*   const navigate = useNavigate();
- */
+  /* const navigate = useNavigate(); */
+
   return (
     <div className="flex items-center justify-center min-h-[60vh] px-4">
       <div className="w-full max-w-md text-center bg-warning-50 shadow-lg rounded-2xl p-8">
@@ -48,8 +48,8 @@ export const ErrorComponent = ({
         <Button
           color="danger"
           variant="solid"
-/*           onPress={() => navigate("/login")}
- */          className="w-full"
+          /* onPress={() => navigate("/login")} */
+          className="w-full"
         >
           Попробовать снова
         </Button>

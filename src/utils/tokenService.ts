@@ -1,42 +1,51 @@
-const JWT_TOKEN_KEY_NAME = "yourhaven";
+const JWT_TOKEN_KEY_NAME = "userToken";
 
 class TokenService {
-  private token: string | null = null;
+  private accessToken: string | null = null;
+  private termsAccepted: string | null = null;
 
-  // Инициализация при создании сервиса
   constructor() {
     this.loadToken();
   }
 
   private loadToken(): void {
-    if (typeof window !== 'undefined') {
-      this.token = localStorage.getItem(JWT_TOKEN_KEY_NAME);
+    if (typeof window !== "undefined") {
+      this.accessToken = localStorage.getItem(JWT_TOKEN_KEY_NAME);
     }
   }
 
-  getJwtToken(): string | null {
-    // Если токен еще не загружен, пробуем загрузить
-    if (this.token === null && typeof window !== 'undefined') {
+  getJwtToken() {
+    if (this.accessToken === null && typeof window !== "undefined") {
       this.loadToken();
     }
-    return this.token;
+    return {
+      accessToken: this.accessToken,
+      termsAccepted: this.termsAccepted,
+    };
   }
 
-  setJwtToken(token: string): void {
-    this.token = token;
-    if (typeof window !== 'undefined') {
-      localStorage.setItem(JWT_TOKEN_KEY_NAME, token);
+  setJwtToken({
+    accessToken,
+    termsAccepted,
+  }: {
+    accessToken: string;
+    termsAccepted: string;
+  }): void {
+    this.accessToken = accessToken;
+    this.termsAccepted = termsAccepted;
+    if (typeof window !== "undefined") {
+      localStorage.setItem(JWT_TOKEN_KEY_NAME, accessToken);
     }
   }
 
   removeJwtToken(): void {
-    this.token = null;
-    if (typeof window !== 'undefined') {
+    this.accessToken = null;
+    this.termsAccepted = null;
+    if (typeof window !== "undefined") {
       localStorage.removeItem(JWT_TOKEN_KEY_NAME);
     }
   }
 
-  // Метод для принудительной перезагрузки токена
   refreshToken(): void {
     this.loadToken();
   }

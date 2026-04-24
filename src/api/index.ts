@@ -5,3 +5,5 @@ export * from "./progress";
 export * from "./target";
 export * from "./coin";
 export * from "./practice";
+export * from "./auth";
+export * from "./registration";

@@ -1,19 +1,24 @@
 import { Suspense, lazy } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
 import { ROUTES } from "./Routes.constants";
+import { tokenService } from "../../utils";
 
 export const AppRoutes = () => {
+  // Public routes
   const Login = lazy(() => import("../../pages/Login"));
+  const Registration = lazy(() => import("../../pages/Registration"));
+  const Terms = lazy(() => import("../../pages/Terms"));
+  const Privacy = lazy(() => import("../../pages/Privacy"));
+  const Error = lazy(() => import("../../pages/Error"));
+
+  // Private routes
   const Main = lazy(() => import("../../pages/Main"));
   const Targets = lazy(() => import("../../pages/Targets"));
   const Comunity = lazy(() => import("../../pages/Comunity"));
   const Practice = lazy(() => import("../../pages/Practice"));
-  const Error = lazy(() => import("../../pages/Error"));
   const Profile = lazy(() => import("../../pages/Profile"));
   const Subscription = lazy(() => import("../../pages/Subscription"));
   const Faq = lazy(() => import("../../pages/Faq"));
-  const Terms = lazy(() => import("../../pages/Terms"));
-  const Privacy = lazy(() => import("../../pages/Privacy"));
   const Archive = lazy(() => import("../../pages/Archive"));
   const Breath = lazy(() => import("../../pages/Breath"));
   const MetaCard = lazy(() => import("../../pages/MetaCard"));
@@ -22,23 +27,90 @@ export const AppRoutes = () => {
   return (
     <Suspense fallback={<></>}>
       <Routes>
+        {/* Public routes - доступны без авторизации */}
         <Route path={ROUTES.LOGIN} element={<Login />} />
-        <Route path={ROUTES.MAIN} element={<Main />} />
-        <Route path={ROUTES.TARGETS} element={<Targets />} />
-        <Route path={ROUTES.COMUNITY} element={<Comunity />} />
-        <Route path={ROUTES.PRACTICE} element={<Practice />} />
-        <Route path={ROUTES.ARCHIVE} element={<Archive />} />
-        <Route path={ROUTES.BREATH} element={<Breath />} />
-        <Route path={ROUTES.META_CARD} element={<MetaCard />} />
-        <Route path={ROUTES.AUDIO_HELP} element={<AudioHelp />} />
-        <Route path={ROUTES.ERROR} element={<Error />} />
-        <Route path={ROUTES.PROFILE} element={<Profile />} />
-        <Route path={ROUTES.SUBSCRIPTION} element={<Subscription />} />
-        <Route path={ROUTES.FAQ} element={<Faq />} />
         <Route path={ROUTES.TERMS} element={<Terms />} />
         <Route path={ROUTES.PRIVACY} element={<Privacy />} />
-        <Route path="*" element={<Navigate replace to={ROUTES.LOGIN} />} />
+        <Route path={ROUTES.ERROR} element={<Error />} />
+        
+        {/* Semi-public - требует авторизации, но не принятия оферты */}
+        <Route path={ROUTES.REGISTRATION} element={<Registration />} />
+        
+        {/* Private routes - требуют авторизацию и принятие оферты */}
+        <Route path={ROUTES.MAIN} element={
+          <PrivateRoute>
+            <Main />
+          </PrivateRoute>
+        } />
+        <Route path={ROUTES.TARGETS} element={
+          <PrivateRoute>
+            <Targets />
+          </PrivateRoute>
+        } />
+        <Route path={ROUTES.COMUNITY} element={
+          <PrivateRoute>
+            <Comunity />
+          </PrivateRoute>
+        } />
+        <Route path={ROUTES.PRACTICE} element={
+          <PrivateRoute>
+            <Practice />
+          </PrivateRoute>
+        } />
+        <Route path={ROUTES.ARCHIVE} element={
+          <PrivateRoute>
+            <Archive />
+          </PrivateRoute>
+        } />
+        <Route path={ROUTES.BREATH} element={
+          <PrivateRoute>
+            <Breath />
+          </PrivateRoute>
+        } />
+        <Route path={ROUTES.META_CARD} element={
+          <PrivateRoute>
+            <MetaCard />
+          </PrivateRoute>
+        } />
+        <Route path={ROUTES.AUDIO_HELP} element={
+          <PrivateRoute>
+            <AudioHelp />
+          </PrivateRoute>
+        } />
+        <Route path={ROUTES.PROFILE} element={
+          <PrivateRoute>
+            <Profile />
+          </PrivateRoute>
+        } />
+        <Route path={ROUTES.SUBSCRIPTION} element={
+          <PrivateRoute>
+            <Subscription />
+          </PrivateRoute>
+        } />
+        <Route path={ROUTES.FAQ} element={
+          <PrivateRoute>
+            <Faq />
+          </PrivateRoute>
+        } />
+        
+        {/* Default redirect */}
+        <Route path="/" element={<Navigate to={ROUTES.MAIN} replace />} />
+        <Route path="*" element={<Navigate to={ROUTES.ERROR} replace />} />
       </Routes>
     </Suspense>
   );
+};
+
+interface PrivateRouteProps {
+  children: React.ReactNode;
+}
+
+export const PrivateRoute = ({ children }: PrivateRouteProps) => {
+  const { accessToken } = tokenService.getJwtToken();
+
+  if (!accessToken) {
+    return <Navigate to={ROUTES.LOGIN} replace />;
+  }
+  
+  return <>{children}</>;
 };

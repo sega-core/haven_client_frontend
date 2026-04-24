@@ -14,7 +14,6 @@ export const CircleCheckbox = ({
   const isDisabled = checked || !isCanCompletedToday;
 
   const handleClick = () => {
-    console.log('asd')
     if (!isDisabled) {
       onChange();
     }

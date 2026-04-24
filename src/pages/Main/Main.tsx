@@ -6,7 +6,6 @@ import { DailyQuestionCard } from "../../modules/DailyQuestion";
 import { useGetProgress } from "../../hooks";
 import { SkeletonMetric } from "../../components/Skeleton";
 import { Card } from "../../components/Card";
-import { AudioPlayer } from "../../modules/AudioPlayer/AudioPlayer";
 
 export const Main = () => {
   const { data, isLoading } = useGetProgress();
@@ -21,12 +20,6 @@ export const Main = () => {
         <GratitudeCard data={data?.gratitude.listOfGratitude} />
         <DailyQuestionCard data={data?.dailyQuestion} />
       </SkeletonMetric>
-
-      <div style={{ paddingBottom: '100px' }}>
-          <AudioPlayer />
-
-    </div>
-    
     </div>
   );
 };

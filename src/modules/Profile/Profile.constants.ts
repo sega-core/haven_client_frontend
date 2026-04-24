@@ -57,7 +57,7 @@ export const menuSections: TProfileSection[] = [
     items: [
       {
         id: "terms",
-        label: "Оферта",
+        label: "Пользовательское соглашение",
         icon: "📋",
         route: ROUTES.TERMS,
       },

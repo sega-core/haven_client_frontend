@@ -10,7 +10,7 @@ export const HEADER_TITLE = {
   [ROUTES.BREATH]: "Дыхание",
   [ROUTES.SUBSCRIPTION]: "Управление подпиской",
   [ROUTES.PRIVACY]: "Политика конфиденциальности",
-  [ROUTES.TERMS]: "Оферта",
+  [ROUTES.TERMS]: "Пользовательское соглашение",
   [ROUTES.FAQ]: "Часто задаваемые вопросы",
   [ROUTES.META_CARD]: "Метафорическая карта",
   [ROUTES.AUDIO_HELP]: "Слова поддержки",

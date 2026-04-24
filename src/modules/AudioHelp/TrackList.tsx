@@ -7,7 +7,7 @@ export const TrackList = () => {
   const [trackIndex, setTrackIndex] = useState<number | null>(null);
   const [trackProgress, setTrackProgress] = useState<number>(0);
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
-  const [activeTrackId, setActiveTrackId] = useState<number | null>(null); // Добавляем активный трек
+  const [activeTrackId, setActiveTrackId] = useState<number | null>(null);
 
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);

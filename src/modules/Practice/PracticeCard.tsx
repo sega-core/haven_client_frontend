@@ -44,6 +44,7 @@ export const PracticeCard = ({ item, hidePurchasedChip, isNasted }: Props) => {
             price={priceZen}
             currency="zen"
             handlePay={handlePay}
+            isDescriptionNode={false}
           />
         </div>
       ),

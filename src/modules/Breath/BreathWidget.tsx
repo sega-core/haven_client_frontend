@@ -62,6 +62,7 @@ export const BreathWidget = () => {
       (window.AudioContext || (window as any).webkitAudioContext)();
   }, []);
 
+  // Мягкий тик - звук колокольчика
   const playTick = useCallback(() => {
     if (!audioCtxRef.current) {
       initAudio();
@@ -71,36 +72,31 @@ export const BreathWidget = () => {
 
     const now = ctx.currentTime;
 
-    const osc1 = ctx.createOscillator();
-    const osc2 = ctx.createOscillator();
+    const osc = ctx.createOscillator();
     const gain = ctx.createGain();
     const filter = ctx.createBiquadFilter();
 
-    osc1.connect(filter);
-    osc2.connect(filter);
+    osc.connect(filter);
     filter.connect(gain);
     gain.connect(ctx.destination);
 
     filter.type = "lowpass";
-    filter.frequency.value = 2000;
-    filter.Q.value = 0.5;
+    filter.frequency.value = 800;
+    filter.Q.value = 1;
 
-    osc1.type = "sine";
-    osc1.frequency.value = 523.25; // C5 - приятный высокий тон
+    osc.type = "sine";
+    osc.frequency.value = 880; // A5 - мягкий высокий тон
 
-    osc2.type = "sine";
-    osc2.frequency.value = 783.99; // G5
-
+    // Очень плавная огибающая
     gain.gain.setValueAtTime(0, now);
-    gain.gain.linearRampToValueAtTime(0.08, now + 0.01);
-    gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.4);
+    gain.gain.linearRampToValueAtTime(0.03, now + 0.02);
+    gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.5);
 
-    osc1.start();
-    osc2.start();
-    osc1.stop(now + 0.4);
-    osc2.stop(now + 0.4);
+    osc.start();
+    osc.stop(now + 0.5);
   }, [initAudio]);
 
+  // Мягкий звук смены фазы - аккорд на пианино
   const playPhaseChange = useCallback(() => {
     if (!audioCtxRef.current) {
       initAudio();
@@ -110,43 +106,37 @@ export const BreathWidget = () => {
 
     const now = ctx.currentTime;
 
-    const osc1 = ctx.createOscillator();
-    const osc2 = ctx.createOscillator();
-    const osc3 = ctx.createOscillator();
-    const gain = ctx.createGain();
-    const filter = ctx.createBiquadFilter();
+    const notes = [261.63, 329.63, 392.0]; // C4, E4, G4
+    const gains: GainNode[] = [];
 
-    osc1.connect(filter);
-    osc2.connect(filter);
-    osc3.connect(filter);
-    filter.connect(gain);
-    gain.connect(ctx.destination);
+    notes.forEach((freq, i) => {
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      const filter = ctx.createBiquadFilter();
 
-    filter.type = "lowpass";
-    filter.frequency.value = 1500;
-    filter.Q.value = 1;
+      osc.connect(filter);
+      filter.connect(gain);
+      gain.connect(ctx.destination);
 
-    osc1.type = "sine";
-    osc1.frequency.value = 261.63; // C4
+      filter.type = "lowpass";
+      filter.frequency.value = 1200;
+      filter.Q.value = 1.5;
 
-    osc2.type = "sine";
-    osc2.frequency.value = 329.63; // E4
+      osc.type = "sine";
+      osc.frequency.value = freq;
 
-    osc3.type = "sine";
-    osc3.frequency.value = 392.0; // G4
+      // Мягкая атака и затухание
+      gain.gain.setValueAtTime(0, now);
+      gain.gain.linearRampToValueAtTime(0.05, now + 0.05 + i * 0.05);
+      gain.gain.exponentialRampToValueAtTime(0.0001, now + 1.2);
 
-    gain.gain.setValueAtTime(0, now);
-    gain.gain.linearRampToValueAtTime(0.1, now + 0.02);
-    gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.8);
-
-    osc1.start();
-    osc2.start();
-    osc3.start();
-    osc1.stop(now + 0.8);
-    osc2.stop(now + 0.8);
-    osc3.stop(now + 0.8);
+      gains.push(gain);
+      osc.start();
+      osc.stop(now + 1.2);
+    });
   }, [initAudio]);
 
+  // Мягкий звук завершения - звук поющей чаши
   const playCompletionSound = useCallback(() => {
     if (!audioCtxRef.current) {
       initAudio();
@@ -154,7 +144,12 @@ export const BreathWidget = () => {
     const ctx = audioCtxRef.current;
     if (!ctx || ctx.state !== "running") return;
 
-    const playBowl = (startTime: number, pitch: number) => {
+    const now = ctx.currentTime;
+
+    // Создаем сложный звук для имитации поющей чаши
+    const frequencies = [130.81, 196.0, 261.63, 329.63];
+    
+    frequencies.forEach((freq, i) => {
       const osc1 = ctx.createOscillator();
       const osc2 = ctx.createOscillator();
       const gain = ctx.createGain();
@@ -166,28 +161,26 @@ export const BreathWidget = () => {
       gain.connect(ctx.destination);
 
       filter.type = "lowpass";
-      filter.frequency.value = 1200;
+      filter.frequency.value = 1000;
       filter.Q.value = 2;
 
       osc1.type = "sine";
-      osc1.frequency.value = pitch;
+      osc1.frequency.value = freq;
 
       osc2.type = "sine";
-      osc2.frequency.value = pitch * 1.5;
+      osc2.frequency.value = freq * 2.01; // Обертон
 
+      const startTime = now + i * 0.3;
+      
       gain.gain.setValueAtTime(0, startTime);
-      gain.gain.linearRampToValueAtTime(0.12, startTime + 0.05);
-      gain.gain.exponentialRampToValueAtTime(0.0001, startTime + 2);
+      gain.gain.linearRampToValueAtTime(0.08, startTime + 0.1);
+      gain.gain.exponentialRampToValueAtTime(0.0001, startTime + 2.5);
 
       osc1.start(startTime);
       osc2.start(startTime);
-      osc1.stop(startTime + 2);
-      osc2.stop(startTime + 2);
-    };
-
-    playBowl(ctx.currentTime, 196.0); // G3
-    playBowl(ctx.currentTime + 0.8, 261.63); // C4
-    playBowl(ctx.currentTime + 1.6, 329.63); // E4
+      osc1.stop(startTime + 2.5);
+      osc2.stop(startTime + 2.5);
+    });
   }, [initAudio]);
 
   const enableAudio = useCallback(() => {

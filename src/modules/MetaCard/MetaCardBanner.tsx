@@ -1,9 +1,8 @@
 import { useCallback, useState } from "react";
 import { useDrawerContext } from "../../components/Drawer";
-import { MetaCardSheet } from "./MetaCardSheet";
 
 export const MetaCardBanner = () => {
-  const { openDrawer, closeDrawer } = useDrawerContext();
+  const { openDrawer } = useDrawerContext();
   const [isPressed, setIsPressed] = useState(false);
 
   const handleOpen = useCallback(() => {
@@ -12,7 +11,7 @@ export const MetaCardBanner = () => {
     setTimeout(() => {
       openDrawer({
         title: "Ваша карта",
-        content: <MetaCardSheet onClose={closeDrawer}/>,
+        content: <div>1</div>,
       });
       setIsPressed(false);
     }, 180);

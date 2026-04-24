@@ -5,6 +5,7 @@ export const ROUTES = {
   PRACTICE: "/practice",
   ERROR: "/error",
   LOGIN: "/login",
+  REGISTRATION: "/registration",
   PROFILE: "/profile",
   SUBSCRIPTION: "/profile/subscription",
   FAQ: "/profile/faq",

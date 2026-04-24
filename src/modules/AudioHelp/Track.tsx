@@ -1,34 +1,51 @@
 import { Block } from "../../components/Block";
 import { Icon } from "../../components/Icon";
 import { Typography } from "../../components/Typography";
+import { cn } from "../../utils";
+import { useState, useEffect } from "react";
 
 export type TTrack = {
   id: number;
+  index: number;
   title: string;
   artist: string;
   src: string;
-  onPlayPauseClick: (isPlaying: boolean, index: number) => void;
+  coverColor: string;
   isPlaying: boolean;
-  isActive: boolean; // Добавляем isActive
+  isActive: boolean;
   duration: number;
-  index: number;
   trackProgress: number;
+  onPlayPauseClick: (isPlaying: boolean, index: number) => void;
   onScrub: (value: string) => void;
   onScrubEnd: () => void;
 };
 
 export const Track = ({
   title,
-  artist,
-  onPlayPauseClick,
-  isPlaying,
-  isActive, // используем для показа прогресс-бара
   index,
-  trackProgress,
+  artist,
+  coverColor,
+  isPlaying,
+  isActive,
   duration,
+  trackProgress,
+  onPlayPauseClick,
   onScrub,
   onScrubEnd,
 }: TTrack) => {
+  const [shouldShow, setShouldShow] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    if (isActive) {
+      setShouldShow(true);
+      setTimeout(() => setIsVisible(true), 10);
+    } else {
+      setIsVisible(false);
+      setTimeout(() => setShouldShow(false), 300);
+    }
+  }, [isActive]);
+
   const formatTime = (seconds: number): string => {
     if (!seconds || isNaN(seconds)) return "0:00";
     const mins = Math.floor(seconds / 60);
@@ -41,10 +58,15 @@ export const Track = ({
     : "0%";
 
   return (
-    <Block disabledTranform className="bg-beige-tertiary! rounded-2xl!">
+    <Block disabledTranform className="bg-beige-tertiary! rounded-2xl! gap-0!">
       <div className="flex justify-between items-center">
         <div className="flex gap-2">
-          <div className="w-10 h-10 bg-cold-green-secondary rounded-md flex items-center justify-center">
+          <div
+            className={cn(
+              "w-10 h-10 rounded-md flex items-center justify-center",
+              coverColor,
+            )}
+          >
             <Icon name="Lotus" width={29} height={24} />
           </div>
           <div>
@@ -59,7 +81,7 @@ export const Track = ({
         {isPlaying ? (
           <button
             type="button"
-            className="pause w-10 h-10 transition-transform hover:scale-110"
+            className="pause w-10 h-10 active:scale-95 transition-transform duration-150"
             onClick={() => onPlayPauseClick(false, index)}
             aria-label="Pause"
           >
@@ -68,7 +90,7 @@ export const Track = ({
         ) : (
           <button
             type="button"
-            className="play w-10 h-10 transition-transform hover:scale-110"
+            className="play w-10 h-10 active:scale-95 transition-transform duration-150"
             onClick={() => onPlayPauseClick(true, index)}
             aria-label="Play"
           >
@@ -76,9 +98,16 @@ export const Track = ({
           </button>
         )}
       </div>
-      
-      {isActive && (
-        <div className="mt-3">
+
+      {(shouldShow || isActive) && (
+        <div
+          className="mt-3 overflow-hidden transition-all duration-300 ease-in-out"
+          style={{
+            maxHeight: isVisible ? "100px" : "0",
+            opacity: isVisible ? 1 : 0,
+            marginTop: isVisible ? "12px" : "0",
+          }}
+        >
           <input
             type="range"
             value={trackProgress}

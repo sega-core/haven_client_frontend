@@ -10,7 +10,8 @@ type PurchaseStage = "initial" | "confirmation";
 
 interface PurchaseDrawerProps {
   title: string;
-  description: string | React.ReactNode;
+  description: string | React.ReactNode; //TODO: fix types
+  isDescriptionNode: boolean;
   instructions?: string;
   isPurchased: boolean;
   price: number;
@@ -22,6 +23,7 @@ export const PurchaseDrawer = ({
   title,
   description,
   instructions,
+  isDescriptionNode,
   isPurchased,
   price,
   currency,
@@ -34,7 +36,7 @@ export const PurchaseDrawer = ({
 
   const handleBuyClick = () => {
     setStage("confirmation");
-    updateDrawerTitle(titleMap['confirmation']);
+    updateDrawerTitle(titleMap["confirmation"]);
   };
 
   const handleConfirmPayment = () => {
@@ -45,7 +47,7 @@ export const PurchaseDrawer = ({
 
   const handleBack = () => {
     setStage("initial");
-    updateDrawerTitle(titleMap['initial']);
+    updateDrawerTitle(titleMap["initial"]);
   };
 
   const titleMap = {
@@ -68,7 +70,15 @@ export const PurchaseDrawer = ({
     if (isPurchased) {
       return (
         <Typography type="body-s" className="text-brown-primary">
-          {instructions || description}
+          {isDescriptionNode ? (
+            <>{description}</>
+          ) : (
+            <div
+              dangerouslySetInnerHTML={{
+                __html: instructions || (description as string),
+              }}
+            ></div>
+          )}
         </Typography>
       );
     }
