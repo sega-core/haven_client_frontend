@@ -99,7 +99,15 @@ export const PurchaseDrawer = ({
         return (
           <div className="flex flex-col gap-4">
             <Typography type="body-s" className="text-brown-primary">
-              {description}
+              {isDescriptionNode ? (
+                <>{description}</>
+              ) : (
+                <div
+                  dangerouslySetInnerHTML={{
+                    __html: description as string,
+                  }}
+                ></div>
+              )}
             </Typography>
 
             <div className="flex flex-col gap-3">

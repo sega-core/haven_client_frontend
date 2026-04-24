@@ -1,7 +1,3 @@
-/* @tailwind base;
-@tailwind components;
-@tailwind utilities;
- */
 @import "tailwindcss";
 
 @config "../tailwind.config.js";
@@ -230,4 +226,36 @@ textarea {
   /* yellow */
   --text-yellow-primary: #e0b624;
   --text-yellow-secondary: #e0b62480;
+}
+
+@layer base {
+  ul, ol {
+    @apply pl-5 mb-4;
+  }
+  
+  ul {
+    @apply list-disc;
+  }
+  
+  ol {
+    @apply list-decimal;
+  }
+  
+  li {
+    @apply mb-1;
+  }
+  
+  li > ul,
+  li > ol {
+    @apply mt-1 mb-0;
+  }
+  
+  .prose ul, 
+  .prose ol {
+    @apply text-brown-primary;
+  }
+  
+  .prose li::marker {
+    color: var(--text-beige-primary);
+  }
 }
