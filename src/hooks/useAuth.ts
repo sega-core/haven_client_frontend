@@ -1,5 +1,5 @@
 import { useMutation } from "@tanstack/react-query";
-import { getAuth } from "../api/auth";
+import { getAuth } from "../api";
 import { useRawLaunchParamsTelegram } from "./useTelegramApi";
 import { tokenService } from "../utils/tokenService";
 import { useNavigate } from "react-router";
@@ -14,19 +14,25 @@ export const useAuth = () => {
 
   return useMutation({
     mutationFn: () => getAuth(rawData),
-    onSuccess: ({ accessToken }) => {
-      tokenService.setJwtToken(accessToken);
+    onSuccess: ({ accessToken, termsAccepted }) => {
+      tokenService.setJwtToken({ accessToken, termsAccepted });
       navigate(ROUTES.MAIN);
     },
     onError: (err: unknown) => {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      //@ts-ignore
+      if (err?.status == 404) {
+        navigate(ROUTES.REGISTRATION);
+        return;
+      }
       const errorMessage = formatError(err);
 
       navigate(ROUTES.ERROR, {
         state: {
           error: errorMessage,
           timestamp: Date.now(),
-          type: 'auth_error'
-        }
+          type: "auth_error",
+        },
       });
     },
   });
