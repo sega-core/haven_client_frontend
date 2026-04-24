@@ -81,15 +81,14 @@ export const PracticeBundleCard = ({ item }: Props) => {
       {/* Затемнение для лучшей читаемости текста */}
       <div className="absolute inset-0 bg-black/50 rounded-3xl" />
 
-      <div className="relative z-10">
-        {" "}
-        {/* Обертка для контента */}
+      <div className="relative z-10 flex flex-col h-full">
         <PriceChip
           type="bundle"
           price={price}
           isPurchased={isPurchasedBundle}
         />
-        <div className="grid gap-2">
+        <div className="grid gap-2 mt-auto">
+          {/* mt-auto прижмет к низу */}
           <Typography
             type="heading-xs"
             className="text-white-primary flex items-center gap-2"
