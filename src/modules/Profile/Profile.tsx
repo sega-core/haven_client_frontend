@@ -5,6 +5,10 @@ import { useNavigate } from "react-router-dom";
 import { version } from "../../../package.json";
 import { menuSections, TProfileSection } from "./Profile.constants";
 import { ROUTES } from "../../containers";
+import { Button } from "@heroui/button";
+import { useDrawerContext } from "../../components/Drawer";
+import { useCallback } from "react";
+import { DeleteProfileSheet } from "./DeleteProfileSheet";
 
 export const Profile = () => {
   const navigate = useNavigate();
@@ -19,6 +23,15 @@ export const Profile = () => {
       window.open(item.external, "_blank", "noopener,noreferrer");
     }
   };
+
+  const { openDrawer, closeDrawer } = useDrawerContext();
+
+  const handleOpenDeleteProfileSheet = useCallback(() => {
+    openDrawer({
+      title: "Удалить профиль?",
+      content: <DeleteProfileSheet onClose={closeDrawer} />,
+    });
+  }, [openDrawer, closeDrawer]);
 
   return (
     <div>
@@ -95,10 +108,16 @@ export const Profile = () => {
           </div>
         ))}
       </div>
-      <div className="px-4 py-6 text-center">
-        <Typography type="body-s" className="text-brown-secondary">
-          Версия {version}
-        </Typography>
+      <div className="grid mt-4">
+        <Button
+          variant="flat"
+          color="danger"
+          onPress={handleOpenDeleteProfileSheet}
+        >
+          Удалить профиль
+        </Button>
+      </div>
+      <div className="text-center mt-10 ">
         <Typography type="body-xs" className="text-brown-secondary mt-1">
           СМЗ Константинова Анастасия Сергеевна
         </Typography>
@@ -113,6 +132,9 @@ export const Profile = () => {
         </Typography>
         <Typography type="body-xs" className="text-brown-secondary mt-1">
           © 2026 Haven
+        </Typography>
+        <Typography type="body-xxs" className="text-brown-secondary">
+          v.{version}
         </Typography>
       </div>
     </div>

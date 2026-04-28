@@ -11,13 +11,13 @@ function App() {
   return (
     <QueryClientProvider>
       <Layout>
-        <DrawerProvider>
-          <BrowserRouter>
+        <BrowserRouter>
+          <DrawerProvider>
             <Header />
             <AppRoutes />
             <TabBar />
-          </BrowserRouter>
-        </DrawerProvider>
+          </DrawerProvider>
+        </BrowserRouter>
       </Layout>
     </QueryClientProvider>
   );

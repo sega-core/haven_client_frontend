@@ -13,7 +13,7 @@ export type TProfileSection = {
 };
 
 export const menuSections: TProfileSection[] = [
-  {
+  /* {
     title: "Аккаунт",
     items: [
       {
@@ -23,7 +23,7 @@ export const menuSections: TProfileSection[] = [
         route: ROUTES.SUBSCRIPTION,
       },
     ],
-  },
+  }, */
   {
     title: "Информация",
     items: [

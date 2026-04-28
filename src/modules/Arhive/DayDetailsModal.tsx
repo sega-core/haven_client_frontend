@@ -55,7 +55,7 @@ export const DayDetailsModal = ({
             <div className="flex flex-col gap-4">
               <div className="flex gap-2 flex-col">
                 <Typography type="body-md" className="text-brown-primary">
-                  Мое настроение
+                  Моё настроение
                 </Typography>
                 <div>
                   <Chip label={MOOD_CONFIG[dayData?.mood?.level].label} />

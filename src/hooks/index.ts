@@ -8,3 +8,4 @@ export * from "./usePractice";
 export * from "./useTelegramApi";
 export * from "./useAuth";
 export * from "./useRegistration";
+export * from "./useUser";

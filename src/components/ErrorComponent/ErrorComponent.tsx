@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { Typography } from "../Typography";
 import { Button } from "@heroui/button";
-/* import { useNavigate } from "react-router";
- */
+import { ROUTES } from "../../containers";
+import { Block } from "../Block";
+
 export const ErrorComponent = ({
   error,
 }: {
@@ -27,40 +28,42 @@ export const ErrorComponent = ({
     }
   };
 
-  /* const navigate = useNavigate(); */
-
   return (
-    <div className="flex items-center justify-center min-h-[60vh] px-4">
-      <div className="w-full max-w-md text-center bg-warning-50 shadow-lg rounded-2xl p-8">
-        <div className="flex items-center justify-center mb-4">
+    <div className="fixed inset-0 z-50 flex items-center justify-center backdrop-blur-sm bg-black/30 p-4">
+      <Block className="text-center!" disabledTranform>
+        <div className="flex items-center justify-center pt-5">
           <div className="w-12 h-12 flex items-center justify-center rounded-full bg-red-100 text-red-600 text-2xl">
             😅
           </div>
         </div>
 
-        <Typography type="heading-s" className="text-red-600 mb-2">
+        <Typography type="heading-s" className="text-red-primary">
           Что-то пошло не так
         </Typography>
 
-        <Typography type="body-s" className="text-gray-500 mb-6 break-words">
+        <Typography
+          type="body-s"
+          className="text-red-secondary wrap-break-word"
+        >
           {error?.message || "Произошла непредвиденная ошибка"}
         </Typography>
         <Button
-          color="danger"
+          radius="full"
           variant="solid"
-          /* onPress={() => navigate("/login")} */
-          className="w-full"
+          onPress={() => document.location.replace(ROUTES.MAIN)}
+          className="w-full bg-red-secondary text-white"
         >
           Попробовать снова
         </Button>
         <Button
-          variant="bordered"
+          radius="full"
+          variant="flat"
           onPress={onCopyError}
-          className="w-full mt-2"
+          className="w-full bg-brown-secondary"
         >
           {isCopied ? "Скопировано ✓" : "Скопировать ошибку"}
         </Button>
-      </div>
+      </Block>
     </div>
   );
 };

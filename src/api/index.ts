@@ -7,3 +7,4 @@ export * from "./coin";
 export * from "./practice";
 export * from "./auth";
 export * from "./registration";
+export * from "./user";

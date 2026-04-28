@@ -128,6 +128,9 @@ export const PurchaseDrawer = ({
               >
                 Купить за {price}
               </Button>
+              <Typography type="body-xs" className="text-brown-primary text-center">
+                Доступ к практикам сохраняется, пока вы пользуетесь приложением
+              </Typography>
             </div>
           </div>
         );

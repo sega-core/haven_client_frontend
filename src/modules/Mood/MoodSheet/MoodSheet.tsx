@@ -42,9 +42,9 @@ export const MoodSheet = ({
       onSubmit={onSubmit}
     >
       <div className="grid gap-4 bg-white-primary">
-        <Typography type="body-s">Моё настроение</Typography>
+        <Typography type="body-s" className="text-brown-primary ">Моё настроение</Typography>
         <SelectMood />
-        <Typography type="body-s">Мои эмоции и чувства</Typography>
+        <Typography type="body-s" className="text-brown-primary ">Мои эмоции и чувства</Typography>
         <SelectTags />
         <InputText />
         <Button
