@@ -4,12 +4,13 @@ import { Icon } from "../Icon";
 import { Typography } from "../Typography";
 
 export const havenToast = {
-  coins: (amount: number, description?: string) => {
+  coins: (amount: number, reason?:string, description?: string) => {
     addToast({
       title: (
         <Typography type="body-md" className="flex gap-1 items-center">
           Вам начислено {amount}{" "}
           <Icon name="ZenFilled" className="fill-(--stroke-white-primary)" />
+          {" "}{reason}
         </Typography>
       ),
       description: (

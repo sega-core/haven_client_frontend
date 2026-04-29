@@ -14,7 +14,7 @@ export const Hint = ({ text, example, title }: HintProps) => {
   return (
     <>
       <Icon
-        name="Info"
+        name="Question"
         width={20}
         height={20}
         onClick={() => setIsOpen(true)}
@@ -45,7 +45,7 @@ export const Hint = ({ text, example, title }: HintProps) => {
                       {title}
                     </h3>
                   )}
-                  <p className="text-gray-600 text-base leading-relaxed mb-3">
+                  <p className="text-gray-600 text-base leading-relaxed mb-3 whitespace-pre-line">
                     {text}
                   </p>
                   {example && (

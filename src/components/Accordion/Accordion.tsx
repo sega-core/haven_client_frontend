@@ -64,10 +64,10 @@ export const AccordionGroup = ({
               <div
                 className={`
                   overflow-hidden transition-all duration-300 ease-in-out
-                  ${isOpen ? "max-h-96 opacity-100 mt-4" : "max-h-0 opacity-0"}
+                  ${isOpen ? "opacity-100 mt-4" : "max-h-0 opacity-0"}
                 `}
               >
-                <Typography type="body-md" className="text-brown-secondary">
+                <Typography type="body-md" className="text-brown-secondary whitespace-pre-line">
                   {item.description}
                 </Typography>
               </div>

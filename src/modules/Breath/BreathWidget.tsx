@@ -46,6 +46,7 @@ export const BreathWidget = () => {
   const [totalSeconds, setTotalSeconds] = useState(initialSeconds);
 
   const audioCtxRef = useRef<AudioContext | null>(null);
+  const isAudioEnabledRef = useRef(false);
 
   const currentPhase = phases.find((p) => p.name === phase)!;
 
@@ -62,13 +63,11 @@ export const BreathWidget = () => {
       (window.AudioContext || (window as any).webkitAudioContext)();
   }, []);
 
-  // Мягкий тик - звук колокольчика
+  // Очень мягкий тик - глубокий колокольчик (низкая частота)
   const playTick = useCallback(() => {
-    if (!audioCtxRef.current) {
-      initAudio();
-    }
+    if (!audioCtxRef.current || !isAudioEnabledRef.current) return;
     const ctx = audioCtxRef.current;
-    if (!ctx || ctx.state !== "running") return;
+    if (ctx.state !== "running") return;
 
     const now = ctx.currentTime;
 
@@ -81,34 +80,32 @@ export const BreathWidget = () => {
     gain.connect(ctx.destination);
 
     filter.type = "lowpass";
-    filter.frequency.value = 800;
-    filter.Q.value = 1;
+    filter.frequency.value = 600;
+    filter.Q.value = 0.8;
 
     osc.type = "sine";
-    osc.frequency.value = 880; // A5 - мягкий высокий тон
+    osc.frequency.value = 523.25; // C5 - мягкий, не резкий
 
-    // Очень плавная огибающая
+    // Очень плавная, тёплая огибающая
     gain.gain.setValueAtTime(0, now);
-    gain.gain.linearRampToValueAtTime(0.03, now + 0.02);
-    gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.5);
+    gain.gain.linearRampToValueAtTime(0.008, now + 0.05);
+    gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.6);
 
     osc.start();
-    osc.stop(now + 0.5);
-  }, [initAudio]);
+    osc.stop(now + 0.6);
+  }, []);
 
-  // Мягкий звук смены фазы - аккорд на пианино
+  // Мягкий переход между фазами - арпеджио на низких нотах
   const playPhaseChange = useCallback(() => {
-    if (!audioCtxRef.current) {
-      initAudio();
-    }
+    if (!audioCtxRef.current || !isAudioEnabledRef.current) return;
     const ctx = audioCtxRef.current;
-    if (!ctx || ctx.state !== "running") return;
+    if (ctx.state !== "running") return;
 
     const now = ctx.currentTime;
 
-    const notes = [261.63, 329.63, 392.0]; // C4, E4, G4
-    const gains: GainNode[] = [];
-
+    // Медленное, спокойное арпеджио
+    const notes = [196.0, 261.63, 329.63, 261.63]; // G3, C4, E4, C4
+    
     notes.forEach((freq, i) => {
       const osc = ctx.createOscillator();
       const gain = ctx.createGain();
@@ -119,83 +116,100 @@ export const BreathWidget = () => {
       gain.connect(ctx.destination);
 
       filter.type = "lowpass";
-      filter.frequency.value = 1200;
-      filter.Q.value = 1.5;
+      filter.frequency.value = 800;
+      filter.Q.value = 1.2;
 
       osc.type = "sine";
       osc.frequency.value = freq;
 
-      // Мягкая атака и затухание
-      gain.gain.setValueAtTime(0, now);
-      gain.gain.linearRampToValueAtTime(0.05, now + 0.05 + i * 0.05);
-      gain.gain.exponentialRampToValueAtTime(0.0001, now + 1.2);
+      const startTime = now + i * 0.12;
+      
+      gain.gain.setValueAtTime(0, startTime);
+      gain.gain.linearRampToValueAtTime(0.012, startTime + 0.08);
+      gain.gain.exponentialRampToValueAtTime(0.0001, startTime + 0.8);
 
-      gains.push(gain);
-      osc.start();
-      osc.stop(now + 1.2);
+      osc.start(startTime);
+      osc.stop(startTime + 0.8);
     });
-  }, [initAudio]);
+  }, []);
 
-  // Мягкий звук завершения - звук поющей чаши
+  // Мягкое завершение - звук тибетской чаши (низкий, глубокий)
   const playCompletionSound = useCallback(() => {
-    if (!audioCtxRef.current) {
-      initAudio();
-    }
+    if (!audioCtxRef.current || !isAudioEnabledRef.current) return;
     const ctx = audioCtxRef.current;
-    if (!ctx || ctx.state !== "running") return;
+    if (ctx.state !== "running") return;
 
     const now = ctx.currentTime;
 
-    // Создаем сложный звук для имитации поющей чаши
-    const frequencies = [130.81, 196.0, 261.63, 329.63];
+    // Основной тон чаши
+    const baseFreqs = [110.0, 164.81, 220.0, 329.63];
+    const overtones = [2.01, 3.02, 4.03];
     
-    frequencies.forEach((freq, i) => {
+    baseFreqs.forEach((freq, i) => {
       const osc1 = ctx.createOscillator();
-      const osc2 = ctx.createOscillator();
-      const gain = ctx.createGain();
-      const filter = ctx.createBiquadFilter();
+      const gain1 = ctx.createGain();
+      const filter1 = ctx.createBiquadFilter();
 
-      osc1.connect(filter);
-      osc2.connect(filter);
-      filter.connect(gain);
-      gain.connect(ctx.destination);
+      osc1.connect(filter1);
+      filter1.connect(gain1);
+      gain1.connect(ctx.destination);
 
-      filter.type = "lowpass";
-      filter.frequency.value = 1000;
-      filter.Q.value = 2;
+      filter1.type = "lowpass";
+      filter1.frequency.value = 900;
+      filter1.Q.value = 2.5;
 
       osc1.type = "sine";
       osc1.frequency.value = freq;
 
+      // Добавляем обертоны для богатства звука
+      const osc2 = ctx.createOscillator();
+      const gain2 = ctx.createGain();
+      osc2.connect(filter1);
       osc2.type = "sine";
-      osc2.frequency.value = freq * 2.01; // Обертон
+      osc2.frequency.value = freq * overtones[i % overtones.length];
 
-      const startTime = now + i * 0.3;
+      const startTime = now + i * 0.25;
       
-      gain.gain.setValueAtTime(0, startTime);
-      gain.gain.linearRampToValueAtTime(0.08, startTime + 0.1);
-      gain.gain.exponentialRampToValueAtTime(0.0001, startTime + 2.5);
+      gain1.gain.setValueAtTime(0, startTime);
+      gain1.gain.linearRampToValueAtTime(0.015, startTime + 0.15);
+      gain1.gain.exponentialRampToValueAtTime(0.0001, startTime + 3.0);
+
+      gain2.gain.setValueAtTime(0, startTime);
+      gain2.gain.linearRampToValueAtTime(0.006, startTime + 0.2);
+      gain2.gain.exponentialRampToValueAtTime(0.0001, startTime + 2.5);
 
       osc1.start(startTime);
       osc2.start(startTime);
-      osc1.stop(startTime + 2.5);
-      osc2.stop(startTime + 2.5);
+      osc1.stop(startTime + 3.0);
+      osc2.stop(startTime + 3.0);
     });
-  }, [initAudio]);
+  }, []);
 
   const enableAudio = useCallback(() => {
     initAudio();
     if (audioCtxRef.current && audioCtxRef.current.state === "suspended") {
       audioCtxRef.current.resume();
+      isAudioEnabledRef.current = true;
     }
   }, [initAudio]);
 
   useEffect(() => {
     if (!isActive) return;
 
-    const interval = setInterval(() => {
-      playTick();
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    //@ts-ignore
+    let tickInterval: NodeJS.Timeout;
+    
+    // Используем setTimeout для более точного управления тиками
+    const startTicking = () => {
+      tickInterval = setInterval(() => {
+        playTick();
+      }, 1000);
+    };
+    
+    startTicking();
 
+    const phaseInterval = setInterval(() => {
       setTimeLeft((prev) => {
         if (prev <= 1) {
           playPhaseChange();
@@ -212,8 +226,11 @@ export const BreathWidget = () => {
       });
     }, 1000);
 
-    return () => clearInterval(interval);
-  }, [isActive, phase, playTick, playPhaseChange]);
+    return () => {
+      clearInterval(phaseInterval);
+      clearInterval(tickInterval);
+    };
+  }, [isActive, playTick, playPhaseChange]);
 
   useEffect(() => {
     const elapsed = currentPhase.duration - timeLeft;
@@ -232,7 +249,7 @@ export const BreathWidget = () => {
         if (prev <= 1) {
           setIsActive(false);
           playCompletionSound();
-          return 600;
+          return initialSeconds;
         }
         return prev - 1;
       });
@@ -248,6 +265,7 @@ export const BreathWidget = () => {
     setProgress(0);
     setIsActive(true);
     setTotalSeconds(initialSeconds);
+    isAudioEnabledRef.current = true;
   }, [enableAudio]);
 
   const reset = useCallback(() => {

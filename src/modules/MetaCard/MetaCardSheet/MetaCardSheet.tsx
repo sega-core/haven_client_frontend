@@ -160,9 +160,6 @@ export const MetaCardSheet = () => {
                 {data?.metaCard.description && (
                   <Hint text={data?.metaCard.description} />
                 )}
-                {/* <Typography type="body-xs" className="text-beige-primary">
-                  Помощь
-                </Typography> */}
               </div>
               <InputText field={EMetaCardField.SEEN} readOnly={readOnly} />
               <InputText field={EMetaCardField.FELT} readOnly={readOnly} />

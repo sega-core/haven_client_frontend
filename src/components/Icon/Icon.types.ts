@@ -46,4 +46,5 @@ export type TIcon =
   | "ZenFilled"
   | "ZenOutlined"
   | "Rub"
-  | "Lotus";
+  | "Lotus"
+  | "Question";

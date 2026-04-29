@@ -46,6 +46,7 @@ import Trash from '../../assets/icons/trash.svg?react'
 import User from '../../assets/icons/user.svg?react'
 import Rub from '../../assets/icons/rub.svg?react'
 import Lotus from '../../assets/icons/lotus.svg?react'
+import Question from '../../assets/icons/question.svg?react'
 
 export const ICON_MAP: Partial<Record<TIcon, FC<SVGProps<SVGSVGElement>>>> = {
   'Check': Check,
@@ -93,7 +94,8 @@ export const ICON_MAP: Partial<Record<TIcon, FC<SVGProps<SVGSVGElement>>>> = {
   "Trash": Trash,
   "User": User,
   "Rub": Rub,
-  "Lotus":Lotus,
+  "Lotus": Lotus,
+  "Question": Question,
 } as const;
 
 
