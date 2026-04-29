@@ -1,21 +1,25 @@
 import { useCallback, useState } from "react";
 import { useDrawerContext } from "../../components/Drawer";
+import { MetaCardSheet } from "./MetaCardSheet";
+import { useGetMetaCard } from "../../hooks/useMetaCard";
 
 export const MetaCardBanner = () => {
-  const { openDrawer } = useDrawerContext();
+  const { openDrawer, closeDrawer } = useDrawerContext();
   const [isPressed, setIsPressed] = useState(false);
+
+  const { data } = useGetMetaCard();
 
   const handleOpen = useCallback(() => {
     setIsPressed(true);
 
     setTimeout(() => {
       openDrawer({
-        title: "Ваша карта",
-        content: <div>1</div>,
+        title: "Ваша карта на сегодня",
+        content: <MetaCardSheet />,
       });
       setIsPressed(false);
     }, 180);
-  }, [openDrawer]);
+  }, [openDrawer, closeDrawer]);
 
   return (
     <div
@@ -23,6 +27,8 @@ export const MetaCardBanner = () => {
       className="relative"
       style={{ perspective: "1000px" }}
     >
+      {/* //TODO: preload */}
+      <img src={data?.metaCard.imgUrl} className="hidden" />
       <div
         className="
           p-5 rounded-3xl cursor-pointer
@@ -47,7 +53,6 @@ export const MetaCardBanner = () => {
         }}
       >
         <div className="flex items-center justify-between gap-4">
-          {/* LEFT */}
           <div className="flex flex-col gap-2">
             <div
               className="text-xl font-semibold leading-tight"
@@ -64,14 +69,13 @@ export const MetaCardBanner = () => {
             </div>
           </div>
 
-          {/* RIGHT — карта */}
           <div
             className="relative w-16 h-24 rounded-2xl flex items-center justify-center text-2xl transition-all duration-300"
             style={{
-             /*  transform: isPressed
+              transform: isPressed
                 ? "rotateY(180deg) scale(0.95)"
                 : "rotateY(0deg)",
- */
+
               background: `
                 linear-gradient(
                   135deg,

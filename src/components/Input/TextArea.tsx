@@ -19,6 +19,8 @@ interface HavenTextareaProps {
   maxLength?: number;
   showCount?: boolean;
   resize?: "none" | "vertical" | "horizontal" | "both";
+  disabled?: boolean;
+  readOnly?: boolean;
 }
 
 export const Textarea = ({
@@ -34,8 +36,10 @@ export const Textarea = ({
   maxLength,
   showCount = true,
   resize = "vertical",
+  disabled = false,
+  readOnly = false,
 }: HavenTextareaProps) => {
-  const showError = meta.touched && meta.error;
+  const showError = meta.touched && meta.error && !disabled;
   const errorText = meta.error || errorMessage;
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
@@ -49,6 +53,14 @@ export const Textarea = ({
     both: "resize",
   }[resize];
 
+  const isDisabled = disabled || readOnly;
+
+  const handleContainerClick = () => {
+    if (!isDisabled) {
+      textareaRef.current?.focus();
+    }
+  };
+
   return (
     <div
       className={`
@@ -60,16 +72,17 @@ export const Textarea = ({
     >
       {label && (
         <label
-          className="
-              text-sm 
-              font-medium 
-              text-[rgba(26,26,26,0.7)]
-              mb-1
-              px-1
-              cursor-pointer
-              w-fit
-            "
-          onClick={() => textareaRef.current?.focus()}
+          className={`
+            text-sm 
+            font-medium 
+            text-[rgba(26,26,26,0.7)]
+            mb-1
+            px-1
+            cursor-pointer
+            w-fit
+            ${isDisabled ? "opacity-50 cursor-not-allowed" : ""}
+          `}
+          onClick={handleContainerClick}
         >
           {label}
           {isRequired && <span className="text-red-500 ml-1">*</span>}
@@ -77,28 +90,30 @@ export const Textarea = ({
       )}
 
       <div
-        onClick={() => textareaRef.current?.focus()}
+        onClick={handleContainerClick}
         className={`
-            px-4 py-3 
-            flex 
-            flex-col 
-            justify-center 
-            items-start 
-            gap-2
-            rounded-2xl
-            transition-all
-            duration-200
-            relative
-            cursor-text
-            w-full
-            ${
-              showError
+          px-4 py-3 
+          flex 
+          flex-col 
+          justify-center 
+          items-start 
+          gap-2
+          rounded-2xl
+          transition-all
+          duration-200
+          relative
+          cursor-text
+          w-full
+          ${
+            isDisabled
+              ? "bg-[rgba(182,135,90,0.10)] cursor-not-allowed opacity-60"
+              : showError
                 ? "bg-[rgba(239,68,68,0.20)] ring-2 ring-red-500/50"
                 : "bg-[rgba(182,135,90,0.20)] hover:bg-[rgba(182,135,90,0.30)]"
-            }
-            ${meta.active ? "ring-2 ring-[rgba(182,135,90,0.40)]" : ""}
-            ${containerClassName}
-          `}
+          }
+          ${meta.active && !isDisabled ? "ring-2 ring-[rgba(182,135,90,0.40)]" : ""}
+          ${containerClassName}
+        `}
       >
         <textarea
           {...input}
@@ -107,26 +122,30 @@ export const Textarea = ({
           placeholder={placeholder}
           rows={rows}
           maxLength={maxLength}
+          disabled={disabled}
+          readOnly={readOnly}
           className={`
-              w-full
-              bg-transparent
-              outline-none
-              border-none
-              text-[#1a1a1a]
-              placeholder:text-[rgba(26,26,26,0.4)]
-              text-base
-              font-normal
-              leading-normal
-              disabled:opacity-50
-              disabled:cursor-not-allowed
-              ${resizeClass}
-            `}
+            w-full
+            bg-transparent
+            outline-none
+            border-none
+            text-[#1a1a1a]
+            placeholder:text-[rgba(26,26,26,0.4)]
+            text-base
+            font-normal
+            leading-normal
+            disabled:opacity-50
+            disabled:cursor-not-allowed
+            read-only:opacity-50
+            read-only:cursor-default
+            ${resizeClass}
+          `}
         />
       </div>
 
       <div className="flex justify-between items-center px-1">
         <div className="flex-1">
-          {showError && (
+          {showError && !isDisabled && (
             <p
               className="
                 text-sm 
@@ -139,7 +158,7 @@ export const Textarea = ({
           )}
         </div>
 
-        {showCount && maxLength && (
+        {showCount && maxLength && !isDisabled && (
           <div className="flex flex-col items-end">
             <span
               className={`

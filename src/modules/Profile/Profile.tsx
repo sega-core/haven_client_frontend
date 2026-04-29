@@ -125,12 +125,6 @@ export const Profile = () => {
           ИНН 622708106409
         </Typography>
         <Typography type="body-xs" className="text-brown-secondary mt-1">
-          8 915 618 9515
-        </Typography>
-        <Typography type="body-xs" className="text-brown-secondary mt-1">
-          yourhaven@yandex.ru
-        </Typography>
-        <Typography type="body-xs" className="text-brown-secondary mt-1">
           © 2026 Haven
         </Typography>
         <Typography type="body-xxs" className="text-brown-secondary">

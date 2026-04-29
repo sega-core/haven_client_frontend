@@ -6,7 +6,15 @@ import AvatarComunity from "../../../assets/images/avatarComunity.png";
 
 export const Group = () => {
   return (
-    <Block onClick={() => console.log("gotogroup")}>
+    <Block
+      onClick={() =>
+        window.open(
+          "https://t.me/+IxpdS49NqalkMGRi",
+          "_blank",
+          "noopener,noreferrer",
+        )
+      }
+    >
       <div className="flex gap-2 items-center">
         <Avatar image={AvatarComunity} disableLoading />
         <div className="flex-1">
