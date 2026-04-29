@@ -14,7 +14,7 @@ type Props = {
   isNasted?: boolean;
 };
 export const PracticeCard = ({ item, hidePurchasedChip, isNasted }: Props) => {
-  const { priceZen, title, tags, isPurchased, description, id } = item;
+  const { priceZen, title, tags, isPurchased, description, id, imgUrl } = item;
 
   const { openDrawer, closeDrawer } = useDrawerContext();
 
@@ -76,47 +76,40 @@ export const PracticeCard = ({ item, hidePurchasedChip, isNasted }: Props) => {
   return (
     <div
       className={cn(
-        "p-4 rounded-3xl flex flex-col justify-between bg-black-secondary gap-2 h-[179px]",
+        "p-4 rounded-3xl flex flex-col justify-between gap-2 min-h-[179px] relative",
         "active:scale-95 transition-transform duration-150",
       )}
       onClick={onClickCard}
+      style={{
+        backgroundImage: imgUrl ? `url(${imgUrl})` : undefined,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundColor: "#1a1a1a",
+      }}
     >
-      <PriceChip
-        price={priceZen}
-        isPurchased={isPurchased}
-        hidePurchasedChip={hidePurchasedChip}
-        type="practice"
-      />
-      <div className="grid gap-2 z-10">
-        <Typography
-          type="heading-xs"
-          className="text-white-primary flex items-center gap-2"
-        >
-          {title}
-        </Typography>
-        <div className="flex gap-2 flex-wrap">
-          {tags?.map((item, index) => (
-            <Chip key={index} label={item} color="white" />
-          ))}
+      <div className="absolute inset-0 bg-black/50 rounded-3xl" />
+
+      <div className="relative z-10 flex flex-col h-full">
+        <PriceChip
+          price={priceZen}
+          isPurchased={isPurchased}
+          hidePurchasedChip={hidePurchasedChip}
+          type="practice"
+        />
+        <div className="grid gap-2 mt-auto">
+          <Typography
+            type="heading-xs"
+            className="text-white-primary flex items-center gap-2"
+          >
+            {title}
+          </Typography>
+          <div className="flex gap-2 flex-wrap">
+            {tags?.map((item, index) => (
+              <Chip key={index} label={item} color="white" />
+            ))}
+          </div>
         </div>
       </div>
-      {/*  {imageUrl && (
-        <div
-          className={cn(
-            "absolute inset-0 rounded-3xl overflow-hidden opacity-50 transition-opacity",
-          )}
-        >
-          <img
-            src={imageUrl}
-            alt={title}
-            className="w-full h-full object-cover"
-            loading="lazy"
-          />
-          {isLocked && (
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
-          )}
-        </div>
-      )} */}
     </div>
   );
 };

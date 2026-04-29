@@ -75,10 +75,9 @@ export const PracticeBundleCard = ({ item }: Props) => {
         backgroundImage: imgUrl ? `url(${imgUrl})` : undefined,
         backgroundSize: "cover",
         backgroundPosition: "center",
-        backgroundColor: "#1a1a1a", // fallback цвет
+        backgroundColor: "#1a1a1a",
       }}
     >
-      {/* Затемнение для лучшей читаемости текста */}
       <div className="absolute inset-0 bg-black/50 rounded-3xl" />
 
       <div className="relative z-10 flex flex-col h-full">
@@ -88,7 +87,6 @@ export const PracticeBundleCard = ({ item }: Props) => {
           isPurchased={isPurchasedBundle}
         />
         <div className="grid gap-2 mt-auto">
-          {/* mt-auto прижмет к низу */}
           <Typography
             type="heading-xs"
             className="text-white-primary flex items-center gap-2"
