@@ -3,18 +3,17 @@ import { Typography } from "../../../components/Typography";
 import { Icon } from "../../../components/Icon";
 import { cn } from "../../../utils/cn";
 import { useGetCoinState } from "../../../hooks";
-
-type Currency = "zen" | "rub";
+import { TCurrency } from "./PurchaseDrawer";
 
 interface ConfirmPayStageProps {
   onClick: () => void;
   amount?: number;
-  currency?: Currency;
+  currency?: TCurrency;
   className?: string;
   isLoading?: boolean;
 }
 
-const CURRENCY_CONFIG: Record<Currency, { icon: string; label: string }> = {
+const CURRENCY_CONFIG: Record<TCurrency, { icon: string; label: string }> = {
   zen: {
     icon: "ZenFilled",
     label: "ZEN",
@@ -33,7 +32,7 @@ const BalanceRow = ({
 }: {
   label: string;
   value: number;
-  currency?: Currency;
+  currency?: TCurrency;
   isTotal?: boolean;
 }) => {
   const config = CURRENCY_CONFIG[currency];
@@ -85,7 +84,7 @@ export const ConfirmPayStage = ({
 }: ConfirmPayStageProps) => {
   const { balance } = useGetCoinState();
 
-  const hasSufficientBalance = balance >= amount;
+  const hasSufficientBalance = currency === "zen" ? balance >= amount : true;
 
   const buttonText =
     currency === "rub"
@@ -111,8 +110,7 @@ export const ConfirmPayStage = ({
           "bg-beige-primary text-white",
           !hasSufficientBalance && "opacity-50 cursor-not-allowed",
         )}
-        type="submit"
-        onPress={hasSufficientBalance ? onClick : undefined}
+        onPress={onClick}
         isDisabled={!hasSufficientBalance}
         isLoading={isLoading}
       >

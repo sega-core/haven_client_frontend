@@ -7,6 +7,7 @@ export type TPractice = {
   description: string;
   tags: string[];
   priceZen: number;
+  priceRub?: number;
   isPurchased: boolean;
   isActive: boolean;
   imgUrl?: string;

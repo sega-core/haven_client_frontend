@@ -4,7 +4,7 @@ import { Typography } from "../../components/Typography";
 import cn from "../../utils/cn";
 import { useGetPracticeInstructions, useSpendCoin } from "../../hooks";
 import { PriceChip } from "./components/PriceChip";
-import { PurchaseDrawer } from "./components/PurchaseDrawer";
+import { PurchaseDrawer, TCurrency } from "./components/PurchaseDrawer";
 import { useDrawerContext } from "../../components/Drawer/DrawerContextProvider";
 import { Icon } from "../../components/Icon";
 
@@ -14,7 +14,16 @@ type Props = {
   isNasted?: boolean;
 };
 export const PracticeCard = ({ item, hidePurchasedChip, isNasted }: Props) => {
-  const { priceZen, title, tags, isPurchased, description, id, imgUrl } = item;
+  const {
+    priceZen,
+    priceRub,
+    title,
+    tags,
+    isPurchased,
+    description,
+    id,
+    imgUrl,
+  } = item;
 
   const { openDrawer, closeDrawer } = useDrawerContext();
 
@@ -22,7 +31,11 @@ export const PracticeCard = ({ item, hidePurchasedChip, isNasted }: Props) => {
 
   const { mutateAsync } = useSpendCoin();
 
-  const handlePay = async () => {
+  const handlePay = async (currency: TCurrency) => {
+    if (currency === "rub") {
+      alert("Перейти на оплату");
+      return;
+    }
     await mutateAsync({
       amount: priceZen,
       practiceId: id,
@@ -41,10 +54,10 @@ export const PracticeCard = ({ item, hidePurchasedChip, isNasted }: Props) => {
             description={description}
             instructions={data?.instructions}
             isPurchased={isPurchased}
-            price={priceZen}
-            currency="zen"
             handlePay={handlePay}
             isDescriptionNode={false}
+            priceZen={priceZen}
+            priceRub={priceRub}
           />
         </div>
       ),
@@ -90,12 +103,20 @@ export const PracticeCard = ({ item, hidePurchasedChip, isNasted }: Props) => {
       <div className="absolute inset-0 bg-black/50 rounded-3xl" />
 
       <div className="relative z-10 flex flex-col h-full">
-        <PriceChip
-          price={priceZen}
-          isPurchased={isPurchased}
-          hidePurchasedChip={hidePurchasedChip}
-          type="practice"
-        />
+        <div className="flex gap-1 justify-end">
+          <PriceChip
+            priceZen={priceZen}
+            isPurchased={isPurchased}
+            hidePurchasedChip={hidePurchasedChip}
+          />
+          {priceRub && (
+            <PriceChip
+              priceRub={priceRub}
+              isPurchased={isPurchased}
+              hidePurchasedChip={hidePurchasedChip}
+            />
+          )}
+        </div>
         <div className="grid gap-2 mt-auto">
           <Typography
             type="heading-xs"

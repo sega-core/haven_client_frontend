@@ -54,10 +54,9 @@ export const PracticeBundleCard = ({ item }: Props) => {
               </div>
             }
             isPurchased={isPurchasedBundle}
-            price={price}
-            currency="rub"
             handlePay={handlePay}
             isDescriptionNode
+            priceRub={price}
           />
         </div>
       ),
@@ -82,8 +81,7 @@ export const PracticeBundleCard = ({ item }: Props) => {
 
       <div className="relative z-10 flex flex-col h-full">
         <PriceChip
-          type="bundle"
-          price={price}
+          priceRub={price}
           isPurchased={isPurchasedBundle}
         />
         <div className="grid gap-2 mt-auto">
