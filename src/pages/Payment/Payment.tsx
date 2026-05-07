@@ -1,9 +1,8 @@
-import { useNavigate, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { useState, useEffect, useRef } from "react";
 
 export const Payment = () => {
   const location = useLocation();
-  const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(true);
   const [hasError, setHasError] = useState(false);
   const [loadAttempts, setLoadAttempts] = useState(0);
@@ -59,7 +58,7 @@ export const Payment = () => {
 
   if (!url) {
     return (
-      <div className="fixed inset-0 z-50 bg-white flex items-center justify-center">
+      <div className="inset-0 z-50 bg-white flex items-center justify-center rounded-3xl overflow-hidden">
         <div className="text-center p-6">
           <div className="w-20 h-20 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
             <svg className="w-10 h-10 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -68,48 +67,18 @@ export const Payment = () => {
           </div>
           <h3 className="text-xl font-semibold text-gray-800 mb-2">Ошибка</h3>
           <p className="text-gray-500 mb-6">Не удалось получить ссылку на оплату</p>
-          <button
-            onClick={() => navigate(-1)}
-            className="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium"
-          >
-            Вернуться назад
-          </button>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="fixed inset-0 z-50 bg-white">
-      <div className="sticky top-0 bg-white border-b border-gray-200 px-4 py-3 flex items-center justify-between z-10">
-        <button
-          onClick={() => navigate(-1)}
-          className="p-2 -ml-2 text-gray-600 hover:bg-gray-100 rounded-full transition"
-        >
-          <svg
-            className="w-6 h-6"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M15 19l-7-7 7-7"
-            />
-          </svg>
-        </button>
-        <span className="font-medium">Оплата</span>
-        <div className="w-8" />
-      </div>
+    <div className="z-50 bg-white w-full rounded-3xl overflow-hidden">
 
       {isLoading && !hasError && (
-        <div className="absolute inset-0 flex flex-col items-center justify-center bg-white z-20" style={{ top: '52px', height: 'calc(100% - 52px)' }}>
+        <div className="inset-0 flex flex-col items-center justify-center bg-white z-20" style={{ top: '52px', height: 'calc(100% - 52px)' }}>
           <div className="relative">
-            {/* Фоновое кольцо */}
             <div className="w-16 h-16 border-4 border-gray-200 rounded-full"></div>
-            {/* Анимированный спиннер */}
             <div className="absolute top-0 left-0 w-16 h-16 border-4 border-blue-600 rounded-full border-t-transparent animate-spin"></div>
           </div>
           <p className="mt-4 text-gray-600 font-medium">Загрузка формы оплаты...</p>
@@ -118,7 +87,7 @@ export const Payment = () => {
       )}
 
       {hasError && (
-        <div className="absolute inset-0 flex flex-col items-center justify-center bg-white z-20 p-6" style={{ top: '52px', height: 'calc(100% - 52px)' }}>
+        <div className="inset-0 flex flex-col items-center justify-center bg-white z-20 p-6" style={{ top: '52px', height: 'calc(100% - 52px)' }}>
           <div className="w-20 h-20 bg-red-100 rounded-full flex items-center justify-center mb-4">
             <svg className="w-10 h-10 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />

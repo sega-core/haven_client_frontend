@@ -22,6 +22,7 @@ export const useRouteTitle = () => {
     ROUTES.META_CARD,
     ROUTES.AUDIO_HELP,
     ROUTES.REGISTRATION,
+    ROUTES.PAYMENT
   ].some((route) => route === pathname) && accessToken;
 
   const isVisibleBreadcrumb = [
@@ -31,6 +32,7 @@ export const useRouteTitle = () => {
     ROUTES.META_CARD,
     ROUTES.AUDIO_HELP,
     ROUTES.REGISTRATION,
+    ROUTES.PAYMENT
   ].some((route) => pathname.includes(route));
 
   return { title, isVisibleHeader, isVisibleBreadcrumb };

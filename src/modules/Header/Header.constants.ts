@@ -14,4 +14,5 @@ export const HEADER_TITLE = {
   [ROUTES.FAQ]: "Часто задаваемые вопросы",
   [ROUTES.META_CARD]: "Метафорическая карта",
   [ROUTES.AUDIO_HELP]: "Слова поддержки",
+  [ROUTES.PAYMENT]: "Оплата",
 };

@@ -46,7 +46,11 @@ export const Hint = ({ text, example, title }: HintProps) => {
                     </h3>
                   )}
                   <p className="text-gray-600 text-base leading-relaxed mb-3 whitespace-pre-line">
-                    {text}
+                    <div
+                      dangerouslySetInnerHTML={{
+                        __html: text,
+                      }}
+                    />
                   </p>
                   {example && (
                     <div className="bg-beige-primary/10 rounded-xl p-3 mt-2">
