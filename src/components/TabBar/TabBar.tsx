@@ -3,6 +3,7 @@ import { Icon } from "../Icon";
 import { Typography } from "../Typography";
 import { useNavigate, useLocation } from "react-router-dom";
 import { ROUTES } from "../../containers/Routes";
+import { EOnboardingTargetId } from "../../hooks";
 
 const tabs = [
   {
@@ -14,16 +15,19 @@ const tabs = [
     id: "Calendar" as const,
     name: "Каледарь",
     route: ROUTES.ARCHIVE,
+    onboardingId: EOnboardingTargetId.CALENDAR,
   },
   {
     id: "MessageCircle" as const,
     name: "Комьюнити",
     route: ROUTES.COMUNITY,
+    onboardingId: EOnboardingTargetId.COMUNITY,
   },
   {
     id: "LibreryBig" as const,
     name: "Практики",
     route: ROUTES.PRACTICE,
+    onboardingId: EOnboardingTargetId.PRACTICES,
   },
 ];
 
@@ -63,7 +67,10 @@ export const TabBar = () => {
             <Tab
               key={index}
               title={
-                <div className="flex items-center flex-col gap-1">
+                <div
+                  className="flex items-center flex-col gap-1"
+                  id={tab.onboardingId}
+                >
                   <Icon
                     name={tab.id}
                     width={20}

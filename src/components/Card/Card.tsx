@@ -2,6 +2,7 @@ import { useNavigate } from "react-router";
 import { ROUTES } from "../../containers";
 import { cn } from "../../utils";
 import { Typography } from "../Typography";
+import { EOnboardingTargetId } from "../../hooks";
 
 const cards = [
   {
@@ -10,6 +11,7 @@ const cards = [
     route: ROUTES.TARGETS,
     color: "bg-vinous-secondary",
     emoji: "🎯",
+    onboardingId: EOnboardingTargetId.TARGET,
   },
   {
     id: "Goal" as const,
@@ -17,6 +19,7 @@ const cards = [
     route: ROUTES.BREATH,
     color: "bg-cold-green-secondary",
     emoji: "🌀",
+    onboardingId: EOnboardingTargetId.BREATH,
   },
   {
     id: "Goal" as const,
@@ -24,6 +27,7 @@ const cards = [
     route: ROUTES.META_CARD,
     color: "bg-brown-secondary",
     emoji: "🪬",
+    onboardingId: EOnboardingTargetId.META_CARD,
   },
   {
     id: "Goal" as const,
@@ -31,6 +35,7 @@ const cards = [
     route: ROUTES.AUDIO_HELP,
     color: "bg-mustard-secondary",
     emoji: "🧘",
+    onboardingId: EOnboardingTargetId.ZEN,
   },
 ];
 
@@ -41,6 +46,7 @@ export const Card = () => {
     <div className="flex gap-4">
       {cards.map((item, index) => (
         <div
+          id={item.onboardingId}
           key={index}
           className="flex flex-col h-full active:scale-95 transition-transform duration-150"
           onClick={() => navigate(item.route)}

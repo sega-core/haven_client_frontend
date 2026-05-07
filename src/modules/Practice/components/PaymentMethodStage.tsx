@@ -55,7 +55,7 @@ const PaymentOptionCard = ({
         >
           {price}
         </Typography>
-        <Typography type="body-xs" className="text-beige-secondary">
+        <Typography type="body-xs" className="text-brown-primary">
           {title}
         </Typography>
       </div>

@@ -14,14 +14,13 @@ export type TPractice = {
 };
 
 export type TPraciteBundle = {
-  priceRubWithDiscount: number;
-  isApplyDiscount: boolean;
-  isPurchasedBundle: boolean;
+  isPurchased: boolean;
   id: number;
   title: string;
   subTitle: string;
   description: string;
   priceRub: number;
+  priceRubWithDiscount: number;
   isActive: boolean;
   tags: string[];
   imgUrl?: string;

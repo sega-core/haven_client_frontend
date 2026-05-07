@@ -23,6 +23,7 @@ export const AppRoutes = () => {
   const Breath = lazy(() => import("../../pages/Breath"));
   const MetaCard = lazy(() => import("../../pages/MetaCard"));
   const AudioHelp = lazy(() => import("../../pages/AudioHelp"));
+  const Payment = lazy(() => import("../../pages/Payment"));
 
   return (
     <Suspense fallback={<></>}>
@@ -90,6 +91,11 @@ export const AppRoutes = () => {
         <Route path={ROUTES.FAQ} element={
           <PrivateRoute>
             <Faq />
+          </PrivateRoute>
+        } />
+        <Route path={ROUTES.PAYMENT} element={
+          <PrivateRoute>
+            <Payment />
           </PrivateRoute>
         } />
         

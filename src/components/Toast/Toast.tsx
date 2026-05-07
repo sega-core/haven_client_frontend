@@ -34,4 +34,32 @@ export const havenToast = {
       },
     });
   },
+  error:(reason:string)=>{
+    addToast({
+      title: (
+        <Typography type="body-md" className="flex gap-1 items-center">
+          Произошла ошибка
+        </Typography>
+      ),
+      description: (
+        <Typography type="body-s" className="text-white-primary">
+          {reason}
+        </Typography>
+      ),
+      radius: "lg",
+      timeout: 5000,
+      hideIcon: true,
+      classNames: {
+        base: cn(
+          "mt-20",
+          "py-4 px-5 rounded-[16px]",
+          "bg-red-secondary",
+          "border border-[var(--background-danger-primary)] ",
+          "backdrop-blur-sm shadow-lg",
+        ),
+        title: "text-white-primary",
+        description: "text-white-primary",
+      },
+    });
+  }
 };

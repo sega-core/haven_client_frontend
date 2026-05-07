@@ -1,4 +1,4 @@
-import { useLocation } from "react-router";
+import { useLocation } from "react-router-dom";
 import { ErrorComponent } from "../../components/ErrorComponent";
 
 export const ErrorPage = () => {

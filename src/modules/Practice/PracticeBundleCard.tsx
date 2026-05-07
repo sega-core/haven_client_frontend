@@ -4,33 +4,37 @@ import { Typography } from "../../components/Typography";
 import cn from "../../utils/cn";
 import { PriceChip } from "./components/PriceChip";
 import { useDrawerContext } from "../../components/Drawer/DrawerContextProvider";
-import { PurchaseDrawer } from "./components/PurchaseDrawer";
+import { PurchaseDrawer, TCurrency } from "./components/PurchaseDrawer";
 import { PracticeCard } from "./PracticeCard";
+import { useCreatePayment } from "../../hooks";
 
 type Props = {
   item: TPraciteBundle;
 };
 export const PracticeBundleCard = ({ item }: Props) => {
   const {
-    priceRubWithDiscount,
-    isPurchasedBundle,
+    isPurchased,
     title,
     tags,
     practiceBundleItems,
     description,
-    isApplyDiscount,
     priceRub,
+    priceRubWithDiscount,
     imgUrl,
+    id,
   } = item;
 
-  const price = isApplyDiscount ? priceRubWithDiscount : priceRub;
+  const price = priceRubWithDiscount ? priceRubWithDiscount : priceRub;
 
   //TODO: сделать перечеркнуто при скидке
 
-  const { openDrawer } = useDrawerContext();
+  const { openDrawer, closeDrawer } = useDrawerContext();
 
-  const handlePay = async () => {
-    alert("Переходим к оплате");
+  const { mutateAsync: createPayment } = useCreatePayment();
+
+  const handlePay = async (currency: TCurrency) => {
+    createPayment({ currency, id, type: "bundle" });
+    closeDrawer();
   };
 
   const onClickCard = () => {
@@ -53,7 +57,7 @@ export const PracticeBundleCard = ({ item }: Props) => {
                 ))}
               </div>
             }
-            isPurchased={isPurchasedBundle}
+            isPurchased={isPurchased}
             handlePay={handlePay}
             isDescriptionNode
             priceRub={price}
@@ -80,10 +84,7 @@ export const PracticeBundleCard = ({ item }: Props) => {
       <div className="absolute inset-0 bg-black/50 rounded-3xl" />
 
       <div className="relative z-10 flex flex-col h-full">
-        <PriceChip
-          priceRub={price}
-          isPurchased={isPurchasedBundle}
-        />
+        <PriceChip priceRub={price} isPurchased={isPurchased} />
         <div className="grid gap-2 mt-auto">
           <Typography
             type="heading-xs"

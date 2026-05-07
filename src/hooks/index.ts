@@ -9,3 +9,5 @@ export * from "./useTelegramApi";
 export * from "./useAuth";
 export * from "./useRegistration";
 export * from "./useUser";
+export * from "./useOnbording";
+export * from "./usePayment";

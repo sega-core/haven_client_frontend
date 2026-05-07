@@ -1,6 +1,6 @@
 import { Avatar } from "../../components/Avatar";
 import { Typography } from "../../components/Typography";
-import { useLaunchParamsTelegram } from "../../hooks";
+import { EOnboardingTargetId, useLaunchParamsTelegram } from "../../hooks";
 import { CoinBalance } from "./components";
 import { useRouteTitle } from "./hooks/useRouteTitle";
 import { Icon } from "../../components/Icon";
@@ -46,8 +46,12 @@ export const Header = () => {
         {title?.replace("%user_name%", String(firstName))}
       </Typography>
       <div className="flex gap-4">
-        <CoinBalance />
-        <Avatar image={photoUrl} onClick={() => navigate(ROUTES.PROFILE)} />
+        <div id={EOnboardingTargetId.COIN}>
+          <CoinBalance />
+        </div>
+        <div id={EOnboardingTargetId.PROFILE}>
+          <Avatar image={photoUrl} onClick={() => navigate(ROUTES.PROFILE)} />
+        </div>
       </div>
     </div>
   );

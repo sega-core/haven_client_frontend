@@ -15,4 +15,5 @@ export const ROUTES = {
   BREATH: "/breath",
   META_CARD: "/meta-card",
   AUDIO_HELP: "/audio-help",
+  PAYMENT: "/payment",
 } as const;

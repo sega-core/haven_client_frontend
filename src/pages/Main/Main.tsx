@@ -3,7 +3,7 @@ import { GratitudeCard } from "../../modules/Gratitude";
 import { MoodCard } from "../../modules/Mood";
 import { TargetCards } from "../../modules/Targets";
 import { DailyQuestionCard } from "../../modules/DailyQuestion";
-import { useGetProgress } from "../../hooks";
+import { EOnboardingTargetId, useGetProgress } from "../../hooks";
 import { SkeletonMetric } from "../../components/Skeleton";
 import { Card } from "../../components/Card";
 
@@ -13,12 +13,20 @@ export const Main = () => {
   return (
     <div className="grid gap-4 w-full">
       <Card />
-      <ProgressLineZen goal={data?.progressPoint} />
+      <div id={EOnboardingTargetId.PROGRESS_LINE}>
+        <ProgressLineZen goal={data?.progressPoint} />
+      </div>
       <TargetCards />
       <SkeletonMetric isLoading={isLoading}>
-        <MoodCard data={data?.mood} />
-        <GratitudeCard data={data?.gratitude.listOfGratitude} />
-        <DailyQuestionCard data={data?.dailyQuestion} />
+        <div id={EOnboardingTargetId.MOOD}>
+          <MoodCard data={data?.mood} />
+        </div>
+        <div id={EOnboardingTargetId.GRATITUDE}>
+          <GratitudeCard data={data?.gratitude.listOfGratitude} />
+        </div>
+        <div id={EOnboardingTargetId.DAILY_QUESTION}>
+          <DailyQuestionCard data={data?.dailyQuestion} />
+        </div>
       </SkeletonMetric>
     </div>
   );

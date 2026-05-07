@@ -2,11 +2,10 @@ import { TPractice } from "../../api";
 import { Chip } from "../../components/Chip";
 import { Typography } from "../../components/Typography";
 import cn from "../../utils/cn";
-import { useGetPracticeInstructions, useSpendCoin } from "../../hooks";
+import { useGetPracticeInstructions, useCreatePayment } from "../../hooks";
 import { PriceChip } from "./components/PriceChip";
 import { PurchaseDrawer, TCurrency } from "./components/PurchaseDrawer";
 import { useDrawerContext } from "../../components/Drawer/DrawerContextProvider";
-import { Icon } from "../../components/Icon";
 
 type Props = {
   item: TPractice;
@@ -29,17 +28,10 @@ export const PracticeCard = ({ item, hidePurchasedChip, isNasted }: Props) => {
 
   const { data } = useGetPracticeInstructions(id, isPurchased);
 
-  const { mutateAsync } = useSpendCoin();
+  const { mutateAsync: createPayment } = useCreatePayment();
 
   const handlePay = async (currency: TCurrency) => {
-    if (currency === "rub") {
-      alert("Перейти на оплату");
-      return;
-    }
-    await mutateAsync({
-      amount: priceZen,
-      practiceId: id,
-    });
+    createPayment({ currency, id, type:'practice' });
     closeDrawer();
   };
 
@@ -73,15 +65,7 @@ export const PracticeCard = ({ item, hidePurchasedChip, isNasted }: Props) => {
         <Typography type="body-s" className="text-brown-primary">
           {title}
         </Typography>
-        {!isPurchased && (
-          <Chip
-            icon={<Icon name="ZenFilled" width={14} height={14} />}
-            color="beige"
-            iconPostition="end"
-            label={String(priceZen)}
-          />
-        )}
-        {isPurchased && <Chip color="beige" label="Куплено" />}
+        <PriceChip isPurchased={isPurchased} priceZen={priceZen} />
       </div>
     );
   }
@@ -103,20 +87,28 @@ export const PracticeCard = ({ item, hidePurchasedChip, isNasted }: Props) => {
       <div className="absolute inset-0 bg-black/50 rounded-3xl" />
 
       <div className="relative z-10 flex flex-col h-full">
-        <div className="flex gap-1 justify-end">
-          <PriceChip
-            priceZen={priceZen}
-            isPurchased={isPurchased}
-            hidePurchasedChip={hidePurchasedChip}
-          />
-          {priceRub && (
+        {!isPurchased ? (
+          <div className="flex gap-1 justify-end">
             <PriceChip
-              priceRub={priceRub}
+              priceZen={priceZen}
               isPurchased={isPurchased}
               hidePurchasedChip={hidePurchasedChip}
             />
-          )}
-        </div>
+            {priceRub && (
+              <PriceChip
+                priceRub={priceRub}
+                isPurchased={isPurchased}
+                hidePurchasedChip={hidePurchasedChip}
+              />
+            )}
+          </div>
+        ) : (
+          <PriceChip
+            isPurchased={isPurchased}
+            hidePurchasedChip={hidePurchasedChip}
+          />
+        )}
+
         <div className="grid gap-2 mt-auto">
           <Typography
             type="heading-xs"
