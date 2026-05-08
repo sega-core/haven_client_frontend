@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { postPayment, TReqPayment } from "../api";
+import { getPayment, postPayment, TReqPayment } from "../api";
 import { useNavigate } from "react-router";
 import { ROUTES } from "../containers";
 import { havenToast } from "../components/Toast";
@@ -12,12 +12,12 @@ export const useCreatePayment = () => {
 
   return useMutation({
     mutationFn: (props: TReqPayment) => postPayment(props),
-    onSuccess: ({ url }) => {
-      if (url) {
+    onSuccess: ({ url, invId }) => {
+      if (url && invId) {
         navigate(ROUTES.PAYMENT, {
-          state: { url },
+          state: { url, invId },
         });
-        return
+        return;
       }
       queryClient.invalidateQueries({ queryKey: [GET_COIN] });
       queryClient.invalidateQueries({ queryKey: [GET_PRACTICE] });
@@ -26,5 +26,11 @@ export const useCreatePayment = () => {
     onError: () => {
       havenToast.error("Не получен ответ от кассы");
     },
+  });
+};
+
+export const useGetPayment = () => {
+  return useMutation({
+    mutationFn: (id: number) => getPayment(id),
   });
 };
