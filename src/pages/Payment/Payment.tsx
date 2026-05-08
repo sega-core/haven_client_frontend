@@ -21,7 +21,7 @@ export const Payment = () => {
 
   const checkPaymentStatus = async () => {
     try {
-      const data = await mutateAsync(1778154701025);
+      const data = await mutateAsync(invId);
 
       if (data.status === "paid") {
         setStatus("success");

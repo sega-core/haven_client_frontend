@@ -6,16 +6,14 @@ import { useNavigate } from "react-router";
 import { ROUTES } from "../containers";
 import { formatError } from "../utils";
 
-export const GET_AUTH = "GET_AUTH";
-
 export const useAuth = () => {
   const rawData = useRawLaunchParamsTelegram();
   const navigate = useNavigate();
 
   return useMutation({
     mutationFn: () => getAuth(rawData),
-    onSuccess: ({ accessToken, termsAccepted }) => {
-      tokenService.setJwtToken({ accessToken, termsAccepted });
+    onSuccess: ({ accessToken }) => {
+      tokenService.setJwtToken({ accessToken });
       navigate(ROUTES.MAIN);
     },
     onError: (err: unknown) => {

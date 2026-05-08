@@ -23,7 +23,7 @@ export const useRouteTitle = () => {
     ROUTES.AUDIO_HELP,
     ROUTES.REGISTRATION,
     ROUTES.PAYMENT
-  ].some((route) => route === pathname) && accessToken;
+  ].some((route) => route === pathname) && !!accessToken;
 
   const isVisibleBreadcrumb = [
     ROUTES.PROFILE,

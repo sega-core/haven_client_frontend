@@ -24,6 +24,8 @@ export const AppRoutes = () => {
   const MetaCard = lazy(() => import("../../pages/MetaCard"));
   const AudioHelp = lazy(() => import("../../pages/AudioHelp"));
   const Payment = lazy(() => import("../../pages/Payment"));
+  const PaymentSuccess = lazy(() => import("../../pages/PaymentSuccess"));
+  const PaymentError = lazy(() => import("../../pages/PaymentError"));
 
   return (
     <Suspense fallback={<></>}>
@@ -33,72 +35,110 @@ export const AppRoutes = () => {
         <Route path={ROUTES.TERMS} element={<Terms />} />
         <Route path={ROUTES.PRIVACY} element={<Privacy />} />
         <Route path={ROUTES.ERROR} element={<Error />} />
-        
+        <Route path={ROUTES.PAYMENT_ERROR} element={<PaymentError />} />
+        <Route path={ROUTES.PAYMENT_SUCCESS} element={<PaymentSuccess />} />
+
         {/* Semi-public - требует авторизации, но не принятия оферты */}
         <Route path={ROUTES.REGISTRATION} element={<Registration />} />
-        
+
         {/* Private routes - требуют авторизацию и принятие оферты */}
-        <Route path={ROUTES.MAIN} element={
-          <PrivateRoute>
-            <Main />
-          </PrivateRoute>
-        } />
-        <Route path={ROUTES.TARGETS} element={
-          <PrivateRoute>
-            <Targets />
-          </PrivateRoute>
-        } />
-        <Route path={ROUTES.COMUNITY} element={
-          <PrivateRoute>
-            <Comunity />
-          </PrivateRoute>
-        } />
-        <Route path={ROUTES.PRACTICE} element={
-          <PrivateRoute>
-            <Practice />
-          </PrivateRoute>
-        } />
-        <Route path={ROUTES.ARCHIVE} element={
-          <PrivateRoute>
-            <Archive />
-          </PrivateRoute>
-        } />
-        <Route path={ROUTES.BREATH} element={
-          <PrivateRoute>
-            <Breath />
-          </PrivateRoute>
-        } />
-        <Route path={ROUTES.META_CARD} element={
-          <PrivateRoute>
-            <MetaCard />
-          </PrivateRoute>
-        } />
-        <Route path={ROUTES.AUDIO_HELP} element={
-          <PrivateRoute>
-            <AudioHelp />
-          </PrivateRoute>
-        } />
-        <Route path={ROUTES.PROFILE} element={
-          <PrivateRoute>
-            <Profile />
-          </PrivateRoute>
-        } />
-        <Route path={ROUTES.SUBSCRIPTION} element={
-          <PrivateRoute>
-            <Subscription />
-          </PrivateRoute>
-        } />
-        <Route path={ROUTES.FAQ} element={
-          <PrivateRoute>
-            <Faq />
-          </PrivateRoute>
-        } />
-        <Route path={ROUTES.PAYMENT} element={
-          <PrivateRoute>
-            <Payment />
-          </PrivateRoute>
-        } />
-        
+        <Route
+          path={ROUTES.MAIN}
+          element={
+            <PrivateRoute>
+              <Main />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path={ROUTES.TARGETS}
+          element={
+            <PrivateRoute>
+              <Targets />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path={ROUTES.COMUNITY}
+          element={
+            <PrivateRoute>
+              <Comunity />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path={ROUTES.PRACTICE}
+          element={
+            <PrivateRoute>
+              <Practice />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path={ROUTES.ARCHIVE}
+          element={
+            <PrivateRoute>
+              <Archive />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path={ROUTES.BREATH}
+          element={
+            <PrivateRoute>
+              <Breath />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path={ROUTES.META_CARD}
+          element={
+            <PrivateRoute>
+              <MetaCard />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path={ROUTES.AUDIO_HELP}
+          element={
+            <PrivateRoute>
+              <AudioHelp />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path={ROUTES.PROFILE}
+          element={
+            <PrivateRoute>
+              <Profile />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path={ROUTES.SUBSCRIPTION}
+          element={
+            <PrivateRoute>
+              <Subscription />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path={ROUTES.FAQ}
+          element={
+            <PrivateRoute>
+              <Faq />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path={ROUTES.PAYMENT}
+          element={
+            <PrivateRoute>
+              <Payment />
+            </PrivateRoute>
+          }
+        />
+
         {/* Default redirect */}
         <Route path="/" element={<Navigate to={ROUTES.MAIN} replace />} />
         <Route path="*" element={<Navigate to={ROUTES.ERROR} replace />} />
@@ -117,6 +157,6 @@ export const PrivateRoute = ({ children }: PrivateRouteProps) => {
   if (!accessToken) {
     return <Navigate to={ROUTES.LOGIN} replace />;
   }
-  
+
   return <>{children}</>;
 };

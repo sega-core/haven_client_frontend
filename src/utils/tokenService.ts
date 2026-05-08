@@ -2,7 +2,6 @@ const JWT_TOKEN_KEY_NAME = "userToken";
 
 class TokenService {
   private accessToken: string | null = null;
-  private termsAccepted: string | null = null;
 
   constructor() {
     this.loadToken();
@@ -20,19 +19,15 @@ class TokenService {
     }
     return {
       accessToken: this.accessToken,
-      termsAccepted: this.termsAccepted,
     };
   }
 
   setJwtToken({
     accessToken,
-    termsAccepted,
   }: {
     accessToken: string;
-    termsAccepted: string;
   }): void {
     this.accessToken = accessToken;
-    this.termsAccepted = termsAccepted;
     if (typeof window !== "undefined") {
       localStorage.setItem(JWT_TOKEN_KEY_NAME, accessToken);
     }
@@ -40,7 +35,6 @@ class TokenService {
 
   removeJwtToken(): void {
     this.accessToken = null;
-    this.termsAccepted = null;
     if (typeof window !== "undefined") {
       localStorage.removeItem(JWT_TOKEN_KEY_NAME);
     }

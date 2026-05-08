@@ -16,4 +16,6 @@ export const ROUTES = {
   META_CARD: "/meta-card",
   AUDIO_HELP: "/audio-help",
   PAYMENT: "/payment",
+  PAYMENT_SUCCESS: "/payment-success",
+  PAYMENT_ERROR: "/payment-error",
 } as const;
