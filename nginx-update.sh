@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash chmod +x nginx-update.sh
 
 # Цвета для вывода
 GREEN='\033[0;32m'

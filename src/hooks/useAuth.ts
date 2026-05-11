@@ -1,10 +1,12 @@
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { getAuth } from "../api";
 import { useRawLaunchParamsTelegram } from "./useTelegramApi";
 import { tokenService } from "../utils/tokenService";
 import { useNavigate } from "react-router";
 import { ROUTES } from "../containers";
 import { formatError } from "../utils";
+
+export const GET_AUTH = "GET_AUTH";
 
 export const useAuth = () => {
   const rawData = useRawLaunchParamsTelegram();
@@ -34,4 +36,10 @@ export const useAuth = () => {
       });
     },
   });
+};
+
+export const useGetAuth = () => {
+  const rawData = useRawLaunchParamsTelegram();
+
+  return useQuery({ queryKey: [GET_AUTH], queryFn: () => getAuth(rawData) });
 };

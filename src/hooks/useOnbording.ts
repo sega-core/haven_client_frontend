@@ -1,5 +1,6 @@
-// hooks/useOnboarding.ts
 import { useEffect, useState } from "react";
+import { useGetAuth } from "./useAuth";
+import { useUpdateUser } from "./useUser";
 
 export type OnboardingStep = {
   targetId: string;
@@ -27,70 +28,81 @@ export enum EOnboardingTargetId {
 export const ONBOARDING_STEPS: OnboardingStep[] = [
   {
     targetId: EOnboardingTargetId.TARGET,
-    title: "Цели",
-    description: "Создавайте и отслеживайте свои цели",
-  },
-  {
-    targetId: EOnboardingTargetId.BREATH,
-    title: "breath",
-    description: "breath",
-  },
-  {
-    targetId: EOnboardingTargetId.META_CARD,
-    title: "metaCard",
-    description: "metaCard",
-  },
-  {
-    targetId: EOnboardingTargetId.ZEN,
-    title: "zen",
-    description: "zen",
-  },
-  {
-    targetId: EOnboardingTargetId.PROGRESS_LINE,
-    title: "Ваш прогресс",
+    title: "Трекер личной цели",
     description:
-      "Здесь отображается ваш текущий уровень прогресса. Выполняйте практики, чтобы заполнять шкалу.",
+      "Создайте свою цель, назначьте дедлайн и следите за движением к ней прямо с главного экрана.",
   },
   {
     targetId: EOnboardingTargetId.MOOD,
-    title: "obbording_mood",
-    description: "obbording_mood",
+    title: "Трекер настроения",
+    description:
+      "Фиксируйте свои эмоции и чувства. Это поможет вам анализировать свое состояние и развивать осознанность.",
     position: "top",
   },
   {
     targetId: EOnboardingTargetId.GRATITUDE,
-    title: "obbording_gratitude",
-    description: "obbording_gratitude",
+    title: "Дневник благодарности",
+    description:
+      "Зафиксируйте моменты благодарности – себе, окружающим или всему, что вас радует.",
   },
   {
     targetId: EOnboardingTargetId.DAILY_QUESTION,
-    title: "obbording_dailyQuestion",
-    description: "obbording_dailyQuestion",
+    title: "Ежедневный вопрос для самопознания",
+    description:
+      "Каждый день – новый вопрос, который поможет лучше понять себя и свои ценности.",
   },
   {
     targetId: EOnboardingTargetId.COIN,
-    title: "obbording_coin",
-    description: "obbording_coin",
+    title: "Zen – это валюта приложения",
+    description:
+      "Зарабатывайте её каждый день за заполнение трекера настроения, дневника благодарности и вопроса дня.",
   },
   {
-    targetId: EOnboardingTargetId.PROFILE,
-    title: "obbording_profile",
-    description: "obbording_profile",
-  },
-  {
-    targetId: EOnboardingTargetId.CALENDAR,
-    title: "obbording_calendar",
-    description: "obbording_calendar",
-  },
-  {
-    targetId: EOnboardingTargetId.COMUNITY,
-    title: "obbording_comunity",
-    description: "obbording_comunity",
+    targetId: EOnboardingTargetId.PROGRESS_LINE,
+    title: "Ваша шкала прогресса",
+    description:
+      "Она показывает, сколько трекеров вы заполнили за день. Весь Zen вы получите только когда заполните шкалу целиком.",
   },
   {
     targetId: EOnboardingTargetId.PRACTICES,
-    title: "obbording_practices",
-    description: "obbording_practices",
+    title: "Коллекции практик",
+    description:
+      "Открывайте новые методики! Оплатите сразу или используйте накопленные Zen для выгодной покупки.",
+  },
+  {
+    targetId: EOnboardingTargetId.CALENDAR,
+    title: "Календарь",
+    description: "Изучай свою активность за любой день",
+  },
+  {
+    targetId: EOnboardingTargetId.BREATH,
+    title: "Дыхание",
+    description:
+      "Сделайте дыхательную практику в любой сложной момент, чтобы улучшить свое состояние.",
+  },
+  {
+    targetId: EOnboardingTargetId.META_CARD,
+    title: "Метафорические карты",
+    description:
+      "Воспользуйтесь этим инструментом самопомощи для того, чтобы найти ответ на свой вопрос. Вытащить МАК-карту можно только раз в день.",
+  },
+  {
+    targetId: EOnboardingTargetId.ZEN,
+    title: "Медитации",
+    description:
+      "Заходите в плейлист медитаций каждый раз, когда необходимо самостоятельно поддержать себя.",
+  },
+  {
+    targetId: EOnboardingTargetId.PROFILE,
+    title: "Профиль",
+    description:
+      "За ответами на вопросы и важной информацией загляните в свой профиль.",
+  },
+  {
+    targetId: EOnboardingTargetId.COMUNITY,
+    title: "Комьюнити",
+    description:
+      "Стань частью нашего сообщества – находи поддержку и единомышленников.",
   },
 ];
 
@@ -101,14 +113,19 @@ export const useOnboarding = () => {
   const currentStep = ONBOARDING_STEPS[currentStepIndex];
   const totalSteps = ONBOARDING_STEPS.length;
 
-  useEffect(() => {
-    const hasSeenOnboarding = localStorage.getItem("onboarding_completed");
-    const isNewUser = localStorage.getItem("is_new_user") === "true";
+  const { data, isSuccess } = useGetAuth();
 
-    if (!hasSeenOnboarding && isNewUser) {
+  const { mutate } = useUpdateUser();
+
+  const hasSeenOnboarding = isSuccess && data?.onboardingCompleted === true;
+
+  useEffect(() => {
+    if (isSuccess && !hasSeenOnboarding) {
       setIsOnboarding(true);
+    } else if (isSuccess && hasSeenOnboarding) {
+      setIsOnboarding(false);
     }
-  }, []);
+  }, [data, isSuccess, hasSeenOnboarding]);
 
   const nextStep = () => {
     if (currentStepIndex < totalSteps - 1) {
@@ -120,14 +137,12 @@ export const useOnboarding = () => {
 
   const completeOnboarding = () => {
     setIsOnboarding(false);
-    localStorage.setItem("onboarding_completed", "true");
-    localStorage.removeItem("is_new_user");
+    mutate({ onboardingCompleted: true });
   };
 
   const skipOnboarding = () => {
     setIsOnboarding(false);
-    localStorage.setItem("onboarding_completed", "true");
-    localStorage.removeItem("is_new_user");
+    mutate({ onboardingCompleted: true });
   };
 
   return {

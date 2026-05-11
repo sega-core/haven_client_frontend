@@ -1,5 +1,5 @@
 import { useMutation } from "@tanstack/react-query";
-import { deleteUser } from "../api";
+import { deleteUser, updateUser } from "../api";
 import { handleApiError, tokenService } from "../utils";
 import { useNavigate } from "react-router";
 import { ROUTES } from "../containers";
@@ -13,6 +13,16 @@ export const useDeleteUser = () => {
       tokenService.removeJwtToken();
       navigate(ROUTES.REGISTRATION);
     },
+    onError: (error) => {
+      const errorMessage = handleApiError(error);
+      alert(errorMessage);
+    },
+  });
+};
+
+export const useUpdateUser = () => {
+  return useMutation({
+    mutationFn: (body: { onboardingCompleted: boolean }) => updateUser(body),
     onError: (error) => {
       const errorMessage = handleApiError(error);
       alert(errorMessage);
