@@ -1,25 +1,18 @@
-import { useState } from "react";
+import { ReactNode, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Icon } from "../Icon";
-
 interface HintProps {
   text: string;
   example?: string;
   title?: string;
+  children?: ReactNode;
 }
 
-export const Hint = ({ text, example, title }: HintProps) => {
+export const Hint = ({ text, example, title, children }: HintProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
     <>
-      <Icon
-        name="Question"
-        width={20}
-        height={20}
-        onClick={() => setIsOpen(true)}
-        className="fill-(--stroke-beige-primary)"
-      />
+      <div onClick={() => setIsOpen(true)}>{children}</div>
 
       <AnimatePresence>
         {isOpen && (

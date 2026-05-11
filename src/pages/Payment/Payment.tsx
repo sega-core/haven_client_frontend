@@ -15,7 +15,6 @@ export const Payment = () => {
   const [status, setStatus] = useState<
     "redirecting" | "checking" | "success" | "error"
   >("redirecting");
-  const [checkAttempts, setCheckAttempts] = useState(0);
 
   const { mutateAsync } = useGetPayment();
 
@@ -39,33 +38,37 @@ export const Payment = () => {
   };
 
   useEffect(() => {
+    let attempts = 0;
+    const MAX_ATTEMPTS = 5;
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    //@ts-ignore
+    let interval: NodeJS.Timeout | null = null;
+
     if (!url) {
       setStatus("error");
       return;
     }
+
     openLink(url);
 
     const redirectTimer = setTimeout(() => {
       setStatus("checking");
 
-      const interval = setInterval(async () => {
-        setCheckAttempts((prev) => prev + 1);
+      interval = setInterval(async () => {
+        attempts++;
 
         const isPaid = await checkPaymentStatus();
 
-        if (isPaid) {
-          clearInterval(interval);
-        }
-
-        if (checkAttempts >= 5) {
-          clearInterval(interval);
+        if (isPaid || attempts >= MAX_ATTEMPTS) {
+          if (interval) clearInterval(interval);
         }
       }, 5000);
-
-      return () => clearInterval(interval);
     }, 3000);
 
-    return () => clearTimeout(redirectTimer);
+    return () => {
+      clearTimeout(redirectTimer);
+      if (interval) clearInterval(interval);
+    };
   }, [url, invId]);
 
   if (status === "error") {

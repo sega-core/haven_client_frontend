@@ -12,6 +12,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Typography } from "../../../components/Typography";
 import { format, startOfDay } from "date-fns";
 import { Hint } from "../../../components/Hint";
+import { Chip } from "../../../components/Chip";
 
 const GENERATION_KEY = "meta_card_generation_date";
 
@@ -77,7 +78,7 @@ export const MetaCardSheet = () => {
             }}
           >
             <svg
-              className="w-16 h-16 text-beige-primary"
+              className="w-16 h-16 text-brown-primary"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -93,11 +94,11 @@ export const MetaCardSheet = () => {
 
           <div className="text-center">
             <motion.p
-              className="text-lg font-medium text-beige-primary"
+              className="text-lg text-brown-primary"
               animate={{ opacity: [1, 0.5, 1] }}
               transition={{ duration: 1.5, repeat: Infinity }}
             >
-              Генерируем вашу мета-карту
+              Вытягиваем мета-карту из колоды
             </motion.p>
           </div>
         </motion.div>
@@ -158,7 +159,10 @@ export const MetaCardSheet = () => {
               </Typography>
               <div className="flex justify-end items-center gap-1">
                 {data?.metaCard.description && (
-                  <Hint text={data?.metaCard.description} />
+                  <Hint
+                    text={data?.metaCard.description}
+                    children={<Chip label="Значение" color="beige" />}
+                  />
                 )}
               </div>
               <InputText field={EMetaCardField.SEEN} readOnly={readOnly} />

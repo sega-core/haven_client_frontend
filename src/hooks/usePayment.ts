@@ -30,7 +30,15 @@ export const useCreatePayment = () => {
 };
 
 export const useGetPayment = () => {
+  const queryClient = useQueryClient();
+
   return useMutation({
     mutationFn: (id: number) => getPayment(id),
+    onSuccess: ({ status }) => {
+      if (status === "paid") {
+        queryClient.invalidateQueries({ queryKey: [GET_PRACTICE] });
+        queryClient.invalidateQueries({ queryKey: [GET_PRACTICE_BUNDLE] });
+      }
+    },
   });
 };
