@@ -1,4 +1,3 @@
-// components/Onboarding/OnboardingOverlay.tsx
 import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import { Typography } from "../Typography";

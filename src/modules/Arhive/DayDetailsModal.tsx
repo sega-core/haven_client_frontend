@@ -5,7 +5,7 @@ import { ru } from "date-fns/locale";
 import { Typography } from "../../components/Typography";
 import { Chip } from "../../components/Chip";
 import { BlockAnswer } from "../../components/BlockAnswer";
-import { TDailyQuestion, TGratitude, TMood } from "../../api";
+import { TDailyQuestion, TGratitude, TMetaCard, TMood } from "../../api";
 import { MOOD_TAGS_MAP } from "../Mood/Mood.constants";
 import { MOOD_CONFIG } from "./Calendar";
 import { Modal } from "../../components/Modal";
@@ -24,6 +24,7 @@ interface DayDetailsModalProps {
     mood?: TMood;
     gratitude?: TGratitude[];
     dailyQuestion?: TDailyQuestion;
+    metaCard?: TMetaCard;
   };
   date: Date;
 }
@@ -129,6 +130,53 @@ export const DayDetailsModal = ({
                 <BlockAnswer
                   comment={dayData?.dailyQuestion.userAnswer}
                   date={dayData?.dailyQuestion.createdAt}
+                />
+              </div>
+            </div>
+          ) : (
+            <EmptyState />
+          )}
+        </>
+      ),
+    },
+    {
+      id: "metaCard",
+      title: "Метафорическая карта",
+      content: (
+        <>
+          {dayData?.metaCard?.answer.seen ? (
+            <div className="flex flex-col gap-4">
+              <Typography type="body-md" className="text-brown-primary">
+                {dayData.metaCard?.metaCard.title}
+              </Typography>
+              <img
+                src={dayData?.metaCard.metaCard.imgUrl}
+                className={`
+                    w-full h-full object-cover transition-all duration-700 ease-out rounded-2xl overflow-hidden max-h-3/5
+                  `}
+                loading="lazy"
+              />
+              <div className="flex gap-2 flex-col">
+                <Typography type="body-md" className="text-brown-primary mb-2">
+                  Что я увидел
+                </Typography>
+                <BlockAnswer
+                  comment={dayData?.metaCard.answer.seen}
+                  date={dayData?.metaCard.createdAt}
+                />
+                <Typography type="body-md" className="text-brown-primary mb-2">
+                  Что я почувствовал
+                </Typography>
+                <BlockAnswer
+                  comment={dayData?.metaCard.answer.felt || ""}
+                  date={dayData?.metaCard.createdAt}
+                />
+                <Typography type="body-md" className="text-brown-primary mb-2">
+                  Что я понял
+                </Typography>
+                <BlockAnswer
+                  comment={dayData?.metaCard.answer.understood || ""}
+                  date={dayData?.metaCard.createdAt}
                 />
               </div>
             </div>

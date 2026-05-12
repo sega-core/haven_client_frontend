@@ -1,5 +1,6 @@
 import { axiosClient } from "../config";
 import { TGratitude } from "./gratitude";
+import { TMetaCard } from "./metacard";
 import { TMood } from "./mood";
 import { TDailyQuestion } from "./question";
 
@@ -23,9 +24,11 @@ export const getProgressRange = async (params: {
   endDate?: string;
 }) => {
   return (
-    await axiosClient.get<{ mood: TMood[]; gratitude: TGratitude[]; dailyQuestion:TDailyQuestion[] }>(
-      `/progress-range`,
-      { params },
-    )
+    await axiosClient.get<{
+      mood: TMood[];
+      gratitude: TGratitude[];
+      dailyQuestion: TDailyQuestion[];
+      metaCard: TMetaCard[];
+    }>(`/progress-range`, { params })
   ).data;
 };

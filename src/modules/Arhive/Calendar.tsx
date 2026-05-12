@@ -80,6 +80,9 @@ export const Calendar = () => {
       dailyQuestion: data?.dailyQuestion.find(
         (entry) => format(new Date(entry.createdAt), "yyyy-MM-dd") === dateStr,
       ),
+      metaCard: data?.metaCard.find(
+        (entry) => format(new Date(entry.createdAt), "yyyy-MM-dd") === dateStr,
+      ),
     };
   };
 

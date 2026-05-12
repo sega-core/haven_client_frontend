@@ -58,7 +58,7 @@ export const TabBar = () => {
           classNames={{
             tabList:
               "bg-white-tertiary shadow-xl/30 backdrop-blur-md p-2 w-full",
-            tab: "h-auto py-3",
+            tab: "h-auto py-3 custom-tab",
             cursor: "bg-beige-tertiary",
             base: "w-full",
           }}

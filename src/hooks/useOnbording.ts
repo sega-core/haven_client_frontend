@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useGetAuth } from "./useAuth";
 import { useUpdateUser } from "./useUser";
+import { useToast } from "../components/Toast";
 
 export type OnboardingStep = {
   targetId: string;
@@ -135,14 +136,12 @@ export const useOnboarding = () => {
     }
   };
 
+  const { success } = useToast();
+
   const completeOnboarding = () => {
     setIsOnboarding(false);
     mutate({ onboardingCompleted: true });
-  };
-
-  const skipOnboarding = () => {
-    setIsOnboarding(false);
-    mutate({ onboardingCompleted: true });
+    success(`Вам начислено 5 zen за регистрацию`);
   };
 
   return {
@@ -151,7 +150,7 @@ export const useOnboarding = () => {
     currentStepIndex,
     totalSteps,
     nextStep,
-    skipOnboarding,
+    skipOnboarding: completeOnboarding,
     completeOnboarding,
   };
 };

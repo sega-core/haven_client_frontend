@@ -45,7 +45,7 @@ export const Header = () => {
       >
         {title?.replace("%user_name%", String(firstName))}
       </Typography>
-      <div className="flex gap-4">
+      <div className="flex gap-4 items-center">
         <div id={EOnboardingTargetId.COIN}>
           <CoinBalance />
         </div>

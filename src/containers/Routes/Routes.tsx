@@ -29,7 +29,11 @@ export const AppRoutes = () => {
   const PaymentError = lazy(() => import("../../pages/PaymentError"));
 
   return (
-    <Suspense fallback={<></>}>
+    <Suspense
+      fallback={
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#b6875a] mx-auto mt-40"></div>
+      }
+    >
       <Routes>
         {/* Public routes - доступны без авторизации */}
         <Route path={ROUTES.LOGIN} element={<Login />} />

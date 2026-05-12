@@ -12,7 +12,8 @@ export type TMetaCard = {
     seen?: string;
     understood?: string;
   };
-  hasAnsweredToday:boolean;
+  hasAnsweredToday: boolean;
+  createdAt: string;
 };
 
 export const getMetaCard = async () => {

@@ -19,7 +19,7 @@ interface ErrorResponse {
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const handleApiError = (error: any): string => {
-  console.log({ error });
+  console.error({ error });
   const errorMessage =
     error?.response?.data?.data?.error?.message ||
     error?.response?.data?.data?.message ||
