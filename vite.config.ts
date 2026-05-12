@@ -29,7 +29,6 @@ export default defineConfig({
             "@heroui/button",
             "@heroui/tabs",
             "@heroui/theme",
-            "@heroui/toast",
           ],
 
           "data-vendor": ["@tanstack/react-query", "axios", "date-fns"],
