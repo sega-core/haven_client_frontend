@@ -37,7 +37,7 @@ export const menuSections: TProfileSection[] = [
         id: "news",
         label: "Новости",
         icon: "📨",
-        external: "https://t.me/sega_core",
+        external: "https://www.instagram.com/haven___community?igsh=MWVvYXZydjRhczY4cw==",
       },
     ],
   },
