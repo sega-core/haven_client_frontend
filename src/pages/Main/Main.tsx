@@ -24,7 +24,7 @@ export const Main = () => {
         <div id={EOnboardingTargetId.GRATITUDE}>
           <GratitudeCard data={data?.gratitude.listOfGratitude} />
         </div>
-        <div id={EOnboardingTargetId.DAILY_QUESTION}>
+        <div id={EOnboardingTargetId.DAILY_QUESTION} className="mb-20">
           <DailyQuestionCard data={data?.dailyQuestion} />
         </div>
       </SkeletonMetric>
