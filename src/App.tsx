@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import { Layout } from "./components/Layout";
 import { TabBar } from "./components/TabBar";
 import { BrowserRouter } from "react-router-dom";
@@ -11,9 +12,38 @@ import { initYandexMetrika } from "./utils";
 
 function App() {
   initTelegramApi();
+
   useEffect(() => {
     initYandexMetrika();
   }, []);
+
+  // App.tsx
+useEffect(() => {
+  if (/Android/i.test(navigator.userAgent)) {
+    // Фикс для Android WebView
+    const setHeight = () => {
+      const vh = window.innerHeight * 0.01;
+      document.documentElement.style.setProperty('--vh', `${vh}px`);
+    };
+    
+    setHeight();
+    window.addEventListener('resize', setHeight);
+    
+    //@ts-ignore
+    if (window.Telegram?.WebApp) {
+          //@ts-ignore
+
+      window.Telegram.WebApp.expand();
+          //@ts-ignore
+
+      window.Telegram.WebApp.onEvent('viewportChanged', setHeight);
+    }
+    
+    return () => {
+      window.removeEventListener('resize', setHeight);
+    };
+  }
+}, []);
 
   return (
     <QueryClientProvider>

@@ -26,6 +26,11 @@ body {
   -webkit-overflow-scrolling: touch;
 }
 
+#root {
+  height: 100vh;
+  height: calc(var(--vh, 1vh) * 100);
+}
+
 * {
   -webkit-touch-callout: none;
   -webkit-text-size-adjust: none;
@@ -311,15 +316,4 @@ textarea {
 }
 
 
-/* global.css */
-@media (max-width: 768px) {
-  .onboarding-highlight {
-    transform: scale(1.02);
-    box-shadow: 0 0 0 3px #b6875a;
-  }
-}
 
-/* Для Telegram WebView */
-.tg-webview .onboarding-highlight {
-  -webkit-tap-highlight-color: transparent;
-}
