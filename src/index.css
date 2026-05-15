@@ -309,3 +309,17 @@ textarea {
 .custom-tab:active {
   background-color: transparent !important;
 }
+
+
+/* global.css */
+@media (max-width: 768px) {
+  .onboarding-highlight {
+    transform: scale(1.02);
+    box-shadow: 0 0 0 3px #b6875a;
+  }
+}
+
+/* Для Telegram WebView */
+.tg-webview .onboarding-highlight {
+  -webkit-tap-highlight-color: transparent;
+}
