@@ -5,7 +5,7 @@ declare global {
   }
 }
 
-const COUNTER_ID = 109215283;
+export const COUNTER_ID = 109215283;
 
 export const initYandexMetrika = () => {
   if (typeof window === "undefined") return;

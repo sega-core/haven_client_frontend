@@ -2,7 +2,7 @@ import { Suspense, lazy } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
 import { ROUTES } from "./Routes.constants";
 import { tokenService } from "../../utils";
-import { useGetAuth } from "../../hooks";
+import { useGetAuth, useYandexMetrikaTracker } from "../../hooks";
 
 export const AppRoutes = () => {
   // Public routes
@@ -28,6 +28,8 @@ export const AppRoutes = () => {
   const PaymentSuccess = lazy(() => import("../../pages/PaymentSuccess"));
   const PaymentError = lazy(() => import("../../pages/PaymentError"));
 
+  useYandexMetrikaTracker();
+  
   return (
     <Suspense
       fallback={
