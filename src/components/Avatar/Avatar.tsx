@@ -15,7 +15,7 @@ export const Avatar = ({
   onClick,
 }: TAvatar) => {
   const [imageError, setImageError] = useState(false);
-  const [isLoading, setIsLoading] = useState(!disableLoading);
+  const [isLoading, setIsLoading] = useState(true);
 
   const handleImageError = () => {
     setImageError(true);
@@ -26,7 +26,7 @@ export const Avatar = ({
     setIsLoading(false);
   };
 
-  const showIcon = !image || imageError || isLoading;
+  const showIcon = !image || imageError;
 
   return (
     <div
@@ -34,20 +34,19 @@ export const Avatar = ({
       style={{ width: size, height: size }}
       onClick={() => onClick?.()}
     >
-      {!showIcon && (
-        <>
-          <img
-            src={image}
-            alt={"avatar"}
-            className={`w-full h-full object-cover transition-opacity duration-200 ${
-              isLoading && !disableLoading ? "opacity-0" : "opacity-100"
-            }`}
-            onError={handleImageError}
-            onLoad={handleImageLoad}
-          />
-        </>
+      {image && !imageError && (
+        <img
+          src={image}
+          alt="avatar"
+          className={`w-full h-full object-cover transition-opacity duration-200 ${
+            isLoading && !disableLoading ? "opacity-0" : "opacity-100"
+          }`}
+          onError={handleImageError}
+          onLoad={handleImageLoad}
+        />
       )}
-      {(showIcon || !image) && (
+      
+      {showIcon && (
         <div className="text-gray-400">
           <Icon name="User" />
         </div>
