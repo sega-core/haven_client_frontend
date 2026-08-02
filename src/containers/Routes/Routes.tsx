@@ -27,6 +27,7 @@ export const AppRoutes = () => {
   const Payment = lazy(() => import("../../pages/Payment"));
   const PaymentSuccess = lazy(() => import("../../pages/PaymentSuccess"));
   const PaymentError = lazy(() => import("../../pages/PaymentError"));
+  const AdminPanel = lazy(() => import("../../pages/AdminPanel"));
 
   useYandexMetrikaTracker();
   
@@ -142,6 +143,14 @@ export const AppRoutes = () => {
           element={
             <PrivateRoute>
               <Payment />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path={ROUTES.ADMIN_PANEL}
+          element={
+            <PrivateRoute>
+              <AdminPanel />
             </PrivateRoute>
           }
         />

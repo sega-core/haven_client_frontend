@@ -32,7 +32,8 @@ export const useRouteTitle = () => {
     ROUTES.META_CARD,
     ROUTES.AUDIO_HELP,
     ROUTES.REGISTRATION,
-    ROUTES.PAYMENT
+    ROUTES.PAYMENT,
+    ROUTES.ADMIN_PANEL
   ].some((route) => pathname.includes(route));
 
   return { title, isVisibleHeader, isVisibleBreadcrumb };

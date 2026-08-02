@@ -6,7 +6,7 @@ export const PaymentSuccess = () => {
       <div className="fixed inset-0 z-50 flex items-center justify-center backdrop-blur-sm bg-black/30">
         <Block
           className="flex items-center justify-center h-screen"
-          disabledTranform
+          disabledTransform
         >
           <div className="text-center">
             <div className="w-16 h-16 bg-cold-green-secondary rounded-full flex items-center justify-center mx-auto mb-4">

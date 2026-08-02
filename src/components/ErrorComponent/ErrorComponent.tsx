@@ -30,7 +30,7 @@ export const ErrorComponent = ({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center backdrop-blur-sm bg-black/30 p-4">
-      <Block className="text-center!" disabledTranform>
+      <Block className="text-center!" disabledTransform>
         <div className="flex items-center justify-center pt-5">
           <div className="w-12 h-12 flex items-center justify-center rounded-full bg-red-100 text-red-600 text-2xl">
             😅

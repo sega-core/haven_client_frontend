@@ -10,3 +10,4 @@ export * from "./registration";
 export * from "./user";
 export * from "./metacard";
 export * from "./payment";
+export * from "./notification";

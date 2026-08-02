@@ -10,6 +10,7 @@ export const GET_AUTH = "GET_AUTH";
 
 export const useAuth = () => {
   const rawData = useRawLaunchParamsTelegram();
+
   const navigate = useNavigate();
 
   return useMutation({
@@ -40,6 +41,7 @@ export const useAuth = () => {
 
 export const useGetAuth = () => {
   const rawData = useRawLaunchParamsTelegram();
+
 
   return useQuery({ queryKey: [GET_AUTH], queryFn: () => getAuth(rawData) });
 };

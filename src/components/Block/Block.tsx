@@ -4,19 +4,19 @@ export const Block = ({
   children,
   onClick,
   className = "",
-  disabledTranform
+  disabledTransform
 }: {
   children: React.ReactNode;
   onClick?: () => void;
   className?: string;
-  disabledTranform?:boolean;
+  disabledTransform?:boolean;
 }) => {
   return (
     <div
       onClick={onClick}
       className={cn(
         "p-4 flex flex-col w-full gap-3 bg-white-primary rounded-3xl cursor-pointer",
-        !disabledTranform && "active:scale-95 transition-transform duration-150",
+        !disabledTransform && "active:scale-95 transition-transform duration-150",
         className,
       )}
     >

@@ -1,6 +1,6 @@
 import { Avatar } from "../../components/Avatar";
 import { Typography } from "../../components/Typography";
-import { useLaunchParamsTelegram } from "../../hooks";
+import { useGetAuth, useLaunchParamsTelegram } from "../../hooks";
 import { useNavigate } from "react-router-dom";
 import { version } from "../../../package.json";
 import { menuSections, TProfileSection } from "./Profile.constants";
@@ -24,6 +24,8 @@ export const Profile = () => {
     }
   };
 
+  const { data } = useGetAuth();
+
   const { openDrawer, closeDrawer } = useDrawerContext();
 
   const handleOpenDeleteProfileSheet = useCallback(() => {
@@ -32,6 +34,10 @@ export const Profile = () => {
       content: <DeleteProfileSheet onClose={closeDrawer} />,
     });
   }, [openDrawer, closeDrawer]);
+
+  const goToAdminPanel = () => {
+    navigate(ROUTES.ADMIN_PANEL);
+  };
 
   return (
     <div>
@@ -108,6 +114,13 @@ export const Profile = () => {
           </div>
         ))}
       </div>
+      {data?.isAdmin && (
+        <div className="grid mt-4">
+          <Button variant="flat" color="primary" onPress={goToAdminPanel}>
+            Админ панель
+          </Button>
+        </div>
+      )}
       <div className="grid mt-4">
         <Button
           variant="flat"

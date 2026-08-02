@@ -132,7 +132,7 @@ export const TrackList = () => {
   };
 
   return (
-    <Block disabledTranform>
+    <Block disabledTransform>
       {STATIC_TRACKS.map((item, index) => (
         <Track
           {...item}

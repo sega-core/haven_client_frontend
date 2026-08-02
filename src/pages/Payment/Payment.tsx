@@ -75,7 +75,7 @@ export const Payment = () => {
     return (
       <Block
         className="flex items-center justify-center h-screen"
-        disabledTranform
+        disabledTransform
       >
         <div className="text-center px-4">
           <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -114,7 +114,7 @@ export const Payment = () => {
     return (
       <Block
         className="flex items-center justify-center h-screen"
-        disabledTranform
+        disabledTransform
       >
         <div className="text-center">
           <div className="w-16 h-16 bg-cold-green-secondary rounded-full flex items-center justify-center mx-auto mb-4">
@@ -146,7 +146,7 @@ export const Payment = () => {
   return (
     <Block
       className="flex items-center justify-center h-screen"
-      disabledTranform
+      disabledTransform
     >
       <div className="text-center px-4">
         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#b6875a] mx-auto mb-4"></div>

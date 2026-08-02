@@ -12,3 +12,4 @@ export * from "./useUser";
 export * from "./useOnbording";
 export * from "./usePayment";
 export * from "./useYandexMetrikaTracker";
+export * from './useNotification'

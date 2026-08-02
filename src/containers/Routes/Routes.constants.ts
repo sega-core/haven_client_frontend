@@ -18,4 +18,5 @@ export const ROUTES = {
   PAYMENT: "/payment",
   PAYMENT_SUCCESS: "/payment-success",
   PAYMENT_ERROR: "/payment-error",
+  ADMIN_PANEL: "/admin-panel",
 } as const;

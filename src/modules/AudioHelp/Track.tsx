@@ -58,7 +58,7 @@ export const Track = ({
     : "0%";
 
   return (
-    <Block disabledTranform className="bg-beige-tertiary! rounded-2xl! gap-0!">
+    <Block disabledTransform className="bg-beige-tertiary! rounded-2xl! gap-0!">
       <div className="flex justify-between items-center">
         <div className="flex gap-2">
           <div
