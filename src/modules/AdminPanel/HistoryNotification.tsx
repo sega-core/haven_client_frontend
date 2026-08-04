@@ -24,7 +24,7 @@ export const HistoryNotification = () => {
                     : "bg-yellow-100 text-yellow-600"
               }`}
             >
-              {item.status === "sent"
+              {item.status === "sent" || item.status === "partial"
                 ? "✅"
                 : item.status === "failed"
                   ? "❌"
@@ -32,10 +32,7 @@ export const HistoryNotification = () => {
               {item.status}
             </span>
           </div>
-          <Typography
-            type="body-s"
-            className="text-brown-secondary"
-          >
+          <Typography type="body-s" className="text-brown-secondary">
             {item.message}
           </Typography>
           <Typography type="body-xs" className="text-brown-secondary">
